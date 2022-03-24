@@ -21,6 +21,7 @@ public abstract class ManhuntTeam {
     public void addPlayer(ManhuntPlayer manhuntPlayer) {
         playerList.add(manhuntPlayer);
         playerDeath.put(manhuntPlayer, 0);
+        manhuntPlayer.setTeam(this);
     }
 
     public void removePlayer(ManhuntPlayer manhuntPlayer) {
