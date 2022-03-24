@@ -58,6 +58,5 @@ public class ManhuntPlayer {
 
     public void setTeam(ManhuntTeam team) {
         this.team = team;
-        team.addPlayer(this);
     }
 }
