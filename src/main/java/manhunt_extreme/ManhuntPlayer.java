@@ -1,6 +1,6 @@
 package manhunt_extreme;
 
-import manhunt_extreme.ManhuntTeam.ManhuntTeam;
+import manhunt_extreme.manhunt_team.ManhuntTeam;
 import org.bukkit.entity.Player;
 
 public class ManhuntPlayer {

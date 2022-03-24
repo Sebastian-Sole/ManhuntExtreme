@@ -1,4 +1,4 @@
-package manhunt_extreme.ManhuntTeam;
+package manhunt_extreme.manhunt_team;
 
 import manhunt_extreme.ManhuntPlayer;
 
