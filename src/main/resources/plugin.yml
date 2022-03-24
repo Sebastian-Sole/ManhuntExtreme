@@ -1,0 +1,7 @@
+name: ManhuntExtreme
+version: '${version}'
+main: manhunt_extreme.manhuntextreme.ManhuntExtreme
+api-version: 1.18
+load: STARTUP
+authors: [ solemanseb ]
+description: Manhunt plugin with much needed extra features!
