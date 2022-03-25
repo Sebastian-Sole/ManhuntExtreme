@@ -1,4 +1,4 @@
-package manhunt_extreme;
+package manhunt_extreme.manhunt_player;
 
 import manhunt_extreme.manhunt_team.ManhuntTeam;
 import org.bukkit.entity.Player;

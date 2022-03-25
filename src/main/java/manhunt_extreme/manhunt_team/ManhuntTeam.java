@@ -1,6 +1,6 @@
 package manhunt_extreme.manhunt_team;
 
-import manhunt_extreme.ManhuntPlayer;
+import manhunt_extreme.manhunt_player.ManhuntPlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
