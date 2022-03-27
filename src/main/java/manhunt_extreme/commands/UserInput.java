@@ -7,7 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public abstract class UserInput implements CommandExecutor {
+public class UserInput implements CommandExecutor {
 
     GameEngine gameEngine;
 
@@ -21,67 +21,67 @@ public abstract class UserInput implements CommandExecutor {
         ManhuntPlayer manhuntPlayer = gameEngine.playerToManhuntPlayer(senderPlayer);
         switch (label) {
             case "hunter" -> {
-                new HunterCommand(manhuntPlayer, args);
+                new HunterCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "runner" -> {
-                new RunnerCommand(manhuntPlayer, args);
+                new RunnerCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "start" -> {
-                new StartCommand(manhuntPlayer, args);
+                new StartCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "end" -> {
-                new EndCommand(manhuntPlayer, args);
+                new EndCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "compass" -> {
-                new CompassCommand(manhuntPlayer, args);
+                new CompassCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "setheadstart" -> {
-                new SetHeadStartCommand(manhuntPlayer, args);
+                new SetHeadStartCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "runnerhelp" -> {
-                new RunnerHelpCommand(manhuntPlayer, args);
+                new RunnerHelpCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "hunterhelp" -> {
-                new HunterHelpCommand(manhuntPlayer, args);
+                new HunterHelpCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "extradrops" -> {
-                new ExtraDropsCommand(manhuntPlayer, args);
+                new ExtraDropsCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "hasteboost" -> {
-                new HasteBoostCommand(manhuntPlayer, args);
+                new HasteBoostCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "allhelp" -> {
-                new AllHelpCommand(manhuntPlayer, args);
+                new AllHelpCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "cutclean" -> {
-                new CutCleanCommand(manhuntPlayer, args);
+                new CutCleanCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "pause" -> {
-                new PauseCommand(manhuntPlayer, args);
+                new PauseCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "unpause" -> {
-                new UnpauseCommand(manhuntPlayer, args);
+                new UnpauseCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "health" -> {
-                new HealthCommand(manhuntPlayer, args);
+                new HealthCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
             case "supplydrops" -> {
-                new SupplyDropsCommand(manhuntPlayer, args);
+                new SupplyDropsCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
         }
