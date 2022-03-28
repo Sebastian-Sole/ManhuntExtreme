@@ -1,31 +1,29 @@
 package manhunt_extreme.manhunt_player;
 
+import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_team.ManhuntTeam;
 import org.bukkit.entity.Player;
 
 public class ManhuntPlayer {
 
     final private Player player;
-    private double achievementScore = 0.0;
     private double deaths = 0.0;
     private double kills = 0.0;
     private double chestsGenerated = 0.0;
     private ManhuntTeam team;
 
+    private Double playerScore = new PlayerScoreCalculator(this).calculatePlayerScore();
+
     public ManhuntPlayer(Player player) {
         this.player = player;
     }
 
+    public void addDeath() {
+        deaths++;
+    }
+
     public Player getPlayer() {
         return player;
-    }
-
-    public double getAchievementScore() {
-        return achievementScore;
-    }
-
-    public void setAchievementScore(double achievementScore) {
-        this.achievementScore = achievementScore;
     }
 
     public double getDeaths() {
@@ -59,4 +57,9 @@ public class ManhuntPlayer {
     public void setTeam(ManhuntTeam team) {
         this.team = team;
     }
+
+    public Double getPlayerScore() {
+        return playerScore;
+    }
+
 }

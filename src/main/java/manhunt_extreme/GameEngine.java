@@ -1,6 +1,8 @@
 package manhunt_extreme;
 
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import manhunt_extreme.manhunt_team.HunterTeam;
+import manhunt_extreme.manhunt_team.RunnerTeam;
 import manhunt_extreme.task_manager.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,6 +15,9 @@ public class GameEngine {
     private Game game = new Game(false);
     private TaskManager taskManager = new TaskManager();
     private ArrayList<ManhuntPlayer> manhuntPlayers = new ArrayList<>();
+
+    private HunterTeam hunters = new HunterTeam();
+    private RunnerTeam runners = new RunnerTeam();
 
     // Constructor
     public GameEngine() {
