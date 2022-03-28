@@ -28,6 +28,9 @@ public class PlayerScoreCalculator {
         this.inventoryScore = inventoryCalculator.calculateInventoryScore();
     }
 
+    /**
+     * @return the player's score based on their inventory and their state.
+     */
     public double calculatePlayerScore() {
         boolean isHunter;
         if (manhuntPlayer.getTeam() instanceof HunterTeam) {

@@ -18,7 +18,7 @@ public class UserInput implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player senderPlayer = (Player) sender;
-        ManhuntPlayer manhuntPlayer = gameEngine.playerToManhuntPlayer(senderPlayer);
+        ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(senderPlayer);
         switch (label) {
             case "hunter" -> {
                 new HunterCommand(manhuntPlayer, args, gameEngine);

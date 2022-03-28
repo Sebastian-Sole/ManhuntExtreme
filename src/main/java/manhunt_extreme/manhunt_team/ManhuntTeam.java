@@ -13,6 +13,7 @@ public abstract class ManhuntTeam {
     public void addPlayerDeath(ManhuntPlayer manhuntPlayer) {
         var deathCount = playerDeaths.get(manhuntPlayer);
         playerDeaths.put(manhuntPlayer, deathCount + 1);
+        manhuntPlayer.addDeath();
     }
 
     public ArrayList<ManhuntPlayer> getPlayerList() {

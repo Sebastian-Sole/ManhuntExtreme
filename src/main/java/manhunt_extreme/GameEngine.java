@@ -21,16 +21,15 @@ public class GameEngine {
 
     // Constructor
     public GameEngine() {
-        convertPlayersToManhuntPlayers();
+        convertAllPlayersToManhuntPlayers();
     }
 
-
     // Methods
-    public ManhuntPlayer playerToManhuntPlayer(Player player) {
+    public ManhuntPlayer getManhuntPlayerFromPlayer(Player player) {
         return manhuntPlayers.stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().equals(player)).findFirst().orElseThrow();
     }
 
-    private void convertPlayersToManhuntPlayers() {
+    private void convertAllPlayersToManhuntPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             ManhuntPlayer manhuntPlayer = new ManhuntPlayer(player);
             if (!manhuntPlayers.contains(manhuntPlayer)) {
