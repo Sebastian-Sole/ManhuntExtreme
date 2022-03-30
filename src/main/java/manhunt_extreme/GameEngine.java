@@ -1,5 +1,6 @@
 package manhunt_extreme;
 
+import manhunt_extreme.calculators.GameBalancingCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
@@ -18,10 +19,12 @@ public class GameEngine {
 
     private HunterTeam hunters = new HunterTeam();
     private RunnerTeam runners = new RunnerTeam();
+    private GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
 
     // Constructor
     public GameEngine() {
         convertAllPlayersToManhuntPlayers();
+
     }
 
     // Methods
@@ -54,4 +57,29 @@ public class GameEngine {
     public void setTaskManager(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
+
+    public ArrayList<ManhuntPlayer> getManhuntPlayers() {
+        return manhuntPlayers;
+    }
+
+    public void setManhuntPlayers(ArrayList<ManhuntPlayer> manhuntPlayers) {
+        this.manhuntPlayers = manhuntPlayers;
+    }
+
+    public HunterTeam getHunters() {
+        return hunters;
+    }
+
+    public void setHunters(HunterTeam hunters) {
+        this.hunters = hunters;
+    }
+
+    public RunnerTeam getRunners() {
+        return runners;
+    }
+
+    public void setRunners(RunnerTeam runners) {
+        this.runners = runners;
+    }
+
 }
