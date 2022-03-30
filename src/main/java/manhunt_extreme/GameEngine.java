@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class GameEngine {
 
     // Fields
-    private Game game = new Game(false);
     private TaskManager taskManager = new TaskManager();
     private ArrayList<ManhuntPlayer> manhuntPlayers = new ArrayList<>();
 
@@ -27,6 +26,7 @@ public class GameEngine {
         convertAllPlayersToManhuntPlayers();
         initializePlayerScores();
     }
+
 
     private void initializePlayerScores() {
         for (ManhuntPlayer manhuntPlayer : manhuntPlayers) {
@@ -49,13 +49,6 @@ public class GameEngine {
     }
 
     // Getters and Setters
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
     public TaskManager getTaskManager() {
         return taskManager;
