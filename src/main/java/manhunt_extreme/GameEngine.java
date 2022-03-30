@@ -1,6 +1,7 @@
 package manhunt_extreme;
 
 import manhunt_extreme.calculators.GameBalancingCalculator;
+import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
@@ -24,7 +25,13 @@ public class GameEngine {
     // Constructor
     public GameEngine() {
         convertAllPlayersToManhuntPlayers();
+        initializePlayerScores();
+    }
 
+    private void initializePlayerScores() {
+        for (ManhuntPlayer manhuntPlayer : manhuntPlayers) {
+            manhuntPlayer.setPlayerScore(new PlayerScoreCalculator(manhuntPlayer, taskManager.getGameClock()).calculatePlayerScore());
+        }
     }
 
     // Methods

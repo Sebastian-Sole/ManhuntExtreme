@@ -3,6 +3,7 @@ package manhunt_extreme.calculators;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
+import manhunt_extreme.task_manager.GameClock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +22,12 @@ public class PlayerScoreCalculator {
     private final List<Integer> deathWeights = Arrays.asList(-15, 0);
     private final int starterScore = 10;
 
+    private GameClock gameClock;
 
-    public PlayerScoreCalculator(ManhuntPlayer manhuntPlayer) {
+
+    public PlayerScoreCalculator(ManhuntPlayer manhuntPlayer, GameClock gameClock) {
         this.manhuntPlayer = manhuntPlayer;
+        this.gameClock = gameClock;
         this.inventoryCalculator = new InventoryCalculator(manhuntPlayer);
         this.inventoryScore = inventoryCalculator.calculateInventoryScore();
     }
@@ -53,9 +57,13 @@ public class PlayerScoreCalculator {
                 + (kills * killScore)
                 + (deaths * deathScore)
                 + inventoryScore
-                //TODO: ADD THE GAME TIME
+                + convertTime()
         );
+    }
 
+    private int convertTime() {
+        var minutes = gameClock.getMinutes();
+        return minutes - 30;
     }
 
 

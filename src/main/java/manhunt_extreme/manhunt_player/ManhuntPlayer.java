@@ -1,6 +1,5 @@
 package manhunt_extreme.manhunt_player;
 
-import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_team.ManhuntTeam;
 import org.bukkit.entity.Player;
 
@@ -12,7 +11,7 @@ public class ManhuntPlayer {
     private double chestsGenerated = 0.0;
     private ManhuntTeam team;
 
-    private Double playerScore = new PlayerScoreCalculator(this).calculatePlayerScore();
+    private Double playerScore;
 
     public ManhuntPlayer(Player player) {
         this.player = player;
@@ -62,4 +61,7 @@ public class ManhuntPlayer {
         return playerScore;
     }
 
+    public void setPlayerScore(Double playerScore) {
+        this.playerScore = playerScore;
+    }
 }

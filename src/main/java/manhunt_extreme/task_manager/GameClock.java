@@ -20,4 +20,6 @@ public class GameClock {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+
 }
