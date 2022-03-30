@@ -9,6 +9,28 @@ import org.bukkit.entity.Player;
 
 public class UserInput implements CommandExecutor {
 
+    public static final String[] registeredCommands = {
+            "hunter",
+            "runner",
+            "spectator",
+            "clearteams",
+            "start",
+            "end",
+            "compass",
+            "setheadstart",
+            "runnerhelp",
+            "hunterhelp",
+            "extradrops",
+            "chestgenerate",
+            "hasteboost",
+            "allhelp",
+            "cutclean",
+            "pause",
+            "unpause",
+            "health",
+            "supplydrops"
+    };
+    
     GameEngine gameEngine;
 
     public UserInput(GameEngine gameEngine) {
@@ -88,5 +110,6 @@ public class UserInput implements CommandExecutor {
 
         return false;
     }
+
 
 }
