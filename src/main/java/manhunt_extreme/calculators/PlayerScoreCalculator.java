@@ -14,11 +14,11 @@ public class PlayerScoreCalculator {
     private final InventoryCalculator inventoryCalculator;
     private final Double inventoryScore;
 
-    private final int chestWeight = 5;
+    private final int chestWeight = 30;
     // Runner, Hunter
-    private final List<Integer> killWeights = Arrays.asList(10, 15);
+    private final List<Integer> killWeights = Arrays.asList(10, 10);
     // Runner, Hunter
-    private final List<Integer> deathWeights = Arrays.asList(-10, 0);
+    private final List<Integer> deathWeights = Arrays.asList(-15, 0);
     private final int starterScore = 10;
 
 
@@ -53,6 +53,7 @@ public class PlayerScoreCalculator {
                 + (kills * killScore)
                 + (deaths * deathScore)
                 + inventoryScore
+                //TODO: ADD THE GAME TIME
         );
 
     }

@@ -28,10 +28,10 @@ public class InventoryCalculator {
             Material.CROSSBOW
     );
 
-    private final List<Double> helmetScore = Arrays.asList(1.0, 2.0, 2.0, 3.0, 3.0);
-    private final List<Double> chestplateScore = Arrays.asList(3.0, 5.0, 6.0, 8.0, 8.0);
-    private final List<Double> leggingsScore = Arrays.asList(2.0, 3.0, 5.0, 5.0, 5.0);
-    private final List<Double> bootsScore = Arrays.asList(1.0, 1.0, 2.0, 3.0, 3.0);
+    private final List<Double> helmetScore = Arrays.asList(1.0, 2.0, 3.0, 5.0, 5.0);
+    private final List<Double> chestplateScore = Arrays.asList(3.0, 5.0, 7.0, 11.0, 11.0);
+    private final List<Double> leggingsScore = Arrays.asList(2.0, 3.0, 6.0, 9.0, 9.0);
+    private final List<Double> bootsScore = Arrays.asList(1.0, 1.0, 3.0, 5.0, 5.0);
 
     private final List<Double> axeScore = Arrays.asList(2.5, 3.0, 3.3, 3.6, 4.0);
     private final List<Double> swordScore = Arrays.asList(0.5, 1.0, 2.0, 3.0, 4.0);
