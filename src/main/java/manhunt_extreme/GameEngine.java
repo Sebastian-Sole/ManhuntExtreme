@@ -5,7 +5,6 @@ import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
-import manhunt_extreme.task_manager.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -14,23 +13,23 @@ import java.util.ArrayList;
 public class GameEngine {
 
     // Fields
-    private TaskManager taskManager = new TaskManager();
+    private final Game game;
+    private final GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
     private ArrayList<ManhuntPlayer> manhuntPlayers = new ArrayList<>();
-
     private HunterTeam hunters = new HunterTeam();
     private RunnerTeam runners = new RunnerTeam();
-    private GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
 
     // Constructor
     public GameEngine() {
         convertAllPlayersToManhuntPlayers();
         initializePlayerScores();
+        game = new Game(this, false);
     }
 
 
     private void initializePlayerScores() {
         for (ManhuntPlayer manhuntPlayer : manhuntPlayers) {
-            manhuntPlayer.setPlayerScore(new PlayerScoreCalculator(manhuntPlayer, taskManager.getGameClock()).calculatePlayerScore());
+            manhuntPlayer.setPlayerScore(new PlayerScoreCalculator(manhuntPlayer, game.getTaskManager().getGameClock()).calculatePlayerScore());
         }
     }
 
@@ -49,14 +48,6 @@ public class GameEngine {
     }
 
     // Getters and Setters
-
-    public TaskManager getTaskManager() {
-        return taskManager;
-    }
-
-    public void setTaskManager(TaskManager taskManager) {
-        this.taskManager = taskManager;
-    }
 
     public ArrayList<ManhuntPlayer> getManhuntPlayers() {
         return manhuntPlayers;
@@ -82,4 +73,11 @@ public class GameEngine {
         this.runners = runners;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public GameBalancingCalculator getGameBalancingCalculator() {
+        return gameBalancingCalculator;
+    }
 }

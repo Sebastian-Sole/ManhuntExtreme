@@ -1,6 +1,7 @@
 package manhunt_extreme.commands;
 
 import manhunt_extreme.GameEngine;
+import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,11 +31,14 @@ public class UserInput implements CommandExecutor {
             "health",
             "supplydrops"
     };
-    
+
     GameEngine gameEngine;
+    GameStateHandler gameStateHandler;
+    
 
     public UserInput(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
+        gameStateHandler = new GameStateHandler();
     }
 
     @Override
@@ -43,14 +47,17 @@ public class UserInput implements CommandExecutor {
         ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(senderPlayer);
         switch (label) {
             case "hunter" -> {
-                new HunterCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new HunterCommand(manhuntPlayer, args, gameEngine).execute();
             }
             case "runner" -> {
-                new RunnerCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new RunnerCommand(manhuntPlayer, args, gameEngine).execute();
             }
             case "start" -> {
+
+                // Create new Game instance with gameStateHandler and running
+
+                // Set gameEngine's game
+
                 new StartCommand(manhuntPlayer, args, gameEngine);
                 return true;
             }
@@ -59,52 +66,43 @@ public class UserInput implements CommandExecutor {
                 return true;
             }
             case "compass" -> {
-                new CompassCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new CompassCommand(manhuntPlayer, args, gameEngine).execute();
             }
             case "setheadstart" -> {
-                new SetHeadStartCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new SetHeadStartCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler).execute();
             }
             case "runnerhelp" -> {
-                new RunnerHelpCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new RunnerHelpCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "hunterhelp" -> {
-                new HunterHelpCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new HunterHelpCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "extradrops" -> {
-                new ExtraDropsCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new ExtraDropsCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "hasteboost" -> {
-                new HasteBoostCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new HasteBoostCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "allhelp" -> {
-                new AllHelpCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new AllHelpCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "cutclean" -> {
-                new CutCleanCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new CutCleanCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "pause" -> {
-                new PauseCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new PauseCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "unpause" -> {
-                new UnpauseCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new UnpauseCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
             }
             case "health" -> {
-                new HealthCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new HealthCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler).execute();
             }
             case "supplydrops" -> {
-                new SupplyDropsCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new SupplyDropsCommand(manhuntPlayer, args, gameEngine.getGame(), gameStateHandler, label).execute();
+            }
+            case "clearteams" -> {
+                return new ClearTeamsCommand(manhuntPlayer, args, gameEngine).execute();
             }
         }
 

@@ -9,9 +9,10 @@ public class TaskManager {
     //Todo: Haste object
 
     //Todo: GameClock
-    private GameClock gameClock = new GameClock();
+    private GameClock gameClock;
 
     public TaskManager() {
+        this.gameClock = new GameClock();
         //Todo:
     }
 
