@@ -12,8 +12,8 @@ public class GameBalancingCalculator {
 
     public GameBalancingCalculator(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        this.hunterTeamScore = getTeamScore(gameEngine.getHunters());
-        this.runnerTeamScore = getTeamScore(gameEngine.getRunners());
+        this.hunterTeamScore = getTeamScore(gameEngine.getHuntersTeam());
+        this.runnerTeamScore = getTeamScore(gameEngine.getRunnersTeam());
     }
 
     //Todo: Average Score
@@ -43,8 +43,8 @@ public class GameBalancingCalculator {
 //        }
 //    }
     public Double getPlayerScoreDifference() {
-        Double runnerTeamAverageScore = runnerTeamScore / gameEngine.getRunners().getPlayerList().size();
-        Double hunterTeamAverageScore = hunterTeamScore / gameEngine.getHunters().getPlayerList().size();
+        Double runnerTeamAverageScore = runnerTeamScore / gameEngine.getRunnersTeam().getPlayerList().size();
+        Double hunterTeamAverageScore = hunterTeamScore / gameEngine.getHuntersTeam().getPlayerList().size();
         return runnerTeamAverageScore - hunterTeamAverageScore;
     }
 

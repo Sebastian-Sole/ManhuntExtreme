@@ -1,5 +1,6 @@
 package manhunt_extreme.commands;
 
+import manhunt_extreme.Game;
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
@@ -32,13 +33,16 @@ public class UserInput implements CommandExecutor {
             "supplydrops"
     };
 
-    GameEngine gameEngine;
-    GameStateHandler gameStateHandler;
-    
+    private final GameEngine gameEngine;
+    private GameStateHandler gameStateHandler;
+    private Game game;
+
 
     public UserInput(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        gameStateHandler = new GameStateHandler();
+        this.gameStateHandler = new GameStateHandler();
+        this.game = new Game(gameEngine, false);
+        gameEngine.setGame(game);
     }
 
     @Override
@@ -53,13 +57,7 @@ public class UserInput implements CommandExecutor {
                 return new RunnerCommand(manhuntPlayer, args, gameEngine).execute();
             }
             case "start" -> {
-
-                // Create new Game instance with gameStateHandler and running
-
-                // Set gameEngine's game
-
-                new StartCommand(manhuntPlayer, args, gameEngine);
-                return true;
+                return new StartCommand(manhuntPlayer, args, gameEngine, game, gameStateHandler).execute();
             }
             case "end" -> {
                 new EndCommand(manhuntPlayer, args, gameEngine);

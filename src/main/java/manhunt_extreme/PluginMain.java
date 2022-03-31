@@ -11,14 +11,15 @@ import java.util.logging.Logger;
 
 public final class PluginMain extends JavaPlugin {
 
-    Logger logger = Logger.getLogger("manhunt_extreme.PluginMain");
-    World world;
-    GameEngine gameEngine;
+    private Logger logger = Logger.getLogger("manhunt_extreme.PluginMain");
+    private World world;
+    private GameEngine gameEngine;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         gameEngine = new GameEngine();
+        gameEngine.setWorld(world);
         logger.info("Manhunt Extreme Plugin Enabled!");
         setWorld();
         registerEvents();

@@ -17,7 +17,7 @@ public class AllHelpCommand extends GameRuleCommand {
         }
         gameStateHandler.setRunnerHelp(true);
         gameStateHandler.setHunterHelp(true);
-        gameStateHandler.setHeadStart(60.0);
+        gameStateHandler.setHeadStart(60);
         gameStateHandler.setHasteBoost(true);
         gameStateHandler.setExtraDrops(true);
         gameStateHandler.setHealth(40.0);

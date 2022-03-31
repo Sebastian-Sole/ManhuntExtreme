@@ -11,7 +11,7 @@ public class GameStateHandler {
     private double health = 40.0;
     private double borderSize = 1300.0;
     private boolean supplyDrops = true;
-    private double headStart = 30.0;
+    private int headStart = 30;
 
     public GameStateHandler() {
 
@@ -89,11 +89,11 @@ public class GameStateHandler {
         this.supplyDrops = supplyDrops;
     }
 
-    public double getHeadStart() {
+    public int getHeadStart() {
         return headStart;
     }
 
-    public void setHeadStart(double headStart) {
+    public void setHeadStart(int headStart) {
         this.headStart = headStart;
     }
 }

@@ -34,4 +34,8 @@ public abstract class ManhuntTeam {
         playerList.remove(manhuntPlayer);
         playerDeaths.remove(manhuntPlayer);
     }
+
+    public int size() {
+        return playerList.size();
+    }
 }

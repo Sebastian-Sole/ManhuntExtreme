@@ -6,24 +6,25 @@ import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
 public class GameEngine {
 
-    // Fields
-    private final Game game;
     private final GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
+    // Fields
+    private Game game;
     private ArrayList<ManhuntPlayer> manhuntPlayers = new ArrayList<>();
     private HunterTeam hunters = new HunterTeam();
     private RunnerTeam runners = new RunnerTeam();
+    private World world;
 
     // Constructor
     public GameEngine() {
         convertAllPlayersToManhuntPlayers();
         initializePlayerScores();
-        game = new Game(this, false);
     }
 
 
@@ -57,27 +58,39 @@ public class GameEngine {
         this.manhuntPlayers = manhuntPlayers;
     }
 
-    public HunterTeam getHunters() {
+    public HunterTeam getHuntersTeam() {
         return hunters;
     }
 
-    public void setHunters(HunterTeam hunters) {
-        this.hunters = hunters;
-    }
-
-    public RunnerTeam getRunners() {
+    public RunnerTeam getRunnersTeam() {
         return runners;
     }
 
-    public void setRunners(RunnerTeam runners) {
-        this.runners = runners;
+    public ArrayList<ManhuntPlayer> getHunters() {
+        return hunters.getPlayerList();
+    }
+
+    public ArrayList<ManhuntPlayer> getRunners() {
+        return runners.getPlayerList();
     }
 
     public Game getGame() {
         return game;
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public GameBalancingCalculator getGameBalancingCalculator() {
         return gameBalancingCalculator;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }

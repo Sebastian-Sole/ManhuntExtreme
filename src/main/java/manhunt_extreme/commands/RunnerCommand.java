@@ -28,14 +28,14 @@ public class RunnerCommand {
             return true;
         }
         var targetManhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(targetPlayer);
-        if (gameEngine.getRunners().getPlayerList().stream().anyMatch(
+        if (gameEngine.getRunnersTeam().getPlayerList().stream().anyMatch(
                 player -> player.getPlayer().getName().equals(targetPlayer.getName())
         )) {
             manhuntPlayer.getPlayer().sendMessage("Target is already on this team");
             return true;
         }
-        gameEngine.getHunters().removePlayer(targetManhuntPlayer);
-        gameEngine.getRunners().addPlayer(targetManhuntPlayer);
+        gameEngine.getHuntersTeam().removePlayer(targetManhuntPlayer);
+        gameEngine.getRunnersTeam().addPlayer(targetManhuntPlayer);
         Bukkit.broadcastMessage(manhuntPlayer.getPlayer().getName() + " is now a " + ChatColor.RED + ChatColor.BOLD + "HUNTER!");
         return true;
     }

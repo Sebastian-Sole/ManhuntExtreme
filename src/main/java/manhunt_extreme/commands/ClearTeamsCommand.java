@@ -23,11 +23,11 @@ public class ClearTeamsCommand {
             manhuntPlayer.getPlayer().sendMessage("Invalid format. Please use /clearteams");
             return true;
         }
-        for (ManhuntPlayer teammate : gameEngine.getRunners().getPlayerList()) {
-            gameEngine.getRunners().removePlayer(teammate);
+        for (ManhuntPlayer teammate : gameEngine.getRunnersTeam().getPlayerList()) {
+            gameEngine.getRunnersTeam().removePlayer(teammate);
         }
-        for (ManhuntPlayer teammate : gameEngine.getHunters().getPlayerList()) {
-            gameEngine.getHunters().removePlayer(teammate);
+        for (ManhuntPlayer teammate : gameEngine.getHuntersTeam().getPlayerList()) {
+            gameEngine.getHuntersTeam().removePlayer(teammate);
         }
         return true;
     }
