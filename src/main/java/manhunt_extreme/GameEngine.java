@@ -25,6 +25,7 @@ public class GameEngine {
     public GameEngine() {
         convertAllPlayersToManhuntPlayers();
         initializePlayerScores();
+        this.game = new Game(this, false);
     }
 
 

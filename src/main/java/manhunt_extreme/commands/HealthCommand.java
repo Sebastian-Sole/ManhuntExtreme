@@ -11,12 +11,12 @@ public class HealthCommand {
     private Game game;
     private GameStateHandler gameStateHandler;
 
-    public HealthCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game, GameStateHandler gameStateHandler) {
+    public HealthCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game) {
 
         this.manhuntPlayer = manhuntPlayer;
         this.args = args;
         this.game = game;
-        this.gameStateHandler = gameStateHandler;
+        this.gameStateHandler = this.game.getGameStateHandler();
     }
 
     public boolean execute() {

@@ -9,7 +9,7 @@ public class Game {
     private final GameEngine gameEngine;
     private boolean isRunning;
     private TaskManager taskManager = new TaskManager();
-    private GameStateHandler gameStateHandler;
+    private GameStateHandler gameStateHandler = new GameStateHandler();
 
     private HashMap<ManhuntPlayer, String> targets = new HashMap<>();
 
@@ -61,4 +61,5 @@ public class Game {
     public void setTargets(HashMap<ManhuntPlayer, String> targets) {
         this.targets = targets;
     }
+
 }

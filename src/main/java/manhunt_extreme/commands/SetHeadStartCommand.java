@@ -1,6 +1,7 @@
 package manhunt_extreme.commands;
 
 import manhunt_extreme.Game;
+import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 
@@ -10,11 +11,11 @@ public class SetHeadStartCommand {
     private Game game;
     private GameStateHandler gameStateHandler;
 
-    public SetHeadStartCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game, GameStateHandler gameStateHandler) {
+    public SetHeadStartCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine) {
         this.manhuntPlayer = manhuntPlayer;
         this.args = args;
-        this.game = game;
-        this.gameStateHandler = gameStateHandler;
+        this.game = gameEngine.getGame();
+        this.gameStateHandler = this.game.getGameStateHandler();
     }
 
     public boolean execute() {

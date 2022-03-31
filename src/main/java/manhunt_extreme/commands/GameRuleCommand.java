@@ -12,12 +12,12 @@ public abstract class GameRuleCommand {
     protected Game game;
     protected GameStateHandler gameStateHandler;
 
-    public GameRuleCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game, GameStateHandler gameStateHandler, String commandCall) {
+    public GameRuleCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game, String commandCall) {
         this.manhuntPlayer = manhuntPlayer;
         this.args = args;
         this.commandCall = commandCall;
         this.game = game;
-        this.gameStateHandler = gameStateHandler;
+        this.gameStateHandler = game.getGameStateHandler();
     }
 
     public boolean isIllegalCommand() {

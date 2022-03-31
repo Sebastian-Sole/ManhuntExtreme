@@ -24,12 +24,12 @@ public class StartCommand {
     private Game game;
     private GameStateHandler gameStateHandler;
 
-    public StartCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine, Game game, GameStateHandler gameStateHandler) {
+    public StartCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine) {
         this.manhuntPlayer = manhuntPlayer;
         this.args = args;
         this.gameEngine = gameEngine;
-        this.game = game;
-        this.gameStateHandler = gameStateHandler;
+        this.game = gameEngine.getGame();
+        this.gameStateHandler = game.getGameStateHandler();
     }
 
     public boolean execute() {
@@ -55,7 +55,6 @@ public class StartCommand {
         //Todo: Supplydrops task
 
         game.setRunning(true);
-        game.setGameStateHandler(gameStateHandler);
         Bukkit.broadcastMessage("" + ChatColor.DARK_RED + "Manhunt Started!");
 
         return true;
