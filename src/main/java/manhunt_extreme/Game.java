@@ -8,13 +8,14 @@ import java.util.HashMap;
 public class Game {
     private final GameEngine gameEngine;
     private boolean isRunning;
-    private TaskManager taskManager = new TaskManager();
+    private TaskManager taskManager;
     private GameStateHandler gameStateHandler = new GameStateHandler();
 
     private HashMap<ManhuntPlayer, String> targets = new HashMap<>();
 
 
-    public Game(GameEngine gameEngine, boolean isRunning) {
+    public Game(GameEngine gameEngine, boolean isRunning, TaskManager taskManager) {
+        this.taskManager = taskManager;
         this.gameEngine = gameEngine;
         this.isRunning = isRunning;
     }
@@ -22,6 +23,10 @@ public class Game {
     public void startGame() {
         setRunning(true);
         taskManager.getGameClock().start();
+        taskManager.getHasteHandler().start();
+        taskManager.getSupplyDropHandler().start();
+        taskManager.getActionBarHandler().start();
+        taskManager.getCompassHandler().start();
         //Todo: Start task manager tasks
     }
 

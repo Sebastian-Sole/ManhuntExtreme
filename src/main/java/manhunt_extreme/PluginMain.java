@@ -20,7 +20,7 @@ public final class PluginMain extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         TaskManager taskManager = new TaskManager(this);
-        gameEngine = new GameEngine();
+        gameEngine = new GameEngine(taskManager);
         gameEngine.setWorld(world);
         logger.info("Manhunt Extreme Plugin Enabled!");
         setWorld();

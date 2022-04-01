@@ -5,6 +5,7 @@ import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
+import manhunt_extreme.task_manager.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -20,12 +21,14 @@ public class GameEngine {
     private HunterTeam hunters = new HunterTeam();
     private RunnerTeam runners = new RunnerTeam();
     private World world;
+    private TaskManager taskManager;
 
     // Constructor
-    public GameEngine() {
+    public GameEngine(TaskManager taskManager) {
         convertAllPlayersToManhuntPlayers();
         initializePlayerScores();
-        this.game = new Game(this, false);
+        this.taskManager = taskManager;
+        this.game = new Game(this, false, taskManager);
     }
 
 
@@ -93,5 +96,13 @@ public class GameEngine {
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public TaskManager getTaskManager() {
+        return taskManager;
+    }
+
+    public void setTaskManager(TaskManager taskManager) {
+        this.taskManager = taskManager;
     }
 }
