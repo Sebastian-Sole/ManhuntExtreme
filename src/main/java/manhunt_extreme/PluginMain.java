@@ -2,6 +2,7 @@ package manhunt_extreme;
 
 import manhunt_extreme.commands.UserInput;
 import manhunt_extreme.listeners.*;
+import manhunt_extreme.task_manager.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +19,7 @@ public final class PluginMain extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        TaskManager taskManager = new TaskManager(this);
         gameEngine = new GameEngine();
         gameEngine.setWorld(world);
         logger.info("Manhunt Extreme Plugin Enabled!");
@@ -64,4 +66,8 @@ public final class PluginMain extends JavaPlugin {
         this.world = worlds.get(0);
     }
 
+
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
 }

@@ -1,10 +1,12 @@
 package manhunt_extreme.task_manager;
 
+import manhunt_extreme.PluginMain;
+
 public class GameClock {
 
     private int minutes;
 
-    public GameClock() {
+    public GameClock(PluginMain pluginMain) {
         //Todo: Initialize?
     }
 
