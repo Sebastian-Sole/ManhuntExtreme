@@ -2,6 +2,7 @@ package manhunt_extreme;
 
 import manhunt_extreme.calculators.GameBalancingCalculator;
 import manhunt_extreme.calculators.PlayerScoreCalculator;
+import manhunt_extreme.commands.UserInput;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
@@ -11,6 +12,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class GameEngine {
 
@@ -22,6 +24,8 @@ public class GameEngine {
     private RunnerTeam runners = new RunnerTeam();
     private World world;
     private TaskManager taskManager;
+    private Logger logger;
+    private UserInput commands;
 
     // Constructor
     public GameEngine(TaskManager taskManager) {
@@ -104,5 +108,21 @@ public class GameEngine {
 
     public void setTaskManager(TaskManager taskManager) {
         this.taskManager = taskManager;
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    public UserInput getCommands() {
+        return commands;
+    }
+
+    public void setCommands(UserInput commands) {
+        this.commands = commands;
     }
 }
