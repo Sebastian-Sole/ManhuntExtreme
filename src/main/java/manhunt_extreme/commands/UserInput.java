@@ -2,10 +2,16 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserInput implements CommandExecutor {
 
@@ -98,5 +104,42 @@ public class UserInput implements CommandExecutor {
 
         return false;
     }
+
+    public List<String> getCompletions(String[] args, List<String> existingCompletions) {
+        switch (args[0]) {
+            case "/hunter":
+            case "/runner":
+            case "/spectator": {
+                return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
+            }
+            case "/start":
+            case "/end":
+            case "/chestgenerate":
+            case "/compass":
+            case "/clearteams":
+            case "/hasteboost":
+            case "/allhelp":
+            case "/cutclean":
+            case "/pause":
+            case "/unpause":
+            case "/health":
+            case "/supplydrops":
+            case "/extradrops":
+                return new ArrayList<String>();
+            case "/setheadstart": {
+                return new ArrayList<String>() {
+                    {
+                        add("0");
+                        add("30");
+                        add("60");
+                    }
+                };
+            }
+            default:
+                return existingCompletions;
+
+        }
+    }
+
 
 }
