@@ -21,6 +21,10 @@ public class ManhuntPlayer {
         deaths++;
     }
 
+    public void addKill() {
+        kills++;
+    }
+
     public Player getPlayer() {
         return player;
     }
