@@ -39,14 +39,14 @@ public final class PluginMain extends JavaPlugin {
     }
 
     private void registerEvents() {
-        getServer().getPluginManager().registerEvents(new Advancement(getGameEngine()), this);
+//        getServer().getPluginManager().registerEvents(new Advancement(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new Autocomplete(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new BlockBreak(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new PlayerDeath(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new EntityDeath(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new InteractClick(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new InventoryClick(getGameEngine()), this);
-        getServer().getPluginManager().registerEvents(new PiglinTrade(getGameEngine()), this);
+        getServer().getPluginManager().registerEvents(new PiglinTrade(), this);
         getServer().getPluginManager().registerEvents(new PlayerRespawn(getGameEngine(), this), this);
         getServer().getPluginManager().registerEvents(new PortalEnter(getGameEngine()), this);
         logger.info("Events registered");

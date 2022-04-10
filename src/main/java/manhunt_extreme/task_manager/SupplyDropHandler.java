@@ -41,10 +41,10 @@ public class SupplyDropHandler {
         // If hunters in overworld, and runners in nether
         if (hunterCoords.getWorld().getEnvironment() == World.Environment.NORMAL && runnerCoords.getWorld().getEnvironment() == World.Environment.NETHER) {
             ManhuntPlayer runnerInNether = pluginMain.getGameEngine().getRunners().stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER).toList().get(0);
-            //TODO: Add netherportals
+            hunterCoords = pluginMain.getGameEngine().getGame().getNetherPortals().get(runnerInNether);
         } else if (hunterCoords.getWorld().getEnvironment() == World.Environment.NETHER && runnerCoords.getWorld().getEnvironment() == World.Environment.NORMAL) {
             ManhuntPlayer runnerInOverworld = pluginMain.getGameEngine().getRunners().stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL).toList().get(0);
-            //TODO: Add overworldportals
+            hunterCoords = pluginMain.getGameEngine().getGame().getOverworldPortals().get(runnerInOverworld);
         }
 
         double middleX = Math.floor((hunterCoords.getX() + runnerCoords.getX()) / 2);
@@ -67,11 +67,7 @@ public class SupplyDropHandler {
         block.setType(Material.CHEST);
         Chest chest = (Chest) block.getState();
         Inventory inventory = chest.getInventory();
-        //TODO: Create items
-
-        // for (ItemStack itemStack : itemsList){
-        // inventory.addItem(itemStack)
-        //}
+        pluginMain.getGameEngine().getChestGenerator().createSupplyDropChest(targetWorld, supplyDropLocation);
     }
 
     private void generateSupplyDropBox(World targetWorld, Location supplyDropLocation) {
