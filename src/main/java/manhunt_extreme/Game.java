@@ -33,7 +33,6 @@ public class Game {
         taskManager.getSupplyDropHandler().start();
         taskManager.getActionBarHandler().start();
         taskManager.getCompassHandler().start();
-        //Todo: Start task manager tasks
     }
 
 

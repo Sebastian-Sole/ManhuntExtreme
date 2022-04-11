@@ -4,14 +4,6 @@ import manhunt_extreme.PluginMain;
 
 public class TaskManager {
     private final PluginMain pluginMain;
-
-    //Todo: Compass object
-    //Todo: BlazeSpawner object
-    //Todo: Actionbar object
-    //Todo: Supply drop object
-    //Todo: Haste object
-
-    //Todo: GameClock
     private GameClock gameClock;
     private ActionBarHandler actionBarHandler;
     private BlazeSpawnerHandler blazeSpawnerHandler;

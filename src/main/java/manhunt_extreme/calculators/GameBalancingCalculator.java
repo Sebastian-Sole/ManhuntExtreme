@@ -16,17 +16,14 @@ public class GameBalancingCalculator {
         this.runnerTeamScore = getTeamScore(gameEngine.getRunnersTeam());
     }
 
-    //Todo: Average Score
     public Double getAverageOfAllTeamScores() {
         return (hunterTeamScore * runnerTeamScore) / 2;
     }
 
-    //Todo: Team Score
     public Double getTeamScore(ManhuntTeam manhuntTeam) {
         return manhuntTeam.getPlayerList().stream().mapToDouble(ManhuntPlayer::getPlayerScore).sum();
     }
 
-    //Todo: Team score difference
     public Double getTeamScoreDifference() {
         return runnerTeamScore - hunterTeamScore;
     }

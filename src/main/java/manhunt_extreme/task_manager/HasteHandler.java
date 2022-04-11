@@ -17,7 +17,7 @@ public class HasteHandler {
     }
 
     public void start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> giveHaste(), 10L, 1200L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, this::giveHaste, 10L, 1200L);
     }
 
     private void giveHaste() {

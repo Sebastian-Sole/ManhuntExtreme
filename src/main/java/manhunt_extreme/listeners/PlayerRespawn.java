@@ -26,26 +26,22 @@ public class PlayerRespawn implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        //Todo: Respawn player with loot
         ManhuntPlayer respawnedPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
-
         if (respawnedPlayer.getTeam() instanceof RunnerTeam) {
             respawnRunner(respawnedPlayer);
         } else if (respawnedPlayer.getTeam() instanceof HunterTeam) {
             respawnHunter(respawnedPlayer);
         }
-
-
     }
 
     private void respawnHunter(ManhuntPlayer respawnedPlayer) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(pluginMain, () -> {
             int speedDuration;
             if (respawnedPlayer.getPlayer().getBedSpawnLocation() == null) {
-                speedDuration = 200;
+                speedDuration = 4800;
             } else {
                 //Todo: Set speedDuration by the game calculator
-                speedDuration = 4800;
+                speedDuration = 200;
             }
             respawnedPlayer.getPlayer().addPotionEffect(PotionEffectType.SPEED.createEffect(speedDuration, 2));
             if (gameStateHandler.isHunterHelp()) {

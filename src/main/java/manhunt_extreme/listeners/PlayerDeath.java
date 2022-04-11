@@ -2,9 +2,11 @@ package manhunt_extreme.listeners;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
+import manhunt_extreme.listeners.death_drop.DeathDropGenerator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -40,9 +42,9 @@ public class PlayerDeath implements Listener {
                     killer.getPlayer().setHealthScale(killer.getPlayer().getHealthScale() + gameStateHandler.getHealth() / 5);
                     killer.getPlayer().addPotionEffect(PotionEffectType.REGENERATION.createEffect(150, 1));
                 }
-                //Todo: Drop a random drop
                 if (gameStateHandler.isExtraDrops()) {
-                    // Todo: GameEngine should have a "DropGenerator", which should be activated here
+                    var itemToBeDropped = DeathDropGenerator.createItem();
+                    event.getDrops().add(itemToBeDropped);
                 }
 
             }
@@ -52,7 +54,10 @@ public class PlayerDeath implements Listener {
             if (killer.getTeam() instanceof HunterTeam) {
                 manhuntPlayerKilled.addDeath();
                 killer.addKill();
-                //Todo: If all runners have been killed at least once, end game
+                if (!gameEngine.getHuntersTeam().getPlayerDeaths().values().contains(0)) {
+                    Bukkit.broadcastMessage("Game over! Hunters win!");
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "end");
+                }
             }
         }
 

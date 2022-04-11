@@ -28,6 +28,6 @@ public class InteractClick implements Listener {
                 inv.displayToPlayer(player);
             }
         }
-        //Todo: Eye of ender throw
+        // Could do eye throw?
     }
 }

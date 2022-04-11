@@ -50,11 +50,8 @@ public class StartCommand {
         updateWorld();
         runnersState();
         huntersState();
-        //Todo: Compass task
-        //Todo: Haste task
-        //Todo: Supplydrops task
+        game.startGame();
 
-        game.setRunning(true);
         Bukkit.broadcastMessage("" + ChatColor.DARK_RED + "Manhunt Started!");
 
         return true;
@@ -68,14 +65,12 @@ public class StartCommand {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * headStartDuration, 5));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * headStartDuration, 3));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20 * headStartDuration, 10));
-            //Todo: ACTION BAR
         }
     }
 
     private void runnersState() {
         for (ManhuntPlayer manhuntPlayer : gameEngine.getRunners()) {
             startState(manhuntPlayer);
-            //Todo: ACTION BAR
             var speedPotion = createSpeedPotion();
             manhuntPlayer.getPlayer().getInventory().addItem(speedPotion);
         }

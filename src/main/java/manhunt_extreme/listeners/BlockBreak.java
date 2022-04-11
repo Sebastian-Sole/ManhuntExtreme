@@ -30,7 +30,6 @@ public class BlockBreak implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (!gameEngine.getGame().isRunning()) {
-            //Todo: Cannot break blocks
             event.getPlayer().sendMessage("Cannot break blocks before game has started");
             event.setCancelled(true);
             return;

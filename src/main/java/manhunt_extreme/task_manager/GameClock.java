@@ -1,17 +1,21 @@
 package manhunt_extreme.task_manager;
 
 import manhunt_extreme.PluginMain;
+import org.bukkit.Bukkit;
 
 public class GameClock {
 
     private int minutes;
+    private PluginMain pluginMain;
 
     public GameClock(PluginMain pluginMain) {
-        //Todo: Initialize?
+        this.pluginMain = pluginMain;
     }
 
     public void start() {
-        //Todo: Start clock
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
+            minutes++;
+        }, 1200L, 1200L);
     }
 
 

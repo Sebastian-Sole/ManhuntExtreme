@@ -74,8 +74,6 @@ public class SupplyDropHandler {
         // x = +3
         for (int i = 0; i <= 3; i++) {
             for (int j = 0; j <= 3; j++) {
-                //Todo: Loop this
-
                 // x = +3
                 targetWorld.getBlockAt((int) (supplyDropLocation.getX() + 3), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() + j)).setType(Material.OBSIDIAN);
                 targetWorld.getBlockAt((int) (supplyDropLocation.getX() + 3), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() - j)).setType(Material.OBSIDIAN);

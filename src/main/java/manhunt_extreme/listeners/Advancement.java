@@ -8,6 +8,6 @@ public class Advancement implements Listener {
 
     @EventHandler
     public void onAdvancement(PlayerAdvancementDoneEvent event) {
-        //Todo: Increase AdvancementScore
+
     }
 }

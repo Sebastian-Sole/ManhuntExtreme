@@ -17,7 +17,6 @@ public class PiglinTrade implements Listener {
 
     @EventHandler
     public void onPiglinTrade(EntityDropItemEvent event) {
-        //Todo: Add extra drops
         if (event.getEntity().getType() == EntityType.PIGLIN) {
             this.entity = event.getEntity();
             runItemDropRandomizer();
