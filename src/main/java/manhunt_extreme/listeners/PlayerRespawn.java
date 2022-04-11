@@ -49,7 +49,7 @@ public class PlayerRespawn implements Listener {
             }
             respawnedPlayer.getPlayer().addPotionEffect(PotionEffectType.SPEED.createEffect(speedDuration, 2));
             if (gameStateHandler.isHunterHelp()) {
-                //Todo: Respawn items
+                gameEngine.getRespawnHandler().giveItems(respawnedPlayer);
             }
 
         }, 60L);
@@ -71,7 +71,7 @@ public class PlayerRespawn implements Listener {
                     speedDuration, 2
             ));
             if (gameStateHandler.isRunnerHelp()) {
-                //Todo: Respawn item
+                gameEngine.getRespawnHandler().giveItems(respawnedPlayer);
             }
 
         }, 60L);

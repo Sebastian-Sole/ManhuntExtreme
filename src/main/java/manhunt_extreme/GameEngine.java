@@ -4,6 +4,7 @@ import manhunt_extreme.calculators.GameBalancingCalculator;
 import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.chest_generator.ChestGenerator;
 import manhunt_extreme.commands.UserInput;
+import manhunt_extreme.listeners.respawn_handler.RespawnHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
@@ -28,6 +29,7 @@ public class GameEngine {
     private Logger logger;
     private UserInput commands;
     private ChestGenerator chestGenerator;
+    private RespawnHandler respawnHandler;
 
     // Constructor
     public GameEngine(TaskManager taskManager) {
@@ -36,6 +38,7 @@ public class GameEngine {
         this.taskManager = taskManager;
         this.chestGenerator = new ChestGenerator(this);
         this.game = new Game(this, false, taskManager);
+        this.respawnHandler = new RespawnHandler(this);
     }
 
 
@@ -135,5 +138,13 @@ public class GameEngine {
 
     public void setChestGenerator(ChestGenerator chestGenerator) {
         this.chestGenerator = chestGenerator;
+    }
+
+    public RespawnHandler getRespawnHandler() {
+        return respawnHandler;
+    }
+
+    public void setRespawnHandler(RespawnHandler respawnHandler) {
+        this.respawnHandler = respawnHandler;
     }
 }
