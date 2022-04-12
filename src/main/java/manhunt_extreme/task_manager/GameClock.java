@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 
 public class GameClock {
 
-    private int minutes;
+    private int minutes = 0;
     private PluginMain pluginMain;
 
     public GameClock(PluginMain pluginMain) {
