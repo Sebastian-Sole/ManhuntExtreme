@@ -10,6 +10,7 @@ public class GameBalancingCalculator {
     private Double hunterTeamScore;
     private Double runnerTeamScore;
     private ChestOddsCalculator chestOddsCalculator = new ChestOddsCalculator(this);
+    private CutCleanCalculator cutCleanCalculator = new CutCleanCalculator(this);
 
     public GameBalancingCalculator(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -52,5 +53,13 @@ public class GameBalancingCalculator {
 
     public void setChestOddsCalculator(ChestOddsCalculator chestOddsCalculator) {
         this.chestOddsCalculator = chestOddsCalculator;
+    }
+
+    public CutCleanCalculator getCutCleanCalculator() {
+        return cutCleanCalculator;
+    }
+
+    public void setCutCleanCalculator(CutCleanCalculator cutCleanCalculator) {
+        this.cutCleanCalculator = cutCleanCalculator;
     }
 }

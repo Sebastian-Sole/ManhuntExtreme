@@ -3,6 +3,7 @@ package manhunt_extreme.listeners;
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.calculators.ChestOddsCalculator;
+import manhunt_extreme.calculators.CutCleanCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,9 +23,9 @@ public class BlockBreak implements Listener {
     private GameStateHandler gameStateHandler = gameEngine.getGame().getGameStateHandler();
     private Random random = new Random();
     private ChestOddsCalculator chestOddsCalculator = gameEngine.getGameBalancingCalculator().getChestOddsCalculator();
+    private CutCleanCalculator cutCleanCalculator = gameEngine.getGameBalancingCalculator().getCutCleanCalculator();
 
     public BlockBreak(GameEngine gameEngine) {
-
         this.gameEngine = gameEngine;
     }
 
@@ -36,14 +37,8 @@ public class BlockBreak implements Listener {
             return;
         }
         if (gameStateHandler.isChestGenerate()) {
-            //Todo: Implement odds calculator
             ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
             int numberGenerated = random.nextInt(chestOddsCalculator.getPlayerChestOdds(manhuntPlayer));
-//            if (gameEngine.getManhuntPlayerFromPlayer(event.getPlayer()).getTeam() instanceof HunterTeam) {
-//                numberGenerated = random.nextInt(625); // 625
-//            } else if (gameEngine.getManhuntPlayerFromPlayer(event.getPlayer()).getTeam() instanceof RunnerTeam) {
-//                numberGenerated = random.nextInt(525); // 525
-//            }
             if (numberGenerated == 69) {
                 Location blockBrokenLocation = event.getBlock().getLocation();
                 gameEngine.getChestGenerator().generateChest(blockBrokenLocation, event, event.getPlayer().getWorld());
@@ -51,8 +46,11 @@ public class BlockBreak implements Listener {
 
         }
         if (gameStateHandler.isCutClean()) {
-            // Todo: Implement cut clean calculator
-            handleCutClean(event);
+            ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
+            double odds = cutCleanCalculator.calculateOdds(manhuntPlayer);
+            if (random.nextDouble() <= odds) {
+                handleCutClean(event);
+            }
         }
     }
 
