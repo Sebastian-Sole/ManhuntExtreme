@@ -9,6 +9,7 @@ public class GameBalancingCalculator {
     private final GameEngine gameEngine;
     private Double hunterTeamScore;
     private Double runnerTeamScore;
+    private ChestOddsCalculator chestOddsCalculator = new ChestOddsCalculator(this);
 
     public GameBalancingCalculator(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -45,4 +46,11 @@ public class GameBalancingCalculator {
         return runnerTeamAverageScore - hunterTeamAverageScore;
     }
 
+    public ChestOddsCalculator getChestOddsCalculator() {
+        return chestOddsCalculator;
+    }
+
+    public void setChestOddsCalculator(ChestOddsCalculator chestOddsCalculator) {
+        this.chestOddsCalculator = chestOddsCalculator;
+    }
 }

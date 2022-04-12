@@ -2,8 +2,8 @@ package manhunt_extreme.listeners;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
-import manhunt_extreme.manhunt_team.HunterTeam;
-import manhunt_extreme.manhunt_team.RunnerTeam;
+import manhunt_extreme.calculators.ChestOddsCalculator;
+import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -21,6 +21,7 @@ public class BlockBreak implements Listener {
     private GameEngine gameEngine;
     private GameStateHandler gameStateHandler = gameEngine.getGame().getGameStateHandler();
     private Random random = new Random();
+    private ChestOddsCalculator chestOddsCalculator = gameEngine.getGameBalancingCalculator().getChestOddsCalculator();
 
     public BlockBreak(GameEngine gameEngine) {
 
@@ -36,12 +37,13 @@ public class BlockBreak implements Listener {
         }
         if (gameStateHandler.isChestGenerate()) {
             //Todo: Implement odds calculator
-            int numberGenerated = 0;
-            if (gameEngine.getManhuntPlayerFromPlayer(event.getPlayer()).getTeam() instanceof HunterTeam) {
-                numberGenerated = random.nextInt(625); // 625
-            } else if (gameEngine.getManhuntPlayerFromPlayer(event.getPlayer()).getTeam() instanceof RunnerTeam) {
-                numberGenerated = random.nextInt(525); // 525
-            }
+            ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
+            int numberGenerated = random.nextInt(chestOddsCalculator.getPlayerChestOdds(manhuntPlayer));
+//            if (gameEngine.getManhuntPlayerFromPlayer(event.getPlayer()).getTeam() instanceof HunterTeam) {
+//                numberGenerated = random.nextInt(625); // 625
+//            } else if (gameEngine.getManhuntPlayerFromPlayer(event.getPlayer()).getTeam() instanceof RunnerTeam) {
+//                numberGenerated = random.nextInt(525); // 525
+//            }
             if (numberGenerated == 69) {
                 Location blockBrokenLocation = event.getBlock().getLocation();
                 gameEngine.getChestGenerator().generateChest(blockBrokenLocation, event, event.getPlayer().getWorld());
