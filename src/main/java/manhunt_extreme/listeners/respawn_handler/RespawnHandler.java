@@ -10,11 +10,11 @@ public class RespawnHandler {
 
     public RespawnHandler(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        this.respawnInventoryGenerator = new RespawnInventoryGenerator();
+        this.respawnInventoryGenerator = gameEngine.getGameBalancingCalculator().getRespawnInventoryGenerator();
     }
 
     public void giveItems(ManhuntPlayer manhuntPlayer) {
-        var items = respawnInventoryGenerator.generateItemStack();
+        var items = respawnInventoryGenerator.generateItemStack(gameEngine.getTaskManager().getGameClock().getMinutes());
         for (ItemStack stack : items) {
             manhuntPlayer.getPlayer().getInventory().addItem(stack);
         }

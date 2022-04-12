@@ -1,6 +1,7 @@
 package manhunt_extreme.calculators;
 
 import manhunt_extreme.GameEngine;
+import manhunt_extreme.listeners.respawn_handler.RespawnInventoryGenerator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.ManhuntTeam;
 
@@ -11,6 +12,7 @@ public class GameBalancingCalculator {
     private Double runnerTeamScore;
     private ChestOddsCalculator chestOddsCalculator = new ChestOddsCalculator(this);
     private CutCleanCalculator cutCleanCalculator = new CutCleanCalculator(this);
+    private RespawnInventoryGenerator respawnInventoryGenerator = new RespawnInventoryGenerator();
 
     public GameBalancingCalculator(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -61,5 +63,13 @@ public class GameBalancingCalculator {
 
     public void setCutCleanCalculator(CutCleanCalculator cutCleanCalculator) {
         this.cutCleanCalculator = cutCleanCalculator;
+    }
+
+    public RespawnInventoryGenerator getRespawnInventoryGenerator() {
+        return respawnInventoryGenerator;
+    }
+
+    public void setRespawnInventoryGenerator(RespawnInventoryGenerator respawnInventoryGenerator) {
+        this.respawnInventoryGenerator = respawnInventoryGenerator;
     }
 }

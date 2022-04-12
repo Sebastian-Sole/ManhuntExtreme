@@ -5,181 +5,96 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 public class RespawnInventoryGenerator {
-    private int level;
-    private double modifier;
-    private Random random = new Random();
-    // Fields
 
-    // 0-1
+    // 0-10 minutes
     private ArrayList<ItemStack> respawnOne = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.WOODEN_AXE),
-            new ItemStack(Material.WOODEN_PICKAXE),
-            new ItemStack(Material.WOODEN_SHOVEL),
-            new ItemStack(Material.WOODEN_SWORD),
-            new ItemStack(Material.COAL, 5),
+            new ItemStack(Material.OAK_LOG, 4),
+            new ItemStack(Material.COBBLESTONE, 6),
             new ItemStack(Material.BREAD, 8),
             new ItemStack(Material.TORCH, 5)
     ));
-
-    // 1-2
+    // 10-20 minutes
     private ArrayList<ItemStack> respawnTwo = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.STONE_AXE),
-            new ItemStack(Material.STONE_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET)
+            new ItemStack(Material.BREAD, 12),
+            new ItemStack(Material.TORCH, 5),
+            new ItemStack(Material.OAK_LOG, 7),
+            new ItemStack(Material.COBBLESTONE, 9),
+            new ItemStack(Material.IRON_INGOT, 7)
     ));
-
-    // 2-3
+    // 20-30 minutes
     private ArrayList<ItemStack> respawnThree = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.STONE_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.IRON_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.GOLDEN_CHESTPLATE),
-            new ItemStack(Material.GOLDEN_LEGGINGS),
-            new ItemStack(Material.BREAD, 10),
+            new ItemStack(Material.IRON_INGOT, 11),
+            new ItemStack(Material.GOLD_INGOT, 15),
+            new ItemStack(Material.OAK_LOG, 7),
+            new ItemStack(Material.COBBLESTONE, 9),
+            new ItemStack(Material.BREAD, 16),
             new ItemStack(Material.TORCH, 10)
     ));
-
-    // 3-4
+    // 30-40 minutes
     private ArrayList<ItemStack> respawnFour = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.COAL, 3),
-            new ItemStack(Material.OAK_LOG, 10)
+            new ItemStack(Material.COBBLESTONE, 9),
+            new ItemStack(Material.IRON_INGOT, 17),
+            new ItemStack(Material.GOLD_INGOT, 12),
+            new ItemStack(Material.BREAD, 40),
+            new ItemStack(Material.OAK_LOG, 10),
+            new ItemStack(Material.WHITE_WOOL, 3)
     ));
-
-    // 4-5
+    // 40-50 minutes
     private ArrayList<ItemStack> respawnFive = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.GOLDEN_CHESTPLATE),
-            new ItemStack(Material.GOLDEN_LEGGINGS),
-            new ItemStack(Material.OAK_LOG, 4),
-            new ItemStack(Material.COOKED_BEEF, 10)
+            new ItemStack(Material.COBBLESTONE, 12),
+            new ItemStack(Material.IRON_INGOT, 20),
+            new ItemStack(Material.GOLD_INGOT, 17),
+            new ItemStack(Material.COOKED_BEEF, 12),
+            new ItemStack(Material.OAK_LOG, 10),
+            new ItemStack(Material.WHITE_WOOL, 3)
     ));
-
-    // 5-6
+    // 50-60 minutes
     private ArrayList<ItemStack> respawnSix = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.GOLDEN_CHESTPLATE),
-            new ItemStack(Material.IRON_LEGGINGS),
-            new ItemStack(Material.FURNACE),
-            new ItemStack(Material.COAL, 3),
-            new ItemStack(Material.OAK_LOG, 2),
-            new ItemStack(Material.COOKED_BEEF, 10)
+            new ItemStack(Material.COBBLESTONE, 12),
+            new ItemStack(Material.IRON_INGOT, 32),
+            new ItemStack(Material.GOLD_INGOT, 18),
+            new ItemStack(Material.COOKED_BEEF, 24),
+            new ItemStack(Material.OAK_LOG, 10),
+            new ItemStack(Material.WHITE_WOOL, 3),
+            new ItemStack(Material.APPLE)
     ));
-
-    // 6-7
+    // 60-70 minutes
     private ArrayList<ItemStack> respawnSeven = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.IRON_CHESTPLATE),
-            new ItemStack(Material.IRON_LEGGINGS),
-            new ItemStack(Material.FURNACE),
-            new ItemStack(Material.COAL, 3),
-            new ItemStack(Material.OAK_LOG, 2),
-            new ItemStack(Material.COOKED_BEEF, 5)
+            new ItemStack(Material.COBBLESTONE, 12),
+            new ItemStack(Material.IRON_INGOT, 38),
+            new ItemStack(Material.GOLD_INGOT, 24),
+            new ItemStack(Material.COOKED_BEEF, 32),
+            new ItemStack(Material.OAK_LOG, 10),
+            new ItemStack(Material.WHITE_WOOL, 3),
+            new ItemStack(Material.APPLE)
     ));
-
-    // 7-8
+    // 70-80 minutes
     private ArrayList<ItemStack> respawnEight = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.IRON_CHESTPLATE),
-            new ItemStack(Material.IRON_LEGGINGS),
-            new ItemStack(Material.FURNACE),
-            new ItemStack(Material.COAL, 3),
-            new ItemStack(Material.OAK_LOG, 2),
-            new ItemStack(Material.COOKED_BEEF, 10),
-            new ItemStack(Material.SHIELD)
+            new ItemStack(Material.COBBLESTONE, 12),
+            new ItemStack(Material.IRON_INGOT, 42),
+            new ItemStack(Material.GOLD_INGOT, 28),
+            new ItemStack(Material.COOKED_BEEF, 32),
+            new ItemStack(Material.OAK_LOG, 10),
+            new ItemStack(Material.WHITE_WOOL, 3),
+            new ItemStack(Material.APPLE),
+            new ItemStack(Material.DIAMOND)
     ));
-
-    // 8-9
+    // 80+
     private ArrayList<ItemStack> respawnNine = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_AXE),
-            new ItemStack(Material.IRON_PICKAXE),
-            new ItemStack(Material.STONE_SHOVEL),
-            new ItemStack(Material.STONE_SWORD),
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.IRON_CHESTPLATE),
-            new ItemStack(Material.IRON_LEGGINGS),
-            new ItemStack(Material.FURNACE),
-            new ItemStack(Material.COAL, 3),
-            new ItemStack(Material.OAK_LOG, 2),
-            new ItemStack(Material.COOKED_BEEF, 15),
-            new ItemStack(Material.SHIELD),
-            new ItemStack(Material.BOW),
-            new ItemStack(Material.ARROW, 10)
+            new ItemStack(Material.COBBLESTONE, 12),
+            new ItemStack(Material.IRON_INGOT, 42),
+            new ItemStack(Material.GOLD_INGOT, 28),
+            new ItemStack(Material.COOKED_BEEF, 32),
+            new ItemStack(Material.OAK_LOG, 10),
+            new ItemStack(Material.WHITE_WOOL, 3),
+            new ItemStack(Material.APPLE),
+            new ItemStack(Material.DIAMOND),
+            new ItemStack(Material.FLINT, 4),
+            new ItemStack(Material.FEATHER, 4)
     ));
 
-    private ArrayList<ItemStack> tierOne = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_ORE, random.nextInt(5) + 1),
-            new ItemStack(Material.BREAD, random.nextInt(5) + 5)
-    ));
-
-    private ArrayList<ItemStack> tierTwo = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_HELMET),
-            new ItemStack(Material.IRON_BOOTS),
-            new ItemStack(Material.IRON_ORE, random.nextInt(5) + 1),
-            new ItemStack(Material.BREAD, random.nextInt(5) + 5),
-            new ItemStack(Material.COAL, random.nextInt(5) + 5),
-            new ItemStack(Material.OAK_LOG, random.nextInt(3) + 5)
-    ));
-
-    private ArrayList<ItemStack> tierThree = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.BREAD, random.nextInt(5) + 1),
-            new ItemStack(Material.COAL, random.nextInt(10) + 1),
-            new ItemStack(Material.OAK_LOG, random.nextInt(8) + 5),
-            new ItemStack(Material.IRON_ORE, random.nextInt(5) + 1),
-            new ItemStack(Material.TORCH, 32)
-    ));
-
-    private ArrayList<ItemStack> tierFour = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.BREAD, random.nextInt(5) + 1),
-            new ItemStack(Material.COAL, random.nextInt(10) + 1),
-            new ItemStack(Material.OAK_LOG, random.nextInt(5) + 1),
-            new ItemStack(Material.IRON_ORE, random.nextInt(5) + 1),
-            new ItemStack(Material.ENDER_PEARL)
-    ));
-
-    private ArrayList<ItemStack> tierFive = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.ENDER_PEARL),
-            new ItemStack(Material.DIAMOND, random.nextInt(2))
-    ));
-    private ArrayList<ArrayList<ItemStack>> effectTier = new ArrayList<>(Arrays.asList(
-            tierOne,
-            tierTwo,
-            tierThree,
-            tierFour,
-            tierFive
-    ));
     private ArrayList<ArrayList<ItemStack>> respawnLevel = new ArrayList<>(Arrays.asList(
             respawnOne,
             respawnTwo,
@@ -192,26 +107,21 @@ public class RespawnInventoryGenerator {
             respawnNine
     ));
 
-    public ArrayList<ItemStack> generateItemStack() {
-
-        ArrayList<ItemStack> mainItems = new ArrayList<>();
-        mainItems.addAll(respawnLevel.get(level));
-        boolean addItems = Math.random() < this.modifier;
-        if (addItems) {
-            ArrayList<ItemStack> extraItems = new ArrayList<>();
-            ArrayList<ItemStack> activeTier;
-            if (level == 0) {
-                activeTier = effectTier.get(0);
-            } else {
-                activeTier = effectTier.get(level - 1);
-            }
-            for (ItemStack itemStack : activeTier) {
-                if (Math.random() < modifier) {
-                    extraItems.add(itemStack);
-                }
-            }
-            mainItems.addAll(extraItems);
+    public ArrayList<ItemStack> generateItemStack(int minutes) {
+        if (minutes < 5) {
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new ItemStack(Material.CAKE),
+                            new ItemStack(Material.DEAD_BUSH),
+                            new ItemStack(Material.EGG)
+                    )
+            );
         }
-        return mainItems;
+
+        int tier = minutes / 10;
+        if (tier > 8) {
+            tier = 8;
+        }
+        return respawnLevel.get(tier);
     }
 }
