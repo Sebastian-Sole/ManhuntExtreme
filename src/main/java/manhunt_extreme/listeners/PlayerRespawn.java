@@ -15,13 +15,14 @@ import org.bukkit.potion.PotionEffectType;
 
 public class PlayerRespawn implements Listener {
 
-    private GameEngine gameEngine;
-    private PluginMain pluginMain;
-    private GameStateHandler gameStateHandler = gameEngine.getGame().getGameStateHandler();
+    private final GameEngine gameEngine;
+    private final PluginMain pluginMain;
+    private final GameStateHandler gameStateHandler;
 
     public PlayerRespawn(GameEngine gameEngine, PluginMain pluginMain) {
         this.gameEngine = gameEngine;
         this.pluginMain = pluginMain;
+        this.gameStateHandler = gameEngine.getGame().getGameStateHandler();
     }
 
     @EventHandler
@@ -32,6 +33,8 @@ public class PlayerRespawn implements Listener {
         } else if (respawnedPlayer.getTeam() instanceof HunterTeam) {
             respawnHunter(respawnedPlayer);
         }
+        respawnedPlayer.reset();
+        Bukkit.broadcastMessage("Player score: " + respawnedPlayer.getPlayerScore());
     }
 
     private void respawnHunter(ManhuntPlayer respawnedPlayer) {

@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class PiglinTrade implements Listener {
 
-    private Random random = new Random();
+    private final Random random = new Random();
     private Entity entity;
 
     @EventHandler

@@ -2,6 +2,7 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.Game;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 
 public class HunterHelpCommand extends GameRuleCommand {
 
@@ -15,6 +16,8 @@ public class HunterHelpCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setHunterHelp(gameStateHandler.isHunterHelp());
+        Bukkit.broadcastMessage("Hunter help is: " + gameStateHandler.isHunterHelp());
+
         return true;
     }
 }

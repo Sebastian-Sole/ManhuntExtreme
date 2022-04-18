@@ -36,7 +36,7 @@ public class RunnerCommand {
         }
         gameEngine.getHuntersTeam().removePlayer(targetManhuntPlayer);
         gameEngine.getRunnersTeam().addPlayer(targetManhuntPlayer);
-        Bukkit.broadcastMessage(manhuntPlayer.getPlayer().getName() + " is now a " + ChatColor.RED + ChatColor.BOLD + "HUNTER!");
+        Bukkit.broadcastMessage(manhuntPlayer.getPlayer().getName() + " is now a " + ChatColor.GREEN + ChatColor.BOLD + "RUNNER!");
         return true;
     }
 }

@@ -4,8 +4,7 @@ public class HunterTeam extends ManhuntTeam {
 
 
     public HunterTeam() {
-
-
+        super();
     }
 
 

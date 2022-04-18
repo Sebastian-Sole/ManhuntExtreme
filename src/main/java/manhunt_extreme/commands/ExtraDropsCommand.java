@@ -2,6 +2,7 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.Game;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 
 public class ExtraDropsCommand extends GameRuleCommand {
 
@@ -15,6 +16,7 @@ public class ExtraDropsCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setExtraDrops(!gameStateHandler.isExtraDrops());
+        Bukkit.broadcastMessage("Extra drops is: " + gameStateHandler.isExtraDrops());
         return true;
     }
 }

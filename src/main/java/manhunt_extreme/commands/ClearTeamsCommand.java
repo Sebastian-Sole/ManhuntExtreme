@@ -2,6 +2,7 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 
 public class ClearTeamsCommand {
     private ManhuntPlayer manhuntPlayer;
@@ -23,12 +24,9 @@ public class ClearTeamsCommand {
             manhuntPlayer.getPlayer().sendMessage("Invalid format. Please use /clearteams");
             return true;
         }
-        for (ManhuntPlayer teammate : gameEngine.getRunnersTeam().getPlayerList()) {
-            gameEngine.getRunnersTeam().removePlayer(teammate);
-        }
-        for (ManhuntPlayer teammate : gameEngine.getHuntersTeam().getPlayerList()) {
-            gameEngine.getHuntersTeam().removePlayer(teammate);
-        }
+        gameEngine.getHuntersTeam().clearTeam();
+        gameEngine.getRunnersTeam().clearTeam();
+        Bukkit.broadcastMessage("Teams have been cleared");
         return true;
     }
 }

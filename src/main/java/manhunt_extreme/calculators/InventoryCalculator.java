@@ -1,6 +1,7 @@
 package manhunt_extreme.calculators;
 
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -122,9 +123,16 @@ public class InventoryCalculator {
         final var inv = this.manhuntPlayer.getPlayer().getInventory();
         final var hotbar = new ArrayList<ItemStack>();
         for (int i = 0; i <= 8; i++) {
+            if (inv.isEmpty()) {
+                break;
+            }
+            if (inv.getItem(i) == null) {
+                continue;
+            }
             hotbar.add(inv.getItem(i));
         }
         this.hotbar = hotbar;
+        Bukkit.broadcastMessage("Hotbar has " + hotbar.size() + "items");
 
         for (Material material : valuableItems) {
             weaponScore += calculateItemScore(material);
@@ -140,7 +148,7 @@ public class InventoryCalculator {
         double totalItemScore;
         if (!(material.name().equals("BOW") || material.name().equals("CROSSBOW"))) {
             var materialOre = material.name().substring(0, material.name().indexOf("_"));
-            var materialType = material.name().substring(material.name().indexOf("_"));
+            var materialType = material.name().substring(material.name().indexOf("_") + 1);
 
             int oreScore;
 
@@ -168,6 +176,13 @@ public class InventoryCalculator {
         }
 
         for (ItemStack item : this.hotbar) {
+            if (this.hotbar.isEmpty()) {
+                Bukkit.broadcastMessage("Hotbar is empty");
+                break;
+            }
+            if (item == null || item.getType() == null) {
+                continue;
+            }
             if (item.getType() == material) {
                 if (!item.getEnchantments().isEmpty()) {
                     totalItemScore *= enchantWeight;

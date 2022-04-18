@@ -1,6 +1,7 @@
 package manhunt_extreme.commands;
 
 import manhunt_extreme.GameEngine;
+import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,6 +36,8 @@ public class HunterCommand {
         }
         gameEngine.getRunnersTeam().removePlayer(targetManhuntPlayer);
         gameEngine.getHuntersTeam().addPlayer(targetManhuntPlayer);
+        targetManhuntPlayer.setPlayerScore(new PlayerScoreCalculator(targetManhuntPlayer, gameEngine.getTaskManager().getGameClock()).calculatePlayerScore());
+
         Bukkit.broadcastMessage(manhuntPlayer.getPlayer().getName() + " is now a " + ChatColor.RED + ChatColor.BOLD + "HUNTER!");
         return true;
     }

@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerPortalEvent;
 
 public class PortalEnter implements Listener {
 
-    private GameEngine gameEngine;
+    private final GameEngine gameEngine;
     private boolean hasAlreadyEnteredNether;
 
     public PortalEnter(GameEngine gameEngine) {

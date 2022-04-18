@@ -7,13 +7,12 @@ import java.util.HashMap;
 
 public abstract class ManhuntTeam {
 
-    private ArrayList<ManhuntPlayer> playerList;
+    private ArrayList<ManhuntPlayer> playerList = new ArrayList<>();
     private HashMap<ManhuntPlayer, Integer> playerDeaths = new HashMap<>();
 
     public void addPlayerDeath(ManhuntPlayer manhuntPlayer) {
         var deathCount = playerDeaths.get(manhuntPlayer);
         playerDeaths.put(manhuntPlayer, deathCount + 1);
-        manhuntPlayer.addDeath();
     }
 
     public ArrayList<ManhuntPlayer> getPlayerList() {
@@ -27,12 +26,18 @@ public abstract class ManhuntTeam {
     public void addPlayer(ManhuntPlayer manhuntPlayer) {
         playerList.add(manhuntPlayer);
         playerDeaths.put(manhuntPlayer, 0);
+
         manhuntPlayer.setTeam(this);
     }
 
     public void removePlayer(ManhuntPlayer manhuntPlayer) {
         playerList.remove(manhuntPlayer);
         playerDeaths.remove(manhuntPlayer);
+    }
+
+    public void clearTeam() {
+        playerList.clear();
+        playerDeaths.clear();
     }
 
     public int size() {

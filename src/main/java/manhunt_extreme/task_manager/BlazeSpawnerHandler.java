@@ -28,7 +28,7 @@ public class BlazeSpawnerHandler {
                 generateSpawner();
                 spawnersGenerated++;
             }
-        }, 8400L, 3600L);
+        }, 600L, 600L); // 8400L, 3600L
     }
 
     private void generateSpawner() {

@@ -58,7 +58,7 @@ public class StartCommand {
     }
 
     private void huntersState() {
-        for (ManhuntPlayer manhuntPlayer : gameEngine.getManhuntPlayers()) {
+        for (ManhuntPlayer manhuntPlayer : gameEngine.getHunters()) {
             startState(manhuntPlayer);
             Player player = manhuntPlayer.getPlayer();
             int headStartDuration = gameStateHandler.getHeadStart();
@@ -88,9 +88,10 @@ public class StartCommand {
     private void startState(ManhuntPlayer manhuntPlayer) {
         Player player = manhuntPlayer.getPlayer();
         player.setGameMode(GameMode.SURVIVAL);
+        Bukkit.broadcastMessage("Health is: " + gameStateHandler.getHealth());
         player.setHealthScale(gameStateHandler.getHealth());
-        player.setHealth(gameStateHandler.getHealth());
         player.setMaxHealth(gameStateHandler.getHealth());
+        player.setHealth(gameStateHandler.getHealth()); // Must be last
         player.getInventory().clear();
         player.setExp(0F);
         player.setLevel(0);

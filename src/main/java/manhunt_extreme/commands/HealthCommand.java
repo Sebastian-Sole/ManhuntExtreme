@@ -3,6 +3,7 @@ package manhunt_extreme.commands;
 import manhunt_extreme.Game;
 import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 
 public class HealthCommand {
 
@@ -35,6 +36,7 @@ public class HealthCommand {
                 return true;
             }
             gameStateHandler.setHealth(health);
+            Bukkit.broadcastMessage("Health is: " + gameStateHandler.getHealth());
             return true;
         } catch (NumberFormatException e) {
             manhuntPlayer.getPlayer().sendMessage("Invalid number");

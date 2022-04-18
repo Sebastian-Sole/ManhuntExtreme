@@ -2,6 +2,7 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.Game;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Bukkit;
 
 public class HasteBoostCommand extends GameRuleCommand {
 
@@ -15,6 +16,8 @@ public class HasteBoostCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setHasteBoost(!gameStateHandler.isHasteBoost());
+        Bukkit.broadcastMessage("Haste boost is: " + gameStateHandler.isHasteBoost());
+
         return true;
     }
 }

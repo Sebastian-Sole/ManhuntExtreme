@@ -19,6 +19,7 @@ public class ManhuntPlayer {
 
     public void addDeath() {
         deaths++;
+        team.addPlayerDeath(this);
     }
 
     public void addKill() {
@@ -67,5 +68,10 @@ public class ManhuntPlayer {
 
     public void setPlayerScore(Double playerScore) {
         this.playerScore = playerScore;
+    }
+
+    public void reset() {
+        this.chestsGenerated = 0.0;
+        this.kills = 0.0;
     }
 }

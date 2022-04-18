@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class UserInput implements CommandExecutor {
 
-    public static final String[] registeredCommands = {
+    private final String[] registeredCommands = {
             "hunter",
             "runner",
             "spectator",
@@ -23,6 +23,7 @@ public class UserInput implements CommandExecutor {
             "start",
             "end",
             "compass",
+            "chestgenerate",
             "setheadstart",
             "runnerhelp",
             "hunterhelp",
@@ -63,6 +64,9 @@ public class UserInput implements CommandExecutor {
             }
             case "compass" -> {
                 return new CompassCommand(manhuntPlayer, args, gameEngine).execute();
+            }
+            case "chestgenerate" -> {
+                return new ChestGenerateCommand(manhuntPlayer, args, gameEngine.getGame(), label).execute();
             }
             case "setheadstart" -> {
                 return new SetHeadStartCommand(manhuntPlayer, args, gameEngine).execute();
@@ -141,5 +145,7 @@ public class UserInput implements CommandExecutor {
         }
     }
 
-
+    public String[] getRegisteredCommands() {
+        return registeredCommands;
+    }
 }

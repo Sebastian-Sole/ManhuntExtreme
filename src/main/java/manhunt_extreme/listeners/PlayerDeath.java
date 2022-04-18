@@ -15,11 +15,12 @@ import org.bukkit.potion.PotionEffectType;
 public class PlayerDeath implements Listener {
 
 
-    private GameEngine gameEngine;
-    private GameStateHandler gameStateHandler = gameEngine.getGame().getGameStateHandler();
+    private final GameEngine gameEngine;
+    private final GameStateHandler gameStateHandler;
 
     public PlayerDeath(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
+        this.gameStateHandler = gameEngine.getGame().getGameStateHandler();
     }
 
     @EventHandler
