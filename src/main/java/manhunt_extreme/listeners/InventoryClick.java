@@ -51,7 +51,7 @@ public class InventoryClick implements Listener {
             }
             Player owningPlayer = (Player) meta.getOwningPlayer();
             ManhuntPlayer target = gameEngine.getManhuntPlayerFromPlayer(owningPlayer);
-            gameEngine.getGame().getTargets().put(manhuntPlayer, target);
+            gameEngine.getTargets().put(manhuntPlayer, target);
             event.setCancelled(true);
             player.closeInventory();
             player.sendMessage("Compass is now targeting " + target.getPlayer().getName());

@@ -16,7 +16,7 @@ public class ClearTeamsCommand {
     }
 
     public boolean execute() {
-        if (gameEngine.getGame().isRunning()) {
+        if (gameEngine.isRunning()) {
             manhuntPlayer.getPlayer().sendMessage("Game is running. End game before calling this command");
             return true;
         }

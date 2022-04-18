@@ -12,16 +12,13 @@ public class PlayerScoreCalculator {
 
 
     private final ManhuntPlayer manhuntPlayer;
-    private final InventoryCalculator inventoryCalculator;
-    private final Double inventoryScore;
-
     private final int chestWeight = 30;
     // Runner, Hunter
     private final List<Integer> killWeights = Arrays.asList(10, 10);
     // Runner, Hunter
     private final List<Integer> deathWeights = Arrays.asList(-15, 0);
     private final int starterScore = 10;
-
+    private InventoryCalculator inventoryCalculator;
     private GameClock gameClock;
 
 
@@ -29,7 +26,6 @@ public class PlayerScoreCalculator {
         this.manhuntPlayer = manhuntPlayer;
         this.gameClock = gameClock;
         this.inventoryCalculator = new InventoryCalculator(manhuntPlayer);
-        this.inventoryScore = inventoryCalculator.calculateInventoryScore();
     }
 
     /**
@@ -52,18 +48,25 @@ public class PlayerScoreCalculator {
         int i = isHunter ? 1 : 0;
         int deathScore = deathWeights.get(i);
         int killScore = killWeights.get(i);
+
+
         return (starterScore
                 + (chestsGenerated * chestWeight)
                 + (kills * killScore)
                 + (deaths * deathScore)
-                + inventoryScore
+                + inventoryCalculator.calculateInventoryScore()
                 + convertTime()
         );
+
     }
 
     private int convertTime() {
         var minutes = gameClock.getMinutes();
-        return minutes - 30;
+        if (minutes <= 30) {
+            return 0;
+        } else {
+            return minutes - 30;
+        }
     }
 
 

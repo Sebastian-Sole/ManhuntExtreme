@@ -21,7 +21,7 @@ public class InteractClick implements Listener {
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (player.getEquipment().getItemInMainHand().getType() == Material.COMPASS) {
-            if (gameEngine.getGame().isRunning()) {
+            if (gameEngine.isRunning()) {
                 player.sendMessage("Start a Manhunt game before using the compass!");
             } else {
                 var inv = new TargetSelectInventory(gameEngine);

@@ -39,7 +39,7 @@ public class EntityDeath implements Listener {
             Bukkit.broadcastMessage("Game over");
         }
 
-        if (gameEngine.getGame().getGameStateHandler().isCutClean()) {
+        if (gameEngine.getGameStateHandler().isCutClean()) {
             handleCutClean(event);
         }
     }

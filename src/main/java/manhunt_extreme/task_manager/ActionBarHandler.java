@@ -15,9 +15,9 @@ public class ActionBarHandler {
     private PluginMain pluginMain;
     private GameEngine gameEngine;
 
-    public ActionBarHandler(PluginMain pluginMain) {
+    public ActionBarHandler(PluginMain pluginMain, GameEngine gameEngine) {
         this.pluginMain = pluginMain;
-        this.gameEngine = pluginMain.getGameEngine();
+        this.gameEngine = gameEngine;
     }
 
     public void start() {

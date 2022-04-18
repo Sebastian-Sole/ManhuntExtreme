@@ -1,6 +1,6 @@
 package manhunt_extreme.commands;
 
-import manhunt_extreme.Game;
+import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Bukkit;
@@ -9,19 +9,19 @@ public class HealthCommand {
 
     private ManhuntPlayer manhuntPlayer;
     private String[] args;
-    private Game game;
+    private GameEngine gameEngine;
     private GameStateHandler gameStateHandler;
 
-    public HealthCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game) {
+    public HealthCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine) {
 
         this.manhuntPlayer = manhuntPlayer;
         this.args = args;
-        this.game = game;
-        this.gameStateHandler = this.game.getGameStateHandler();
+        this.gameEngine = gameEngine;
+        this.gameStateHandler = this.gameEngine.getGameStateHandler();
     }
 
     public boolean execute() {
-        if (game.isRunning()) {
+        if (gameEngine.isRunning()) {
             manhuntPlayer.getPlayer().sendMessage("Game is running. Start a new game to use this command");
             return true;
         }

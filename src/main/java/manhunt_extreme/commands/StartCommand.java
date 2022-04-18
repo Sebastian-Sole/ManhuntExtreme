@@ -1,6 +1,5 @@
 package manhunt_extreme.commands;
 
-import manhunt_extreme.Game;
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
@@ -21,19 +20,17 @@ public class StartCommand {
     private ManhuntPlayer manhuntPlayer;
     private String[] args;
     private GameEngine gameEngine;
-    private Game game;
     private GameStateHandler gameStateHandler;
 
     public StartCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine) {
         this.manhuntPlayer = manhuntPlayer;
         this.args = args;
         this.gameEngine = gameEngine;
-        this.game = gameEngine.getGame();
-        this.gameStateHandler = game.getGameStateHandler();
+        this.gameStateHandler = gameEngine.getGameStateHandler();
     }
 
     public boolean execute() {
-        if (game.isRunning()) {
+        if (gameEngine.isRunning()) {
             manhuntPlayer.getPlayer().sendMessage("Game is in progress. Use /end to end the game before using /start");
             return true;
         }
@@ -46,11 +43,11 @@ public class StartCommand {
             manhuntPlayer.getPlayer().sendMessage("Illegal format. Use /start");
             return true;
         }
-        game.getTargets().clear();
+        gameEngine.getTargets().clear();
         updateWorld();
         runnersState();
         huntersState();
-        game.startGame();
+        gameEngine.startGame();
 
         Bukkit.broadcastMessage("" + ChatColor.DARK_RED + "Manhunt Started!");
 

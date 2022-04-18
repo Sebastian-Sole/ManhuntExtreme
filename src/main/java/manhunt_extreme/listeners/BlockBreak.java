@@ -5,7 +5,6 @@ import manhunt_extreme.GameStateHandler;
 import manhunt_extreme.calculators.ChestOddsCalculator;
 import manhunt_extreme.calculators.CutCleanCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -28,14 +27,14 @@ public class BlockBreak implements Listener {
 
     public BlockBreak(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        gameStateHandler = gameEngine.getGame().getGameStateHandler();
+        gameStateHandler = gameEngine.getGameStateHandler();
         chestOddsCalculator = gameEngine.getGameBalancingCalculator().getChestOddsCalculator();
         cutCleanCalculator = gameEngine.getGameBalancingCalculator().getCutCleanCalculator();
     }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (!gameEngine.getGame().isRunning()) {
+        if (!gameEngine.isRunning()) {
             event.getPlayer().sendMessage("Cannot break blocks before game has started");
             event.setCancelled(true);
             return;
@@ -48,10 +47,6 @@ public class BlockBreak implements Listener {
                 Location blockBrokenLocation = event.getBlock().getLocation();
                 gameEngine.getChestGenerator().generateChest(blockBrokenLocation, event, event.getPlayer().getWorld());
             }
-            Bukkit.broadcastMessage("Gen Number: " + numberGenerated);
-            Bukkit.broadcastMessage("Your Score: " + manhuntPlayer.getPlayerScore());
-            Bukkit.broadcastMessage("Player odds: " + playerOdds);
-
         }
         if (gameStateHandler.isCutClean()) {
             ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());

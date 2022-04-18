@@ -1,5 +1,6 @@
 package manhunt_extreme.task_manager;
 
+import manhunt_extreme.GameEngine;
 import manhunt_extreme.PluginMain;
 
 public class TaskManager {
@@ -11,14 +12,14 @@ public class TaskManager {
     private HasteHandler hasteHandler;
     private SupplyDropHandler supplyDropHandler;
 
-    public TaskManager(PluginMain pluginMain) {
+    public TaskManager(PluginMain pluginMain, GameEngine gameEngine) {
         this.pluginMain = pluginMain;
         this.gameClock = new GameClock(pluginMain);
-        this.actionBarHandler = new ActionBarHandler(pluginMain);
+        this.actionBarHandler = new ActionBarHandler(pluginMain, gameEngine);
         this.blazeSpawnerHandler = new BlazeSpawnerHandler(pluginMain);
-        this.compassHandler = new CompassHandler(pluginMain);
-        this.hasteHandler = new HasteHandler(pluginMain);
-        this.supplyDropHandler = new SupplyDropHandler(pluginMain);
+        this.compassHandler = new CompassHandler(pluginMain, gameEngine);
+        this.hasteHandler = new HasteHandler(pluginMain, gameEngine);
+        this.supplyDropHandler = new SupplyDropHandler(pluginMain, gameEngine);
     }
 
 

@@ -20,18 +20,23 @@ public class PlayerDeath implements Listener {
 
     public PlayerDeath(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        this.gameStateHandler = gameEngine.getGame().getGameStateHandler();
+        this.gameStateHandler = gameEngine.getGameStateHandler();
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (gameEngine.getGame().isRunning()) {
+        if (gameEngine.isRunning()) {
             gameEngine.getLogger().info("Player died, but game is not running");
             return;
         }
 
         ManhuntPlayer manhuntPlayerKilled = gameEngine.getManhuntPlayerFromPlayer(event.getEntity().getPlayer());
+        if (event.getEntity().getKiller() == null || (!Bukkit.getOnlinePlayers().contains(event.getEntity().getKiller()))) {
+            gameEngine.getLogger().warning("No killer!");
+            return;
+        }
         ManhuntPlayer killer = gameEngine.getManhuntPlayerFromPlayer(event.getEntity().getKiller());
+
 
         // If hunter is killed
         if (manhuntPlayerKilled.getTeam() instanceof HunterTeam) {
@@ -51,6 +56,7 @@ public class PlayerDeath implements Listener {
             }
         }
 
+        // If runner is killed
         if (manhuntPlayerKilled.getTeam() instanceof RunnerTeam) {
             if (killer.getTeam() instanceof HunterTeam) {
                 manhuntPlayerKilled.addDeath();
@@ -61,9 +67,6 @@ public class PlayerDeath implements Listener {
                 }
             }
         }
-
-        // If runner is killed
-
 
     }
 

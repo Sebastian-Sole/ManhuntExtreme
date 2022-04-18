@@ -22,7 +22,7 @@ public class PlayerRespawn implements Listener {
     public PlayerRespawn(GameEngine gameEngine, PluginMain pluginMain) {
         this.gameEngine = gameEngine;
         this.pluginMain = pluginMain;
-        this.gameStateHandler = gameEngine.getGame().getGameStateHandler();
+        this.gameStateHandler = gameEngine.getGameStateHandler();
     }
 
     @EventHandler

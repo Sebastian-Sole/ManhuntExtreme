@@ -1,6 +1,5 @@
 package manhunt_extreme.task_manager;
 
-import manhunt_extreme.Game;
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.PluginMain;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
@@ -18,18 +17,16 @@ import java.util.Map;
 
 public class CompassHandler {
     private final GameEngine gameEngine;
-    private final Game game;
     private PluginMain pluginMain;
 
-    public CompassHandler(PluginMain pluginMain) {
+    public CompassHandler(PluginMain pluginMain, GameEngine gameEngine) {
         this.pluginMain = pluginMain;
-        this.gameEngine = pluginMain.getGameEngine();
-        this.game = gameEngine.getGame();
+        this.gameEngine = gameEngine;
     }
 
     public void start() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
-            for (Map.Entry<ManhuntPlayer, ManhuntPlayer> entry : game.getTargets().entrySet()) {
+            for (Map.Entry<ManhuntPlayer, ManhuntPlayer> entry : gameEngine.getTargets().entrySet()) {
                 ManhuntPlayer hunter = entry.getKey();
                 ManhuntPlayer target = entry.getValue();
                 if (hunter == null || target == null) {
@@ -44,18 +41,18 @@ public class CompassHandler {
                     Location portalLocation = null;
                     // If hunter is in nether and runner is not in nether, show the portal in the nether
                     if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER && target.getPlayer().getWorld().getEnvironment() != World.Environment.NETHER) {
-                        portalLocation = game.getNetherPortals().get(target);
+                        portalLocation = gameEngine.getNetherPortals().get(target);
                     }
                     // If hunter is in overworld, and runner is not in overworld
                     else if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL && target.getPlayer().getWorld().getEnvironment() != World.Environment.NORMAL) {
-                        portalLocation = game.getOverworldPortals().get(target);
+                        portalLocation = gameEngine.getOverworldPortals().get(target);
                     }
                     // If runner is in end, and hunter isn't
                     if (target.getPlayer().getWorld().getEnvironment() == World.Environment.THE_END) {
                         if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER) {
-                            portalLocation = game.getNetherPortals().get(target);
+                            portalLocation = gameEngine.getNetherPortals().get(target);
                         } else if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL) {
-                            portalLocation = game.getEndPortalLocation();
+                            portalLocation = gameEngine.getEndPortalLocation();
                         }
                     } else {
                         portalLocation = hunter.getPlayer().getWorld().getSpawnLocation();

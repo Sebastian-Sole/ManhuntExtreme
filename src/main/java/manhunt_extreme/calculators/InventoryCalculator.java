@@ -1,7 +1,6 @@
 package manhunt_extreme.calculators;
 
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -39,7 +38,6 @@ public class InventoryCalculator {
     private final List<Double> bowScore = Arrays.asList(4.0, 4.5);
     private final Double enchantWeight = 1.3;
     private final ManhuntPlayer manhuntPlayer;
-    private ArrayList<ItemStack> hotbar;
 
 
     public InventoryCalculator(ManhuntPlayer manhuntPlayer) {
@@ -82,7 +80,11 @@ public class InventoryCalculator {
     private Double calculateArmorPieceScore(ItemStack armorPiece, List<Double> armorList) {
         var armorPieceName = armorPiece.getType().name();
         var substringName = armorPieceName.substring(0, armorPieceName.indexOf("_"));
-        var armorPieceScore = armorList.get(calculateArmorWeight(substringName));
+        var armorWeight = calculateArmorWeight(substringName);
+        Double armorPieceScore = 0.0;
+        if (armorWeight != -1) {
+            armorPieceScore = armorList.get(armorWeight);
+        }
         if (!armorPiece.getEnchantments().isEmpty()) {
             armorPieceScore *= enchantWeight;
         }
@@ -112,7 +114,7 @@ public class InventoryCalculator {
                 return 4;
             }
         }
-        return 0;
+        return -1;
     }
 
     /**
@@ -131,21 +133,25 @@ public class InventoryCalculator {
             }
             hotbar.add(inv.getItem(i));
         }
-        this.hotbar = hotbar;
-        Bukkit.broadcastMessage("Hotbar has " + hotbar.size() + "items");
 
-        for (Material material : valuableItems) {
-            weaponScore += calculateItemScore(material);
+        for (ItemStack itemStack : hotbar) {
+            weaponScore += calculateItemScore(itemStack);
         }
         return weaponScore;
     }
 
     /**
-     * @param material The material which is being taken into consideration
+     * @param itemStack The material which is being taken into consideration
      * @return the score of the item based on its ore, type, and potential enchantments.
      */
-    private Double calculateItemScore(Material material) {
+    private Double calculateItemScore(ItemStack itemStack) {
+        var material = itemStack.getType();
+        if (!valuableItems.contains(material)) {
+            return 0.0;
+        }
+
         double totalItemScore;
+
         if (!(material.name().equals("BOW") || material.name().equals("CROSSBOW"))) {
             var materialOre = material.name().substring(0, material.name().indexOf("_"));
             var materialType = material.name().substring(material.name().indexOf("_") + 1);
@@ -175,18 +181,10 @@ public class InventoryCalculator {
             }
         }
 
-        for (ItemStack item : this.hotbar) {
-            if (this.hotbar.isEmpty()) {
-                Bukkit.broadcastMessage("Hotbar is empty");
-                break;
-            }
-            if (item == null || item.getType() == null) {
-                continue;
-            }
-            if (item.getType() == material) {
-                if (!item.getEnchantments().isEmpty()) {
-                    totalItemScore *= enchantWeight;
-                }
+
+        if (itemStack.getType() == material) {
+            if (!itemStack.getEnchantments().isEmpty()) {
+                totalItemScore *= enchantWeight;
             }
         }
         return totalItemScore;

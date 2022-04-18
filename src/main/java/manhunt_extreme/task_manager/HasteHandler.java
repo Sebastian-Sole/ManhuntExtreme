@@ -11,9 +11,9 @@ public class HasteHandler {
     private final PluginMain pluginMain;
     private GameEngine gameEngine;
 
-    public HasteHandler(PluginMain pluginMain) {
+    public HasteHandler(PluginMain pluginMain, GameEngine gameEngine) {
         this.pluginMain = pluginMain;
-        this.gameEngine = pluginMain.getGameEngine();
+        this.gameEngine = gameEngine;
     }
 
     public void start() {

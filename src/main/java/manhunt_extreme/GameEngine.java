@@ -1,7 +1,6 @@
 package manhunt_extreme;
 
 import manhunt_extreme.calculators.GameBalancingCalculator;
-import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.chest_generator.ChestGenerator;
 import manhunt_extreme.commands.UserInput;
 import manhunt_extreme.listeners.respawn_handler.RespawnHandler;
@@ -9,18 +8,17 @@ import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.HunterTeam;
 import manhunt_extreme.manhunt_team.RunnerTeam;
 import manhunt_extreme.task_manager.TaskManager;
-import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class GameEngine {
 
-    private final GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
     // Fields
-    private Game game;
     private ArrayList<ManhuntPlayer> manhuntPlayers = new ArrayList<>();
     private HunterTeam hunters = new HunterTeam();
     private RunnerTeam runners = new RunnerTeam();
@@ -30,23 +28,27 @@ public class GameEngine {
     private UserInput commands;
     private ChestGenerator chestGenerator;
     private RespawnHandler respawnHandler;
+    private GameStateHandler gameStateHandler = new GameStateHandler();
+    private HashMap<ManhuntPlayer, ManhuntPlayer> targets = new HashMap<>();
     private GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
 
+    // Nether portals found in the overworld
+    private HashMap<ManhuntPlayer, Location> overworldPortals = new HashMap<>();
+    // Nether portals found in the nether
+    private HashMap<ManhuntPlayer, Location> netherPortals = new HashMap<>();
+    // End portal location
+    private Location endPortalLocation = null;
+
+    // Session specific
+    private boolean isRunning;
+    private PluginMain pluginMain;
+
     // Constructor
-    public GameEngine(TaskManager taskManager) {
-        convertAllPlayersToManhuntPlayers();
-        initializePlayerScores();
-        this.taskManager = taskManager;
+    public GameEngine(PluginMain pluginMain) {
+        this.pluginMain = pluginMain;
         this.chestGenerator = new ChestGenerator(this);
-        this.game = new Game(this, false, taskManager);
         this.respawnHandler = new RespawnHandler(this);
-    }
-
-
-    private void initializePlayerScores() {
-        for (ManhuntPlayer manhuntPlayer : manhuntPlayers) {
-            manhuntPlayer.setPlayerScore(new PlayerScoreCalculator(manhuntPlayer, game.getTaskManager().getGameClock()).calculatePlayerScore());
-        }
+        this.taskManager = new TaskManager(pluginMain, this);
     }
 
     // Methods
@@ -54,14 +56,15 @@ public class GameEngine {
         return manhuntPlayers.stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().equals(player)).findFirst().orElseThrow();
     }
 
-    private void convertAllPlayersToManhuntPlayers() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            ManhuntPlayer manhuntPlayer = new ManhuntPlayer(player);
-            if (!manhuntPlayers.contains(manhuntPlayer)) {
-                manhuntPlayers.add(manhuntPlayer);
-            }
-        }
+    public void startGame() {
+        setRunning(true);
+        this.taskManager.getGameClock().start();
+        this.taskManager.getCompassHandler().start();
+        this.taskManager.getActionBarHandler().start();
+        this.taskManager.getHasteHandler().start();
+        this.taskManager.getSupplyDropHandler().start();
     }
+
 
     // Getters and Setters
 
@@ -87,14 +90,6 @@ public class GameEngine {
 
     public ArrayList<ManhuntPlayer> getRunners() {
         return runners.getPlayerList();
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     public GameBalancingCalculator getGameBalancingCalculator() {
@@ -147,5 +142,58 @@ public class GameEngine {
 
     public void setRespawnHandler(RespawnHandler respawnHandler) {
         this.respawnHandler = respawnHandler;
+    }
+
+
+    public GameStateHandler getGameStateHandler() {
+        return gameStateHandler;
+    }
+
+    public void setGameStateHandler(GameStateHandler gameStateHandler) {
+        this.gameStateHandler = gameStateHandler;
+    }
+
+    public HashMap<ManhuntPlayer, ManhuntPlayer> getTargets() {
+        return targets;
+    }
+
+    public void setTargets(HashMap<ManhuntPlayer, ManhuntPlayer> targets) {
+        this.targets = targets;
+    }
+
+    public HashMap<ManhuntPlayer, Location> getOverworldPortals() {
+        return overworldPortals;
+    }
+
+    public void setOverworldPortals(HashMap<ManhuntPlayer, Location> overworldPortals) {
+        this.overworldPortals = overworldPortals;
+    }
+
+    public HashMap<ManhuntPlayer, Location> getNetherPortals() {
+        return netherPortals;
+    }
+
+    public void setNetherPortals(HashMap<ManhuntPlayer, Location> netherPortals) {
+        this.netherPortals = netherPortals;
+    }
+
+    public Location getEndPortalLocation() {
+        return endPortalLocation;
+    }
+
+    public void setEndPortalLocation(Location endPortalLocation) {
+        this.endPortalLocation = endPortalLocation;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(boolean running) {
+        isRunning = running;
+    }
+
+    public PluginMain getPluginMain() {
+        return pluginMain;
     }
 }

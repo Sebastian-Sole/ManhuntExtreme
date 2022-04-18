@@ -1,12 +1,12 @@
 package manhunt_extreme.commands;
 
-import manhunt_extreme.Game;
+import manhunt_extreme.GameEngine;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Bukkit;
 
 public class SupplyDropsCommand extends GameRuleCommand {
-    public SupplyDropsCommand(ManhuntPlayer manhuntPlayer, String[] args, Game game, String commandCall) {
-        super(manhuntPlayer, args, game, commandCall);
+    public SupplyDropsCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine, String commandCall) {
+        super(manhuntPlayer, args, gameEngine, commandCall);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package manhunt_extreme.task_manager;
 
+import manhunt_extreme.GameEngine;
 import manhunt_extreme.PluginMain;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Bukkit;
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SupplyDropHandler {
+    private final GameEngine gameEngine;
     private PluginMain pluginMain;
 
-    public SupplyDropHandler(PluginMain pluginMain) {
+    public SupplyDropHandler(PluginMain pluginMain, GameEngine gameEngine) {
         this.pluginMain = pluginMain;
+        this.gameEngine = gameEngine;
     }
 
     public void start() {
@@ -30,8 +33,8 @@ public class SupplyDropHandler {
     }
 
     private void spawnSupplyDrop() {
-        var hunterCoords = teamCoords(pluginMain.getGameEngine().getHunters());
-        var runnerCoords = teamCoords(pluginMain.getGameEngine().getRunners());
+        var hunterCoords = teamCoords(gameEngine.getHunters());
+        var runnerCoords = teamCoords(gameEngine.getRunners());
         // Supply drops will always spawn in the runner's world
         World targetWorld = runnerCoords.getWorld();
 
@@ -40,11 +43,11 @@ public class SupplyDropHandler {
         }
         // If hunters in overworld, and runners in nether
         if (hunterCoords.getWorld().getEnvironment() == World.Environment.NORMAL && runnerCoords.getWorld().getEnvironment() == World.Environment.NETHER) {
-            ManhuntPlayer runnerInNether = pluginMain.getGameEngine().getRunners().stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER).toList().get(0);
-            hunterCoords = pluginMain.getGameEngine().getGame().getNetherPortals().get(runnerInNether);
+            ManhuntPlayer runnerInNether = gameEngine.getRunners().stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER).toList().get(0);
+            hunterCoords = gameEngine.getNetherPortals().get(runnerInNether);
         } else if (hunterCoords.getWorld().getEnvironment() == World.Environment.NETHER && runnerCoords.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            ManhuntPlayer runnerInOverworld = pluginMain.getGameEngine().getRunners().stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL).toList().get(0);
-            hunterCoords = pluginMain.getGameEngine().getGame().getOverworldPortals().get(runnerInOverworld);
+            ManhuntPlayer runnerInOverworld = gameEngine.getRunners().stream().filter(manhuntPlayer -> manhuntPlayer.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL).toList().get(0);
+            hunterCoords = gameEngine.getOverworldPortals().get(runnerInOverworld);
         }
 
         double middleX = Math.floor((hunterCoords.getX() + runnerCoords.getX()) / 2);
@@ -67,7 +70,7 @@ public class SupplyDropHandler {
         block.setType(Material.CHEST);
         Chest chest = (Chest) block.getState();
         Inventory inventory = chest.getInventory();
-        pluginMain.getGameEngine().getChestGenerator().createSupplyDropChest(targetWorld, supplyDropLocation);
+        gameEngine.getChestGenerator().createSupplyDropChest(targetWorld, supplyDropLocation);
     }
 
     private void generateSupplyDropBox(World targetWorld, Location supplyDropLocation) {
@@ -150,7 +153,7 @@ public class SupplyDropHandler {
                 worldCount.put(world, worldCount.get(world) + 1);
             }
         }
-        World currentWorld = pluginMain.getGameEngine().getWorld();
+        World currentWorld = gameEngine.getWorld();
         int currentCount = 0;
         for (var entry : worldCount.entrySet()) {
             // If the world count for the team's list is the same as the "current" world count
