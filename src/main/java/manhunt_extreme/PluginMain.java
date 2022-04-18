@@ -31,7 +31,7 @@ public final class PluginMain extends JavaPlugin {
 
     private void setCommandExecutor() {
         UserInput commands = new UserInput(gameEngine);
-        for (String command : UserInput.registeredCommands) {
+        for (String command : commands.getRegisteredCommands()) {
             this.getCommand(command).setExecutor(commands);
         }
         logger.info("Commands set");
@@ -49,6 +49,8 @@ public final class PluginMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PiglinTrade(), this);
         getServer().getPluginManager().registerEvents(new PlayerRespawn(getGameEngine(), this), this);
         getServer().getPluginManager().registerEvents(new PortalEnter(getGameEngine()), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoin(getGameEngine()), this);
+
         logger.info("Events registered");
     }
 
@@ -61,15 +63,15 @@ public final class PluginMain extends JavaPlugin {
 
 
     private void setWorld() {
-        var worlds = Bukkit.getWorlds();
-        if (worlds.size() < 1) {
-            this.logger.warning("Could not detect main world! Plugin will not work");
+        this.world = Bukkit.getWorld("world");
+        if (world == null) {
+            throw new IllegalArgumentException("WORLD IS NULL");
         }
-        this.world = worlds.get(0);
+        this.gameEngine.setWorld(this.world);
     }
 
 
     public GameEngine getGameEngine() {
-        return gameEngine;
+        return this.gameEngine;
     }
 }

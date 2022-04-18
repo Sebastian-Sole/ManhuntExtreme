@@ -30,6 +30,7 @@ public class GameEngine {
     private UserInput commands;
     private ChestGenerator chestGenerator;
     private RespawnHandler respawnHandler;
+    private GameBalancingCalculator gameBalancingCalculator = new GameBalancingCalculator(this);
 
     // Constructor
     public GameEngine(TaskManager taskManager) {
