@@ -143,9 +143,6 @@ public class BlockBreakChest {
             tierFive
     );
 
-    private ItemStack jammer = new ChestItem().createJammer();
-
-
     public BlockBreakChest() {
     }
 
@@ -168,7 +165,7 @@ public class BlockBreakChest {
             }
         }
         if (random.nextInt(25) == 3) {
-            new ChestItem().createJammer();
+            itemsToAdd.add(new ChestItem().createJammer());
         }
         return itemsToAdd;
     }
