@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class ChestItem {
 
     private Material material = null;
     private int numberGenerated = 1;
-    private List<Enchantment> enchants;
+    private ArrayList<Enchantment> enchants = new ArrayList<>();
     private Random random = new Random();
     private int enchantmentStrengths = 1;
     private int enchantsGenerated = random.nextInt(2);
@@ -37,7 +38,7 @@ public class ChestItem {
         this.numberGenerated = numberGenerated;
     }
 
-    public ChestItem(Material material, List<Enchantment> enchants) {
+    public ChestItem(Material material, ArrayList<Enchantment> enchants) {
         this.material = material;
         this.enchants = enchants;
     }

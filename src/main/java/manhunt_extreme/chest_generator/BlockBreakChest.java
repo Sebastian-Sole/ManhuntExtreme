@@ -11,14 +11,15 @@ import java.util.Random;
 
 public class BlockBreakChest {
 
-    private Random random;
-    private List<Enchantment> pickaxeEnchants = Arrays.asList(
+    private final Random random = new Random();
+
+    private final ArrayList<Enchantment> pickaxeEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DIG_SPEED,
             Enchantment.LOOT_BONUS_BLOCKS,
             Enchantment.MENDING,
             Enchantment.DURABILITY
-    );
-    private List<Enchantment> bookEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> bookEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DAMAGE_ALL,
             Enchantment.DEPTH_STRIDER,
             Enchantment.DURABILITY,
@@ -29,31 +30,31 @@ public class BlockBreakChest {
             Enchantment.WATER_WORKER,
             Enchantment.LOOT_BONUS_BLOCKS,
             Enchantment.FROST_WALKER
-    );
-    private List<Enchantment> swordEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> swordEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DAMAGE_ALL,
             Enchantment.KNOCKBACK,
             Enchantment.LOOT_BONUS_MOBS
-    );
-    private List<Enchantment> mainArmorEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> mainArmorEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.PROTECTION_ENVIRONMENTAL,
             Enchantment.PROTECTION_FIRE,
             Enchantment.PROTECTION_EXPLOSIONS,
             Enchantment.PROTECTION_PROJECTILE
-    );
-    private List<Enchantment> helmetEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> helmetEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.OXYGEN,
             Enchantment.PROTECTION_ENVIRONMENTAL,
             Enchantment.PROTECTION_EXPLOSIONS,
             Enchantment.WATER_WORKER
-    );
-    private List<Enchantment> bootsEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> bootsEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.PROTECTION_FALL,
             Enchantment.SOUL_SPEED,
             Enchantment.FROST_WALKER,
             Enchantment.PROTECTION_ENVIRONMENTAL
-    );
-    private List<ChestItem> tierOne = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierOne = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.DIAMOND_BOOTS, bootsEnchants),
             new ChestItem(Material.DIAMOND_LEGGINGS, mainArmorEnchants),
             new ChestItem(Material.DIAMOND_CHESTPLATE, mainArmorEnchants),
@@ -69,8 +70,8 @@ public class BlockBreakChest {
             new ChestItem(Material.IRON_HELMET, helmetEnchants),
             new ChestItem(Material.BOOKSHELF, 6),
             new ChestItem(Material.BLAZE_ROD, 3)
-    );
-    private List<ChestItem> tierTwo = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierTwo = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.DIAMOND_BOOTS, 1),
             new ChestItem(Material.DIAMOND_HELMET, 1),
             new ChestItem(Material.ENDER_PEARL, random.nextInt(5) + 2),
@@ -88,8 +89,8 @@ public class BlockBreakChest {
             new ChestItem(Material.BOOKSHELF, 4),
             new ChestItem(Material.BLAZE_ROD, random.nextInt(3) + 1),
             new ChestItem(Material.GOLD_BLOCK, random.nextInt(2) + 2)
-    );
-    private List<ChestItem> tierThree = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierThree = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.GOLDEN_APPLE, 1),
             new ChestItem(Material.IRON_INGOT, random.nextInt(13) + 1),
             new ChestItem(Material.ENCHANTED_BOOK, bookEnchants),
@@ -103,8 +104,8 @@ public class BlockBreakChest {
             new ChestItem(Material.BOOKSHELF, 2),
             new ChestItem(Material.BLAZE_SPAWN_EGG, random.nextInt(3) + 1),
             new ChestItem(Material.PIGLIN_SPAWN_EGG, 3)
-    );
-    private List<ChestItem> tierFour = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierFour = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.SHULKER_BOX, 1),
             new ChestItem(Material.COOKED_BEEF, random.nextInt(10) + 10),
             new ChestItem(Material.COAL, random.nextInt(10) + 10),
@@ -118,8 +119,8 @@ public class BlockBreakChest {
             new ChestItem(Material.ENDER_PEARL, random.nextInt(2) + 1),
             new ChestItem(Material.BLAZE_SPAWN_EGG, 2),
             new ChestItem(Material.PIGLIN_SPAWN_EGG, 1)
-    );
-    private List<ChestItem> tierFive = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierFive = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.OAK_PLANKS, 32),
             new ChestItem(Material.TORCH, 32),
             new ChestItem(Material.COAL, random.nextInt(20) + 5),
@@ -132,9 +133,9 @@ public class BlockBreakChest {
             new ChestItem(Material.GOLD_NUGGET, 27),
             new ChestItem(Material.IRON_NUGGET, 27),
             new ChestItem(Material.BOOK, 1)
-    );
+    ));
 
-    private List<List<ChestItem>> chestTiers = Arrays.asList(
+    private final List<List<ChestItem>> chestTiers = Arrays.asList(
             tierOne,
             tierTwo,
             tierThree,
@@ -143,8 +144,7 @@ public class BlockBreakChest {
     );
 
 
-    public BlockBreakChest(Random random) {
-        this.random = random;
+    public BlockBreakChest() {
     }
 
     protected ArrayList<ItemStack> populate() {

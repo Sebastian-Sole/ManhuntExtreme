@@ -10,13 +10,15 @@ import java.util.List;
 import java.util.Random;
 
 public class SupplyDropChest {
-    private final List<Enchantment> pickaxeEnchants = Arrays.asList(
+    private final Random random = new Random();
+
+    private final ArrayList<Enchantment> pickaxeEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DIG_SPEED,
             Enchantment.LOOT_BONUS_BLOCKS,
             Enchantment.MENDING,
             Enchantment.DURABILITY
-    );
-    private final List<Enchantment> bookEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> bookEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DAMAGE_ALL,
             Enchantment.DEPTH_STRIDER,
             Enchantment.DURABILITY,
@@ -27,30 +29,30 @@ public class SupplyDropChest {
             Enchantment.WATER_WORKER,
             Enchantment.LOOT_BONUS_BLOCKS,
             Enchantment.FROST_WALKER
-    );
-    private final List<Enchantment> swordEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> swordEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DAMAGE_ALL,
             Enchantment.KNOCKBACK,
             Enchantment.LOOT_BONUS_MOBS
-    );
-    private final List<Enchantment> mainArmorEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> mainArmorEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.PROTECTION_ENVIRONMENTAL,
             Enchantment.PROTECTION_FIRE,
             Enchantment.PROTECTION_EXPLOSIONS,
             Enchantment.PROTECTION_PROJECTILE
-    );
-    private final List<Enchantment> helmetEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> helmetEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.OXYGEN,
             Enchantment.PROTECTION_ENVIRONMENTAL,
             Enchantment.PROTECTION_EXPLOSIONS,
             Enchantment.WATER_WORKER
-    );
-    private final List<Enchantment> bootsEnchants = Arrays.asList(
+    ));
+    private final ArrayList<Enchantment> bootsEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.PROTECTION_FALL,
             Enchantment.SOUL_SPEED,
             Enchantment.FROST_WALKER,
-            Enchantment.PROTECTION_ENVIRONMENTAL);
-    private final List<ChestItem> tierTwo = Arrays.asList(
+            Enchantment.PROTECTION_ENVIRONMENTAL));
+    private final ArrayList<ChestItem> tierTwo = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.OBSIDIAN, 5),
             new ChestItem(Material.ARROW, 15),
             new ChestItem(Material.IRON_CHESTPLATE, mainArmorEnchants),
@@ -63,8 +65,8 @@ public class SupplyDropChest {
             new ChestItem(Material.ENDER_PEARL, 3),
             new ChestItem(Material.PIGLIN_SPAWN_EGG, 5),
             new ChestItem(Material.BLAZE_ROD, 1)
-    );
-    private final List<ChestItem> tierThree = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierThree = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.GOLDEN_APPLE, 2),
             new ChestItem(Material.IRON_CHESTPLATE, 1),
             new ChestItem(Material.IRON_LEGGINGS, 1),
@@ -75,9 +77,8 @@ public class SupplyDropChest {
             new ChestItem(Material.IRON_INGOT, 5),
             new ChestItem(Material.COOKED_BEEF, 32),
             new ChestItem(Material.FLINT_AND_STEEL, 1)
-    );
-    private Random random;
-    private final List<ChestItem> tierOne = Arrays.asList(
+    ));
+    private final ArrayList<ChestItem> tierOne = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.DIAMOND_BOOTS, bootsEnchants),
             new ChestItem(Material.DIAMOND_LEGGINGS, mainArmorEnchants),
             new ChestItem(Material.DIAMOND_CHESTPLATE, mainArmorEnchants),
@@ -93,16 +94,15 @@ public class SupplyDropChest {
             new ChestItem(Material.ENCHANTED_BOOK, bookEnchants),
             new ChestItem(Material.ANVIL, 1),
             new ChestItem(Material.BLAZE_ROD, 2)
-    );
-    private final List<List<ChestItem>> tiers = Arrays.asList(
+    ));
+    private final ArrayList<List<ChestItem>> tiers = new ArrayList<>(Arrays.asList(
             tierOne,
             tierTwo,
             tierThree
-    );
+    ));
 
 
-    public SupplyDropChest(Random random) {
-        this.random = random;
+    public SupplyDropChest() {
     }
 
     public ArrayList<ItemStack> populate() {

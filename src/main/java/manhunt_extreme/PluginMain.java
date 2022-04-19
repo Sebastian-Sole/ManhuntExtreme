@@ -48,6 +48,7 @@ public final class PluginMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerRespawn(getGameEngine(), this), this);
         getServer().getPluginManager().registerEvents(new PortalEnter(getGameEngine()), this);
         getServer().getPluginManager().registerEvents(new PlayerJoin(getGameEngine()), this);
+        getServer().getPluginManager().registerEvents(new QuitEvent(getGameEngine()), this);
 
         logger.info("Events registered");
     }

@@ -5,8 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class DeathDropGenerator {
@@ -14,7 +14,7 @@ public class DeathDropGenerator {
 
     private static Random random = new Random();
 
-    private static List<Enchantment> bookEnchants = Arrays.asList(
+    private static ArrayList<Enchantment> bookEnchants = new ArrayList<>(Arrays.asList(
             Enchantment.DAMAGE_ALL,
             Enchantment.DEPTH_STRIDER,
             Enchantment.DURABILITY,
@@ -25,7 +25,7 @@ public class DeathDropGenerator {
             Enchantment.WATER_WORKER,
             Enchantment.LOOT_BONUS_BLOCKS,
             Enchantment.FROST_WALKER
-    );
+    ));
 
     public static ItemStack createItem() {
         int number = random.nextInt(42);

@@ -13,10 +13,10 @@ public class ChestPopulator {
 
     public ArrayList<ItemStack> populateChest(String type) throws IllegalArgumentException {
         if (type.equalsIgnoreCase("chest")) {
-            BlockBreakChest blockBreakChest = new BlockBreakChest(random);
+            BlockBreakChest blockBreakChest = new BlockBreakChest();
             return blockBreakChest.populate();
         } else if (type.equalsIgnoreCase("supply")) {
-            SupplyDropChest supplyDropChest = new SupplyDropChest(random);
+            SupplyDropChest supplyDropChest = new SupplyDropChest();
             return supplyDropChest.populate();
         } else {
             throw new IllegalArgumentException("Tried to populate a chest but couldn't. Generation type: " + type);

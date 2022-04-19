@@ -27,6 +27,9 @@ public class PlayerRespawn implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
+        if (!gameEngine.isRunning()) {
+            return;
+        }
         ManhuntPlayer respawnedPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
         if (respawnedPlayer.getTeam() instanceof RunnerTeam) {
             respawnRunner(respawnedPlayer);
