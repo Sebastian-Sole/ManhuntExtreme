@@ -80,3 +80,7 @@ commands:
     description: Enables supply drops
     usage: /supplydrops
     permission: manhunt_extreme.supplydrops
+  jammer:
+    description: Toggles the ability to jam compasses
+    usage: /jammer
+    permission: manhunt_extreme.jammer

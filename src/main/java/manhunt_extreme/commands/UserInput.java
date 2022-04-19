@@ -35,7 +35,8 @@ public class UserInput implements CommandExecutor {
             "pause",
             "unpause",
             "health",
-            "supplydrops"
+            "supplydrops",
+            "jammer"
     };
 
     private final GameEngine gameEngine;
@@ -104,6 +105,9 @@ public class UserInput implements CommandExecutor {
             case "clearteams" -> {
                 return new ClearTeamsCommand(manhuntPlayer, args, gameEngine).execute();
             }
+            case "jammer" -> {
+                return new JammerCommand(manhuntPlayer, args, gameEngine, label).execute();
+            }
         }
 
         return false;
@@ -129,6 +133,7 @@ public class UserInput implements CommandExecutor {
             case "/health":
             case "/supplydrops":
             case "/extradrops":
+            case "/jammer":
                 return new ArrayList<String>();
             case "/setheadstart": {
                 return new ArrayList<String>() {

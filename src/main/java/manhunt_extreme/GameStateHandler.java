@@ -12,6 +12,7 @@ public class GameStateHandler {
     private double borderSize = 1300.0;
     private boolean supplyDrops = true;
     private int headStart = 30;
+    private boolean allowJamming = true;
 
     public GameStateHandler() {
 
@@ -95,5 +96,13 @@ public class GameStateHandler {
 
     public void setHeadStart(int headStart) {
         this.headStart = headStart;
+    }
+
+    public boolean isAllowJamming() {
+        return allowJamming;
+    }
+
+    public void setAllowJamming(boolean allowJamming) {
+        this.allowJamming = allowJamming;
     }
 }

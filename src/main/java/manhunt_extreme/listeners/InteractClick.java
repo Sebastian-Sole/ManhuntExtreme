@@ -28,6 +28,27 @@ public class InteractClick implements Listener {
                 inv.displayToPlayer(player);
             }
         }
-        // Could do eye throw?
+        if (player.getEquipment().getItemInMainHand().getType().equals(Material.BEDROCK)) {
+            if (gameEngine.getGameStateHandler().isAllowJamming()) {
+                var jammer = player.getEquipment().getItemInMainHand();
+                switch (jammer.getItemMeta().getDisplayName().toLowerCase()) {
+                    case "1 min jammer" -> {
+                        gameEngine.getTaskManager().getCompassJammer().jamCompass(1200L);
+                    }
+                    case "2 min jammer" -> {
+                        gameEngine.getTaskManager().getCompassJammer().jamCompass(2400L);
+                    }
+                    case "5 min jammer" -> {
+                        gameEngine.getTaskManager().getCompassJammer().jamCompass(6000L);
+                    }
+                    default -> {
+                        throw new IllegalArgumentException("Jammer has no display name, could not jam");
+                    }
+                }
+            } else {
+                throw new IllegalArgumentException("Jammers are not activated");
+            }
+        }
     }
+
 }

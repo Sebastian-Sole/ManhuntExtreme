@@ -41,6 +41,7 @@ public class GameEngine {
 
     // Session specific
     private boolean isRunning;
+    private boolean isCompassJammed;
     private PluginMain pluginMain;
 
     // Constructor
@@ -195,5 +196,13 @@ public class GameEngine {
 
     public PluginMain getPluginMain() {
         return pluginMain;
+    }
+
+    public boolean isCompassJammed() {
+        return isCompassJammed;
+    }
+
+    public void setCompassJammed(boolean compassJammed) {
+        isCompassJammed = compassJammed;
     }
 }

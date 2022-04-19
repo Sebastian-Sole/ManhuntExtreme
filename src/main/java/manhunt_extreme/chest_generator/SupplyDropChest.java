@@ -101,7 +101,6 @@ public class SupplyDropChest {
             tierThree
     ));
 
-
     public SupplyDropChest() {
     }
 
@@ -119,6 +118,10 @@ public class SupplyDropChest {
             } else {
                 itemsToAdd.add(tierThree.get(random.nextInt(tierThree.size())).createItemStack());
             }
+        }
+        itemsToAdd.add(new ChestItem().createJammer());
+        if (random.nextInt(2) == 0) {
+            itemsToAdd.add(new ChestItem().createJammer());
         }
         return itemsToAdd;
     }

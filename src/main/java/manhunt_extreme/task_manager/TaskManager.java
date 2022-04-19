@@ -11,6 +11,7 @@ public class TaskManager {
     private CompassHandler compassHandler;
     private HasteHandler hasteHandler;
     private SupplyDropHandler supplyDropHandler;
+    private CompassJammer compassJammer;
 
     public TaskManager(PluginMain pluginMain, GameEngine gameEngine) {
         this.pluginMain = pluginMain;
@@ -20,6 +21,7 @@ public class TaskManager {
         this.compassHandler = new CompassHandler(pluginMain, gameEngine);
         this.hasteHandler = new HasteHandler(pluginMain, gameEngine);
         this.supplyDropHandler = new SupplyDropHandler(pluginMain, gameEngine);
+        this.compassJammer = new CompassJammer(pluginMain, gameEngine);
     }
 
 
@@ -69,5 +71,13 @@ public class TaskManager {
 
     public void setSupplyDropHandler(SupplyDropHandler supplyDropHandler) {
         this.supplyDropHandler = supplyDropHandler;
+    }
+
+    public CompassJammer getCompassJammer() {
+        return compassJammer;
+    }
+
+    public void setCompassJammer(CompassJammer compassJammer) {
+        this.compassJammer = compassJammer;
     }
 }
