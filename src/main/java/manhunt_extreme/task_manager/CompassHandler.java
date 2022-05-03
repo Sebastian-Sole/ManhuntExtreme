@@ -3,7 +3,6 @@ package manhunt_extreme.task_manager;
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.PluginMain;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import manhunt_extreme.manhunt_team.HunterTeam;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,38 +27,36 @@ public class CompassHandler {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
             if (!gameEngine.isCompassJammed()) {
                 for (Map.Entry<ManhuntPlayer, ManhuntPlayer> entry : gameEngine.getTargets().entrySet()) {
-                    ManhuntPlayer hunter = entry.getKey();
+                    ManhuntPlayer compassUser = entry.getKey();
                     ManhuntPlayer target = entry.getValue();
-                    if (hunter == null || target == null) {
+                    if (compassUser == null || target == null) {
                         continue;
                     }
-                    if (!(hunter.getTeam() instanceof HunterTeam)) {
-                        continue;
-                    }
-                    Inventory inv = hunter.getPlayer().getInventory();
-                    // If the hunter and runner are not in the same world, point compass to the location of the portal (in the hunter's world)
-                    if (hunter.getPlayer().getWorld().getEnvironment() != target.getPlayer().getWorld().getEnvironment()) {
+
+                    Inventory inv = compassUser.getPlayer().getInventory();
+                    // If the compassUser and runner are not in the same world, point compass to the location of the portal (in the compassUser's world)
+                    if (compassUser.getPlayer().getWorld().getEnvironment() != target.getPlayer().getWorld().getEnvironment()) {
                         Location portalLocation = null;
-                        // If hunter is in nether and runner is not in nether, show the portal in the nether
-                        if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER && target.getPlayer().getWorld().getEnvironment() != World.Environment.NETHER) {
+                        // If compassUser is in nether and runner is not in nether, show the portal in the nether
+                        if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER && target.getPlayer().getWorld().getEnvironment() != World.Environment.NETHER) {
                             portalLocation = gameEngine.getNetherPortals().get(target);
                         }
-                        // If hunter is in overworld, and runner is not in overworld
-                        else if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL && target.getPlayer().getWorld().getEnvironment() != World.Environment.NORMAL) {
+                        // If compassUser is in overworld, and runner is not in overworld
+                        else if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL && target.getPlayer().getWorld().getEnvironment() != World.Environment.NORMAL) {
                             portalLocation = gameEngine.getOverworldPortals().get(target);
                         }
-                        // If runner is in end, and hunter isn't
+                        // If runner is in end, and compassUser isn't
                         if (target.getPlayer().getWorld().getEnvironment() == World.Environment.THE_END) {
-                            if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER) {
+                            if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER) {
                                 portalLocation = gameEngine.getNetherPortals().get(target);
-                            } else if (hunter.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL) {
+                            } else if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL) {
                                 portalLocation = gameEngine.getEndPortalLocation();
                             }
                         } else {
-                            portalLocation = hunter.getPlayer().getWorld().getSpawnLocation();
+                            portalLocation = compassUser.getPlayer().getWorld().getSpawnLocation();
                         }
                         if (portalLocation != null) {
-                            hunter.getPlayer().setCompassTarget(portalLocation);
+                            compassUser.getPlayer().setCompassTarget(portalLocation);
                         }
                         for (int j = 0; j < inv.getSize(); j++) {
                             var stack = inv.getItem(j);
@@ -76,7 +73,7 @@ public class CompassHandler {
                         }
 
                     } else {
-                        hunter.getPlayer().setCompassTarget(target.getPlayer().getLocation());
+                        compassUser.getPlayer().setCompassTarget(target.getPlayer().getLocation());
                         for (int j = 0; j <= inv.getSize(); j++) {
                             var stack = inv.getItem(j);
                             if (stack == null)
