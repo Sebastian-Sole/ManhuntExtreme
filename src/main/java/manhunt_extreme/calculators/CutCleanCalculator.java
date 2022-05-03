@@ -22,21 +22,21 @@ public class CutCleanCalculator {
             if (huntersHaveBetterOdds) {
                 return 1;
             } else {
-                return 0.25;
+                return 0.3;
             }
         } else if (manhuntPlayer.getTeam() instanceof RunnerTeam) {
             if (huntersHaveBetterOdds) {
-                if (scoreDiff <= 50) {
+                if (scoreDiff <= 15) {
                     return 1;
-                } else if (scoreDiff <= 100) {
+                } else if (scoreDiff <= 20) {
                     return 0.9;
-                } else if (scoreDiff <= 140) {
+                } else if (scoreDiff <= 30) {
                     return 0.7;
-                } else if (scoreDiff <= 180) {
+                } else if (scoreDiff <= 45) {
                     return 0.5;
-                } else if (scoreDiff <= 240) {
+                } else if (scoreDiff <= 65) {
                     return 0.4;
-                } else if (scoreDiff <= 300) {
+                } else if (scoreDiff <= 95) {
                     return 0.3;
                 } else {
                     return 0.1;

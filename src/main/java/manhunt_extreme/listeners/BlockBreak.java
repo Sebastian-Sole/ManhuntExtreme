@@ -44,7 +44,7 @@ public class BlockBreak implements Listener {
             ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
             int playerOdds = chestOddsCalculator.getPlayerChestOdds(manhuntPlayer);
             int numberGenerated = random.nextInt(playerOdds);
-            if (numberGenerated == 69) {
+            if (numberGenerated == 1) {
                 Location blockBrokenLocation = event.getBlock().getLocation();
                 gameEngine.getChestGenerator().generateChest(blockBrokenLocation, event, event.getPlayer().getWorld());
                 manhuntPlayer.setChestsGenerated(manhuntPlayer.getChestsGenerated() + 1);

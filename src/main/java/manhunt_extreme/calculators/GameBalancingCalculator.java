@@ -4,7 +4,6 @@ import manhunt_extreme.GameEngine;
 import manhunt_extreme.listeners.respawn_handler.RespawnInventoryGenerator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.ManhuntTeam;
-import org.bukkit.Bukkit;
 
 public class GameBalancingCalculator {
 
@@ -26,8 +25,6 @@ public class GameBalancingCalculator {
     }
 
     public Double getTeamScoreDifference() {
-        Bukkit.getLogger().info("Hunter Team Score: " + getTeamScore(gameEngine.getHuntersTeam()));
-        Bukkit.getLogger().info("Runner Team Score: " + getTeamScore(gameEngine.getRunnersTeam()));
         return getTeamScore(gameEngine.getRunnersTeam()) - getTeamScore(gameEngine.getHuntersTeam());
     }
 

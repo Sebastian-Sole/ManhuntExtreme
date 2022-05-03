@@ -20,17 +20,17 @@ public class ChestOddsCalculator {
         if (manhuntPlayer.getTeam() instanceof HunterTeam) {
             // If the hunters should have better odds
             if (huntersHaveBetterOdds) {
-                if (scoreDiff <= 30) {
-                    return 550;
-                } else if (scoreDiff <= 60) {
-                    return 500;
-                } else if (scoreDiff <= 95) {
+                if (scoreDiff <= 15) {
                     return 450;
+                } else if (scoreDiff <= 30) {
+                    return 400;
+                } else if (scoreDiff <= 60) {
+                    return 450;
+                } else if (scoreDiff <= 90) {
+                    return 300;
                 } else if (scoreDiff <= 120) {
-                    return 350;
-                } else if (scoreDiff <= 140) {
-                    return 275;
-                } else if (scoreDiff <= 170) {
+                    return 265;
+                } else if (scoreDiff <= 150) {
                     return 225;
                 } else {
                     return 150;
@@ -38,33 +38,38 @@ public class ChestOddsCalculator {
             }
             // If the runners should have better odds
             else {
-                return 750;
+                return 600;
             }
 
         } else if (manhuntPlayer.getTeam() instanceof RunnerTeam) {
             if (huntersHaveBetterOdds) {
-                if (scoreDiff <= 30) {
-                    return 550;
+                if (scoreDiff <= 15) {
+                    return 450;
+                } else if (scoreDiff <= 30) {
+                    return 500;
                 } else if (scoreDiff <= 60) {
                     return 600;
-                } else if (scoreDiff <= 95) {
+                } else if (scoreDiff <= 90) {
                     return 650;
                 } else if (scoreDiff <= 120) {
                     return 750;
-                } else if (scoreDiff <= 140) {
+                } else if (scoreDiff <= 150) {
                     return 800;
-                } else if (scoreDiff <= 170) {
-                    return 850;
                 } else {
-                    return 1000;
+                    return 900;
                 }
             } else {
                 if (scoreDiff <= -100) {
                     return 40;
                 } else if (scoreDiff <= -50) {
-                    return 115;
+                    return 90;
                 } else if (scoreDiff <= -25) {
+                    return 120;
+                } else if (scoreDiff < 0) {
                     return 150;
+                } else {
+                    Bukkit.getLogger().info("Invalid score diff: " + scoreDiff + " Runner broke block and has better odds. Default set to 175.");
+                    return 175;
                 }
             }
 
@@ -72,7 +77,6 @@ public class ChestOddsCalculator {
             Bukkit.broadcastMessage("Error when creating chest. Shiiii");
             throw new IllegalArgumentException("Chest could not be generated. Player had no team");
         }
-        return 0;
     }
 
 
