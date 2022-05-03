@@ -43,6 +43,9 @@ public class ActionBarHandler {
                         + "x: " + (int) teammateLocation.getX()
                         + ", y: " + (int) teammateLocation.getY()
                         + ", z: " + (int) teammateLocation.getZ()
+                        + "    |    "
+                        + ChatColor.GREEN + "Chest Odds: 1/" + gameEngine.getGameBalancingCalculator().getChestOddsCalculator().getPlayerChestOdds(manhuntPlayer)
+                        + " , Player Score: " + manhuntPlayer.getPlayerScore()
         ));
 
     }

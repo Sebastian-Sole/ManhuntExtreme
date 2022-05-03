@@ -28,7 +28,7 @@ public class BlazeSpawnerHandler {
                 generateSpawner();
                 spawnersGenerated++;
             }
-        }, 600L, 600L); // 8400L, 3600L
+        }, 8400L, 3600L); // 8400L, 3600L
     }
 
     private void generateSpawner() {
@@ -36,10 +36,11 @@ public class BlazeSpawnerHandler {
         var x = generateCoordinate();
         var y = random.nextDouble(54.0) + 36;
         var z = generateCoordinate();
-        var firstBlock = new Location(nether, x, y, z);
-        var block = nether.getBlockAt(firstBlock);
-        block.setType(Material.SPAWNER);
-        var blockState = (CreatureSpawner) block.getState();
+        var firstBlockLocation = new Location(nether, x, y, z);
+        var block = nether.getBlockAt(firstBlockLocation);
+        var spawnerBlock = nether.getBlockAt(firstBlockLocation.getBlockX(), firstBlockLocation.getBlockY() + 1, firstBlockLocation.getBlockZ());
+        spawnerBlock.setType(Material.SPAWNER);
+        var blockState = (CreatureSpawner) spawnerBlock.getState();
         blockState.setSpawnedType(EntityType.BLAZE);
         generatePlatform(block, nether);
         Bukkit.broadcastMessage("Blaze spawner generated at: " + (int) x + ", " + (int) y + ", " + (int) z);

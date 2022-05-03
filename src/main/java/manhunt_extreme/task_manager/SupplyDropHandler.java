@@ -29,7 +29,7 @@ public class SupplyDropHandler {
                 Bukkit.broadcastMessage("Supply Drop lands in 3 minutes, be ready for a chance at great loot!"), 26400L, 30000L
         );
         Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, this::spawnSupplyDrop, 30000L, 30000L
-        );
+        ); // 30000L, 30000L
     }
 
     private void spawnSupplyDrop() {

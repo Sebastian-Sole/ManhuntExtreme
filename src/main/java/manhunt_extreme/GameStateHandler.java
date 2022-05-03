@@ -9,7 +9,7 @@ public class GameStateHandler {
     private boolean hasteBoost = true;
     private boolean cutClean = true;
     private double health = 40.0;
-    private double borderSize = 1300.0;
+    private double borderSize = 2800.0;
     private boolean supplyDrops = true;
     private int headStart = 30;
     private boolean allowJamming = true;

@@ -4,24 +4,21 @@ import manhunt_extreme.GameEngine;
 import manhunt_extreme.listeners.respawn_handler.RespawnInventoryGenerator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import manhunt_extreme.manhunt_team.ManhuntTeam;
+import org.bukkit.Bukkit;
 
 public class GameBalancingCalculator {
 
     private final GameEngine gameEngine;
-    private Double hunterTeamScore;
-    private Double runnerTeamScore;
     private ChestOddsCalculator chestOddsCalculator = new ChestOddsCalculator(this);
     private CutCleanCalculator cutCleanCalculator = new CutCleanCalculator(this);
     private RespawnInventoryGenerator respawnInventoryGenerator = new RespawnInventoryGenerator();
 
     public GameBalancingCalculator(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        this.hunterTeamScore = getTeamScore(gameEngine.getHuntersTeam());
-        this.runnerTeamScore = getTeamScore(gameEngine.getRunnersTeam());
     }
 
     public Double getAverageOfAllTeamScores() {
-        return (hunterTeamScore * runnerTeamScore) / 2;
+        return (getTeamScore(gameEngine.getHuntersTeam()) * getTeamScore(gameEngine.getRunnersTeam())) / 2;
     }
 
     public Double getTeamScore(ManhuntTeam manhuntTeam) {
@@ -29,7 +26,9 @@ public class GameBalancingCalculator {
     }
 
     public Double getTeamScoreDifference() {
-        return runnerTeamScore - hunterTeamScore;
+        Bukkit.getLogger().info("Hunter Team Score: " + getTeamScore(gameEngine.getHuntersTeam()));
+        Bukkit.getLogger().info("Runner Team Score: " + getTeamScore(gameEngine.getRunnersTeam()));
+        return getTeamScore(gameEngine.getRunnersTeam()) - getTeamScore(gameEngine.getHuntersTeam());
     }
 
     //Todo: Individual player score difference
@@ -44,8 +43,8 @@ public class GameBalancingCalculator {
 //        }
 //    }
     public Double getPlayerScoreDifference() {
-        Double runnerTeamAverageScore = runnerTeamScore / gameEngine.getRunnersTeam().getPlayerList().size();
-        Double hunterTeamAverageScore = hunterTeamScore / gameEngine.getHuntersTeam().getPlayerList().size();
+        Double runnerTeamAverageScore = getTeamScore(gameEngine.getRunnersTeam()) / gameEngine.getRunnersTeam().getPlayerList().size();
+        Double hunterTeamAverageScore = getTeamScore(gameEngine.getHuntersTeam()) / gameEngine.getHuntersTeam().getPlayerList().size();
         return runnerTeamAverageScore - hunterTeamAverageScore;
     }
 

@@ -3,7 +3,6 @@ package manhunt_extreme.listeners;
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.TargetSelectInventory;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import manhunt_extreme.manhunt_team.HunterTeam;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,11 +24,6 @@ public class InventoryClick implements Listener {
         var manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(player);
         var clickedHead = event.getCurrentItem();
         if (event.getView().getTitle().equals(TargetSelectInventory.INVENTORY_NAME)) {
-            if (manhuntPlayer.getTeam() instanceof HunterTeam) {
-                player.sendMessage("You are not on a Manhunt team!");
-                event.setCancelled(true);
-                return;
-            }
             if (clickedHead == null || clickedHead.getType() != Material.PLAYER_HEAD) {
                 gameEngine.getLogger().warning("Item clicked is not player head");
                 event.setCancelled(true);

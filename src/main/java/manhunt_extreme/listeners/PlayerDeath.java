@@ -25,7 +25,7 @@ public class PlayerDeath implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (gameEngine.isRunning()) {
+        if (!gameEngine.isRunning()) {
             gameEngine.getLogger().info("Player died, but game is not running");
             return;
         }

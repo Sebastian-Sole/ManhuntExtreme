@@ -2,6 +2,7 @@ package manhunt_extreme.listeners.respawn_handler;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class RespawnHandler {
@@ -18,6 +19,7 @@ public class RespawnHandler {
         for (ItemStack stack : items) {
             manhuntPlayer.getPlayer().getInventory().addItem(stack);
         }
+        manhuntPlayer.getPlayer().getInventory().addItem(new ItemStack(Material.COMPASS));
     }
 
 }

@@ -15,6 +15,7 @@ public class GameClock {
     public void start() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
             minutes++;
+            Bukkit.getLogger().info("Minutes: " + minutes);
         }, 1200L, 1200L);
     }
 

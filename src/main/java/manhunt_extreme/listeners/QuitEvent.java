@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class QuitEvent implements Listener {
-    
+
     private GameEngine gameEngine;
 
     public QuitEvent(GameEngine gameEngine) {
@@ -19,8 +19,11 @@ public class QuitEvent implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(player);
-        manhuntPlayer.getTeam().removePlayer(manhuntPlayer);
+        if (manhuntPlayer.getTeam() != null) {
+            manhuntPlayer.getTeam().removePlayer(manhuntPlayer);
+        }
         gameEngine.getManhuntPlayers().remove(manhuntPlayer);
+
     }
 
 }

@@ -15,7 +15,7 @@ public class CompassJammer {
     }
 
     public void jamCompass(long duration) {
-        if (gameEngine.getGameStateHandler().isAllowJamming()) {
+        if (!gameEngine.getGameStateHandler().isAllowJamming()) {
             Bukkit.broadcastMessage("Jammers are inactive this game");
             throw new IllegalArgumentException("Jammers are inactive");
         }

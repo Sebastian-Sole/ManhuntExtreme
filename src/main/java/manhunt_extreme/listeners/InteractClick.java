@@ -21,7 +21,7 @@ public class InteractClick implements Listener {
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (player.getEquipment().getItemInMainHand().getType() == Material.COMPASS) {
-            if (gameEngine.isRunning()) {
+            if (!gameEngine.isRunning()) {
                 player.sendMessage("Start a Manhunt game before using the compass!");
             } else {
                 var inv = new TargetSelectInventory(gameEngine);
@@ -31,14 +31,15 @@ public class InteractClick implements Listener {
         if (player.getEquipment().getItemInMainHand().getType().equals(Material.BEDROCK)) {
             if (gameEngine.getGameStateHandler().isAllowJamming()) {
                 var jammer = player.getEquipment().getItemInMainHand();
+                var displayName = jammer.getItemMeta().getDisplayName();
                 switch (jammer.getItemMeta().getDisplayName().toLowerCase()) {
-                    case "1 min jammer" -> {
+                    case "1 minute jammer" -> {
                         gameEngine.getTaskManager().getCompassJammer().jamCompass(1200L);
                     }
-                    case "2 min jammer" -> {
+                    case "2 minute jammer" -> {
                         gameEngine.getTaskManager().getCompassJammer().jamCompass(2400L);
                     }
-                    case "5 min jammer" -> {
+                    case "5 minute jammer" -> {
                         gameEngine.getTaskManager().getCompassJammer().jamCompass(6000L);
                     }
                     default -> {

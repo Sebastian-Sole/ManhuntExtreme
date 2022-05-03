@@ -86,24 +86,19 @@ public class ChestItem {
 
     public ItemStack createJammer() {
         ItemStack jammer = new ItemStack(Material.BEDROCK);
-        Enchantment enchant;
         String name;
         switch (random.nextInt(3)) {
             case 0, 1, 2 -> {
-                enchant = Enchantment.MENDING;
                 name = "1 Minute Jammer";
             }
             case 3, 4 -> {
-                enchant = Enchantment.SOUL_SPEED;
                 name = "2 Minute Jammer";
             }
             case 5 -> {
-                enchant = Enchantment.LUCK;
                 name = "5 Minute Jammer";
             }
             default -> throw new IllegalStateException("Error when creating jammer. The enchant was not assigned. Has there been a new duration added? The switch statement did not hit.");
         }
-        jammer.addEnchantment(enchant, 1);
         var meta = jammer.getItemMeta();
         meta.setDisplayName(name);
         jammer.setItemMeta(meta);

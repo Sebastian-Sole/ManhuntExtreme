@@ -16,22 +16,21 @@ public class ChestOddsCalculator {
     public int getPlayerChestOdds(ManhuntPlayer manhuntPlayer) {
         Double scoreDiff = gameBalancingCalculator.getTeamScoreDifference();
         boolean huntersHaveBetterOdds = scoreDiff >= 0;
-        
         // If player is a hunter
         if (manhuntPlayer.getTeam() instanceof HunterTeam) {
             // If the hunters should have better odds
             if (huntersHaveBetterOdds) {
-                if (scoreDiff <= 50) {
+                if (scoreDiff <= 30) {
                     return 550;
-                } else if (scoreDiff <= 100) {
+                } else if (scoreDiff <= 60) {
                     return 500;
-                } else if (scoreDiff <= 140) {
+                } else if (scoreDiff <= 95) {
                     return 450;
-                } else if (scoreDiff <= 180) {
+                } else if (scoreDiff <= 120) {
                     return 350;
-                } else if (scoreDiff <= 240) {
+                } else if (scoreDiff <= 140) {
                     return 275;
-                } else if (scoreDiff <= 300) {
+                } else if (scoreDiff <= 170) {
                     return 225;
                 } else {
                     return 150;
@@ -44,17 +43,17 @@ public class ChestOddsCalculator {
 
         } else if (manhuntPlayer.getTeam() instanceof RunnerTeam) {
             if (huntersHaveBetterOdds) {
-                if (scoreDiff <= 50) {
+                if (scoreDiff <= 30) {
                     return 550;
-                } else if (scoreDiff <= 100) {
+                } else if (scoreDiff <= 60) {
                     return 600;
-                } else if (scoreDiff <= 140) {
+                } else if (scoreDiff <= 95) {
                     return 650;
-                } else if (scoreDiff <= 180) {
+                } else if (scoreDiff <= 120) {
                     return 750;
-                } else if (scoreDiff <= 240) {
+                } else if (scoreDiff <= 140) {
                     return 800;
-                } else if (scoreDiff <= 300) {
+                } else if (scoreDiff <= 170) {
                     return 850;
                 } else {
                     return 1000;

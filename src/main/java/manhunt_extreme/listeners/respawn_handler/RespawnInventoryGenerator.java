@@ -25,8 +25,8 @@ public class RespawnInventoryGenerator {
     ));
     // 20-30 minutes
     private ArrayList<ItemStack> respawnThree = new ArrayList<>(Arrays.asList(
-            new ItemStack(Material.IRON_INGOT, 11),
-            new ItemStack(Material.GOLD_INGOT, 15),
+            new ItemStack(Material.IRON_INGOT, 13),
+            new ItemStack(Material.GOLD_INGOT, 16),
             new ItemStack(Material.OAK_LOG, 7),
             new ItemStack(Material.COBBLESTONE, 9),
             new ItemStack(Material.BREAD, 16),
@@ -35,8 +35,8 @@ public class RespawnInventoryGenerator {
     // 30-40 minutes
     private ArrayList<ItemStack> respawnFour = new ArrayList<>(Arrays.asList(
             new ItemStack(Material.COBBLESTONE, 9),
-            new ItemStack(Material.IRON_INGOT, 17),
-            new ItemStack(Material.GOLD_INGOT, 12),
+            new ItemStack(Material.IRON_INGOT, 19),
+            new ItemStack(Material.GOLD_INGOT, 13),
             new ItemStack(Material.BREAD, 40),
             new ItemStack(Material.OAK_LOG, 10),
             new ItemStack(Material.WHITE_WOOL, 3)
@@ -44,8 +44,8 @@ public class RespawnInventoryGenerator {
     // 40-50 minutes
     private ArrayList<ItemStack> respawnFive = new ArrayList<>(Arrays.asList(
             new ItemStack(Material.COBBLESTONE, 12),
-            new ItemStack(Material.IRON_INGOT, 20),
-            new ItemStack(Material.GOLD_INGOT, 17),
+            new ItemStack(Material.IRON_INGOT, 21),
+            new ItemStack(Material.GOLD_INGOT, 18),
             new ItemStack(Material.COOKED_BEEF, 12),
             new ItemStack(Material.OAK_LOG, 10),
             new ItemStack(Material.WHITE_WOOL, 3)
@@ -53,8 +53,8 @@ public class RespawnInventoryGenerator {
     // 50-60 minutes
     private ArrayList<ItemStack> respawnSix = new ArrayList<>(Arrays.asList(
             new ItemStack(Material.COBBLESTONE, 12),
-            new ItemStack(Material.IRON_INGOT, 32),
-            new ItemStack(Material.GOLD_INGOT, 18),
+            new ItemStack(Material.IRON_INGOT, 33),
+            new ItemStack(Material.GOLD_INGOT, 19),
             new ItemStack(Material.COOKED_BEEF, 24),
             new ItemStack(Material.OAK_LOG, 10),
             new ItemStack(Material.WHITE_WOOL, 3),
@@ -63,8 +63,8 @@ public class RespawnInventoryGenerator {
     // 60-70 minutes
     private ArrayList<ItemStack> respawnSeven = new ArrayList<>(Arrays.asList(
             new ItemStack(Material.COBBLESTONE, 12),
-            new ItemStack(Material.IRON_INGOT, 38),
-            new ItemStack(Material.GOLD_INGOT, 24),
+            new ItemStack(Material.IRON_INGOT, 39),
+            new ItemStack(Material.GOLD_INGOT, 25),
             new ItemStack(Material.COOKED_BEEF, 32),
             new ItemStack(Material.OAK_LOG, 10),
             new ItemStack(Material.WHITE_WOOL, 3),

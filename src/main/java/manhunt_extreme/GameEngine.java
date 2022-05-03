@@ -64,6 +64,7 @@ public class GameEngine {
         this.taskManager.getActionBarHandler().start();
         this.taskManager.getHasteHandler().start();
         this.taskManager.getSupplyDropHandler().start();
+        this.getLogger().info("gameIsRunning: " + this.isRunning());
     }
 
 

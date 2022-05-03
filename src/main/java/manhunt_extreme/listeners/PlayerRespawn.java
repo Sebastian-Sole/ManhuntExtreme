@@ -52,8 +52,8 @@ public class PlayerRespawn implements Listener {
             respawnedPlayer.getPlayer().addPotionEffect(PotionEffectType.SPEED.createEffect(speedDuration, 2));
             if (gameStateHandler.isHunterHelp()) {
                 gameEngine.getRespawnHandler().giveItems(respawnedPlayer);
+                Bukkit.getLogger().info("Hunter help is true, items have been given");
             }
-
         }, 60L);
     }
 
