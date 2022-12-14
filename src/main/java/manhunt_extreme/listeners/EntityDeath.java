@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.ServerOperator;
 
+import java.util.Random;
+
 public class EntityDeath implements Listener {
 
     private GameEngine gameEngine;
@@ -81,13 +83,14 @@ public class EntityDeath implements Listener {
     }
 
     private void handleBlazeDeath(LivingEntity entity) {
-        if (Math.random() <= 0.45) {
+        Random random = new Random();
+        if (random.nextDouble() <= 0.45) {
             entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.GOLD_INGOT));
         }
-        if (Math.random() <= 0.04) {
+        if (random.nextDouble() <= 0.04) {
             entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.ENDER_PEARL));
         }
-        if (Math.random() <= 0.0095) {
+        if (random.nextDouble() <= 0.0095) {
             entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.NETHERITE_SCRAP));
         }
     }

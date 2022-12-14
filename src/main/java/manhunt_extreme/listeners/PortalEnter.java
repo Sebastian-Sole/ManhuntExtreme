@@ -32,4 +32,8 @@ public class PortalEnter implements Listener {
             gameEngine.setEndPortalLocation(event.getFrom());
         }
     }
+
+    public boolean hasAlreadyEnteredNether() {
+        return hasAlreadyEnteredNether;
+    }
 }

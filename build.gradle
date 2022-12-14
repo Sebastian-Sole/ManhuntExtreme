@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 group = 'manhunt_extreme'
@@ -15,10 +16,21 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.19:2.133.1'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+//    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+//    testImplementation 'org.powermock:powermock-core:2.1.0'
+//    testImplementation 'org.powermock:powermock-module-junit4:2.1.0'
+//    testImplementation 'org.powermock:powermock-api-mockito2:2.1.0'
+    // https://mvnrepository.com/artifact/org.mockito/mockito-inline
+// https://mvnrepository.com/artifact/org.mockito/mockito-inline
+    testImplementation group: 'org.mockito', name: 'mockito-inline', version: '4.9.0'
 }
 jar {
     manifest {
@@ -29,6 +41,11 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+test {
+    useJUnitPlatform()
+}
+
 
 def targetJavaVersion = 17
 java {
