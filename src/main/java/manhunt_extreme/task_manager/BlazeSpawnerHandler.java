@@ -87,5 +87,7 @@ public class BlazeSpawnerHandler {
         return random.nextDouble(300.0) * axis;
     }
 
-
+    public int getSpawnersGenerated() {
+        return spawnersGenerated;
+    }
 }

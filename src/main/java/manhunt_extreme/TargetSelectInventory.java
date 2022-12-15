@@ -19,7 +19,7 @@ public class TargetSelectInventory {
     public TargetSelectInventory(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
         inv = Bukkit.createInventory(null, 9, INVENTORY_NAME);
-        int pos = 0;
+        int slotPosition = 0;
         for (ManhuntPlayer runner : gameEngine.getRunners()) {
             if (runner == null) continue;
             ItemStack stack = new ItemStack(Material.PLAYER_HEAD, 1);
@@ -27,8 +27,8 @@ public class TargetSelectInventory {
             meta.setOwningPlayer(runner.getPlayer());
             meta.setDisplayName(runner.getPlayer().getName());
             stack.setItemMeta(meta);
-            inv.setItem(pos, stack);
-            pos++;
+            inv.setItem(slotPosition, stack);
+            slotPosition++;
         }
     }
 
