@@ -36,7 +36,7 @@ public class HealthCommand {
                 return true;
             }
             gameStateHandler.setHealth(health);
-            Bukkit.broadcastMessage("Health is: " + gameStateHandler.getHealth());
+            Bukkit.broadcastMessage("Health is set to: " + gameStateHandler.getHealth());
             return true;
         } catch (NumberFormatException e) {
             manhuntPlayer.getPlayer().sendMessage("Invalid number");

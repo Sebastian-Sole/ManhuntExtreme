@@ -16,7 +16,7 @@ public class ExtraDropsCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setExtraDrops(!gameStateHandler.isExtraDrops());
-        Bukkit.broadcastMessage("Extra drops is: " + gameStateHandler.isExtraDrops());
+        Bukkit.broadcastMessage("Extra drops is set to: " + gameStateHandler.isExtraDrops());
         return true;
     }
 }

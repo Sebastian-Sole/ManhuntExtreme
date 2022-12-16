@@ -33,6 +33,7 @@ public class SetHeadStartCommand {
             return true;
         }
         gameStateHandler.setHeadStart(duration);
+        manhuntPlayer.getPlayer().sendMessage("Headstart duration set to: " + duration);
         return true;
     }
 }

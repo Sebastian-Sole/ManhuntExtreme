@@ -17,7 +17,9 @@ public class HasteHandler {
     }
 
     public void start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, this::giveHaste, 10L, 1200L);
+        if (gameEngine.getGameStateHandler().isHasteBoost()) {
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, this::giveHaste, 10L, 1200L);
+        }
     }
 
     private void giveHaste() {

@@ -81,14 +81,7 @@ public class ChestItem {
 
             Enchantment enchantment = enchants.get(random.nextInt(enchants.size()));
             try {
-                if (enchantment.canEnchantItem(itemStack)) {
-                    if (enchantment.equals(Enchantment.PROTECTION_ENVIRONMENTAL)) {
-                        System.out.println(enchantment.getMaxLevel());
-                        System.out.println(Enchantment.PROTECTION_ENVIRONMENTAL.getMaxLevel());
-                    }
-                }
                 itemStack.addEnchantment(enchantment, enchantmentStrengths);
-                System.out.println("Legal Enchantment: " + enchantment);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Enchantment: " + enchantment + "\nMaterial: " + material + "\nEnchantment Strength: " + enchantmentStrengths + "\nError: " + e + "\nMax Level for Prot: " + Enchantment.PROTECTION_ENVIRONMENTAL.getMaxLevel());
             }

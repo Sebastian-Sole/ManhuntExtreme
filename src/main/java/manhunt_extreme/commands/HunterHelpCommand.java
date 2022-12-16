@@ -16,7 +16,7 @@ public class HunterHelpCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setHunterHelp(!gameStateHandler.isHunterHelp());
-        Bukkit.broadcastMessage("Hunter help is: " + gameStateHandler.isHunterHelp());
+        Bukkit.broadcastMessage("Hunter help is set to: " + gameStateHandler.isHunterHelp());
 
         return true;
     }

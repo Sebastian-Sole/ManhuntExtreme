@@ -16,7 +16,7 @@ public class HasteBoostCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setHasteBoost(!gameStateHandler.isHasteBoost());
-        Bukkit.broadcastMessage("Haste boost is: " + gameStateHandler.isHasteBoost());
+        Bukkit.broadcastMessage("Haste boost is set to: " + gameStateHandler.isHasteBoost());
 
         return true;
     }

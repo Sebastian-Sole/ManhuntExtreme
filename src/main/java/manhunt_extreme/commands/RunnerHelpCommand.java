@@ -16,7 +16,7 @@ public class RunnerHelpCommand extends GameRuleCommand {
             return true;
         }
         gameStateHandler.setRunnerHelp(!gameStateHandler.isRunnerHelp());
-        Bukkit.broadcastMessage("Runner help is: " + gameStateHandler.isRunnerHelp());
+        Bukkit.broadcastMessage("Runner help is set to: " + gameStateHandler.isRunnerHelp());
         return true;
     }
 }

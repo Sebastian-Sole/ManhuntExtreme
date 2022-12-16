@@ -40,8 +40,19 @@ public class SupplyDropTest {
 
     @Test
     public void testValidDrop() {
-        plugin.getGameEngine().getTaskManager().getSupplyDropHandler().start();
-        server.getScheduler().performTicks(30001L);
-        assert plugin.getGameEngine().getWorld().getBlockAt(75, 75, 75).getType().equals(Material.CHEST);
+
+        int count = 0;
+        int maxTries = 1000;
+        while (count < maxTries) {
+            try {
+                plugin.getGameEngine().getTaskManager().getSupplyDropHandler().start();
+                server.getScheduler().performTicks(30001L);
+                assert plugin.getGameEngine().getWorld().getBlockAt(75, 75, 75).getType().equals(Material.CHEST);
+                break;
+            } catch (Exception e) {
+                if (++count == maxTries) throw e;
+            }
+        }
+
     }
 }

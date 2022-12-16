@@ -21,15 +21,16 @@ public class ActionBarHandler {
     }
 
     public void start() {
-
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
-            for (ManhuntPlayer manhuntPlayer : gameEngine.getRunners()) {
-                updateActionBar(manhuntPlayer, manhuntPlayer.getTeam());
-            }
-            for (ManhuntPlayer manhuntPlayer : gameEngine.getHunters()) {
-                updateActionBar(manhuntPlayer, manhuntPlayer.getTeam());
-            }
-        }, 0L, 20L);
+        if (gameEngine.isRunning()) {
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
+                for (ManhuntPlayer manhuntPlayer : gameEngine.getRunners()) {
+                    updateActionBar(manhuntPlayer, manhuntPlayer.getTeam());
+                }
+                for (ManhuntPlayer manhuntPlayer : gameEngine.getHunters()) {
+                    updateActionBar(manhuntPlayer, manhuntPlayer.getTeam());
+                }
+            }, 0L, 20L);
+        }
     }
 
     private void updateActionBar(ManhuntPlayer manhuntPlayer, ManhuntTeam team) {

@@ -2,7 +2,6 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import org.bukkit.Bukkit;
 
 public class SupplyDropsCommand extends GameRuleCommand {
     public SupplyDropsCommand(ManhuntPlayer manhuntPlayer, String[] args, GameEngine gameEngine, String commandCall) {
@@ -14,8 +13,8 @@ public class SupplyDropsCommand extends GameRuleCommand {
         if (isIllegalCommand()) {
             return true;
         }
-        gameStateHandler.setSupplyDrops(true);
-        Bukkit.broadcastMessage("Supply drops is: " + gameStateHandler.isSupplyDrops());
+        gameEngine.getGameStateHandler().setSupplyDrops(!gameStateHandler.isSupplyDrops());
+        manhuntPlayer.getPlayer().sendMessage("Supply drops are set to: " + gameStateHandler.isSupplyDrops());
 
         return true;
     }

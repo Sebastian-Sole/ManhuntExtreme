@@ -15,7 +15,7 @@ public class JammerCommand extends GameRuleCommand {
     public boolean execute() {
         if (!isIllegalCommand()) {
             gameStateHandler.setAllowJamming(!gameStateHandler.isAllowJamming());
-            Bukkit.broadcastMessage("Jamming is now set to: " + gameStateHandler.isAllowJamming());
+            Bukkit.broadcastMessage("Jamming is set to: " + gameStateHandler.isAllowJamming());
         }
         return true;
     }
