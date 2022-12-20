@@ -19,6 +19,7 @@ public class HunterCommand {
 
     public boolean execute() {
         if (args.length != 1) {
+            manhuntPlayer.getPlayer().sendMessage("Invalid format. Use /runner <playername>");
             return true;
         }
         var targetPlayer = Bukkit.getPlayer(args[0]);

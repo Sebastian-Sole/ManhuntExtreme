@@ -2,7 +2,6 @@ package manhunt_extreme.commands;
 
 import manhunt_extreme.GameEngine;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import org.bukkit.Bukkit;
 
 public class AllHelpCommand extends GameRuleCommand {
 
@@ -24,7 +23,7 @@ public class AllHelpCommand extends GameRuleCommand {
         gameStateHandler.setChestGenerate(true);
         gameStateHandler.setSupplyDrops(true);
         gameStateHandler.setCutClean(true);
-        Bukkit.broadcastMessage("All help is true");
+        manhuntPlayer.getPlayer().sendMessage("All help is enabled");
         return true;
     }
 }

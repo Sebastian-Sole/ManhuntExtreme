@@ -101,7 +101,7 @@ public class InventoryCalculator {
             case "LEATHER" -> {
                 return 0;
             }
-            case "GOLD", "CHAINMAIL" -> {
+            case "GOLDEN", "CHAINMAIL" -> {
                 return 1;
             }
             case "IRON" -> {
@@ -182,11 +182,10 @@ public class InventoryCalculator {
         }
 
 
-        if (itemStack.getType() == material) {
-            if (!itemStack.getEnchantments().isEmpty()) {
-                totalItemScore *= enchantWeight;
-            }
+        if (!itemStack.getEnchantments().isEmpty()) {
+            totalItemScore *= enchantWeight;
         }
+
         return totalItemScore;
     }
 

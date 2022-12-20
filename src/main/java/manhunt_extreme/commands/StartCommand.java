@@ -50,6 +50,12 @@ public class StartCommand {
         gameEngine.startGame();
 
         Bukkit.broadcastMessage("" + ChatColor.DARK_RED + "Manhunt Started!");
+        gameEngine.getHunters().forEach(hunter -> {
+            hunter.getPlayer().sendMessage("Kill the runners before they kill the Ender Dragon!");
+        });
+        gameEngine.getRunners().forEach(runner -> {
+            runner.getPlayer().sendMessage("Kill the Ender Dragon without being killed by a hunter!");
+        });
 
         return true;
     }
@@ -85,7 +91,6 @@ public class StartCommand {
     private void startState(ManhuntPlayer manhuntPlayer) {
         Player player = manhuntPlayer.getPlayer();
         player.setGameMode(GameMode.SURVIVAL);
-        Bukkit.broadcastMessage("Health is: " + gameStateHandler.getHealth());
         player.setHealthScale(gameStateHandler.getHealth());
         player.setMaxHealth(gameStateHandler.getHealth());
         player.setHealth(gameStateHandler.getHealth()); // Must be last

@@ -37,7 +37,7 @@ public class PlayerRespawn implements Listener {
             respawnHunter(respawnedPlayer);
         }
         respawnedPlayer.reset();
-        Bukkit.broadcastMessage("Player score: " + respawnedPlayer.getPlayerScore());
+//        Bukkit.broadcastMessage("Player score: " + respawnedPlayer.getPlayerScore());
     }
 
     private void respawnHunter(ManhuntPlayer respawnedPlayer) {
@@ -66,7 +66,7 @@ public class PlayerRespawn implements Listener {
                 Bukkit.broadcastMessage(ChatColor.BOLD.toString() + ChatColor.RED + "Eliminate remaining runners to win!");
                 respawnedPlayer.getPlayer().sendTitle(ChatColor.DARK_RED.toString() + "ELIMINATED", ChatColor.AQUA.toString() + "Help the runner team win!", 20, 60, 20);
             } else {
-                respawnedPlayer.getPlayer().sendMessage("You're still in the game! Get to your teammate quickly before the hunters eliminate you!");
+                respawnedPlayer.getPlayer().sendMessage("You're still in the game! The hunters must kill you to eliminate you!");
             }
             int speedDuration = respawnedPlayer.getPlayer().getBedSpawnLocation() == null ? 4800 : 240;
             respawnedPlayer.getPlayer().addPotionEffect(PotionEffectType.SPEED.createEffect(

@@ -27,7 +27,6 @@ public abstract class GameRuleCommand {
         }
         if (args.length != 0) {
             manhuntPlayer.getPlayer().sendMessage("Illegal format. Use /" + commandCall);
-            return true;
         }
         return false;
     }

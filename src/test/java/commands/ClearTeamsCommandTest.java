@@ -2,15 +2,15 @@ package commands;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import manhunt_extreme.PluginMain;
+import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class HunterHelpCommandTest {
+public class ClearTeamsCommandTest {
 
     private ServerMock server;
     private PluginMain plugin;
@@ -20,7 +20,7 @@ public class HunterHelpCommandTest {
 //        // Start the mock server
         server = MockBukkit.mock();
 //        // Load your plugin
-        WorldMock worldMock = server.addSimpleWorld("world");
+        server.addSimpleWorld("world");
         plugin = MockBukkit.load(PluginMain.class);
         plugin.onEnable();
     }
@@ -32,20 +32,26 @@ public class HunterHelpCommandTest {
     }
 
     @Test
-    public void testHunterHelpCommand() {
+    public void testClearTeamsCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isHunterHelp();
-        server.execute("hunterhelp", player);
-        Assertions.assertEquals(player.nextMessage(), "Hunter help is set to: " + !startingValue);
+        ManhuntPlayer manhuntPlayer = new ManhuntPlayer(player);
+        plugin.getGameEngine().getRunnersTeam().addPlayer(manhuntPlayer);
+        server.execute("clearteams", player);
+        Assertions.assertTrue(plugin.getGameEngine().getHunters().isEmpty());
     }
 
     @Test
     public void testInvalidCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        server.execute("hunterhelp", player, "invalid");
-        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /hunterhelp");
+        plugin.getGameEngine().setRunning(true);
+        server.execute("clearteams", player);
+        Assertions.assertEquals("Game is running. Restart a game to change this option.", player.nextMessage());
+        plugin.getGameEngine().setRunning(false);
+        server.execute("clearteams", player, "invalid");
+        Assertions.assertEquals("Illegal format. Use /clearteams", player.nextMessage());
     }
+
 
 }

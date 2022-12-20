@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SupplyDropCommandTest {
+public class ChestGenerateCommandTest {
 
     private ServerMock server;
     private PluginMain plugin;
@@ -30,19 +30,26 @@ public class SupplyDropCommandTest {
 
     @AfterEach
     public void tearDown() {
-        // Stop the mock server
         MockBukkit.unmock();
     }
 
     @Test
-    public void testSupplyDropCommand() {
+    public void testChestGeneratorCommand() {
+        server.addPlayer();
+        PlayerMock player = server.getPlayer(0);
+        player.setOp(true);
+        var startingValue = plugin.getGameEngine().getGameStateHandler().isChestGenerate();
+        server.execute("chestgenerate", player);
+        //This does not work
+//        Assertions.assertTrue(plugin.getGameEngine().getGameStateHandler().isChestGenerate() != startingValue);
+        Assertions.assertEquals(player.nextMessage(), "Chest generate is set to: " + !startingValue);
+    }
+
+    @Test
+    public void testInvalidCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isSupplyDrops();
-//        System.out.println("Starting value: " + startingValue);
-        server.execute("supplydrops", player);
-//        System.out.println("Ending value: " + plugin.getGameEngine().getGameStateHandler().isSupplyDrops());
-//        Assertions.assertTrue(plugin.getGameEngine().getGameStateHandler().isSupplyDrops() != startingValue);
-        Assertions.assertEquals(player.nextMessage(), "Supply drops are set to: " + !startingValue);
+        server.execute("chestgenerate", player, "invalid");
+        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /chestgenerate");
     }
 }

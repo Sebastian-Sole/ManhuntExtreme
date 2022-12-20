@@ -20,10 +20,15 @@ public class InventoryClick implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        System.out.println("InventoryClick");
         var player = (Player) event.getWhoClicked();
         var manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(player);
         var clickedHead = event.getCurrentItem();
+        System.out.println(clickedHead);
+        System.out.println("Event view: " + event.getView());
+        System.out.println("Event view title: " + event.getView().getTitle());
         if (event.getView().getTitle().equals(TargetSelectInventory.INVENTORY_NAME)) {
+            System.out.println("InventoryClick: TargetSelectInventory");
             if (clickedHead == null || clickedHead.getType() != Material.PLAYER_HEAD) {
                 gameEngine.getLogger().warning("Item clicked is not player head");
                 event.setCancelled(true);
@@ -43,6 +48,7 @@ public class InventoryClick implements Listener {
                 event.setCancelled(true);
                 return;
             }
+            System.out.println("Doing the thing");
             Player owningPlayer = (Player) meta.getOwningPlayer();
             ManhuntPlayer target = gameEngine.getManhuntPlayerFromPlayer(owningPlayer);
             gameEngine.getTargets().put(manhuntPlayer, target);

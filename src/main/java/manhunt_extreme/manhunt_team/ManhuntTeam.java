@@ -26,7 +26,6 @@ public abstract class ManhuntTeam {
     public void addPlayer(ManhuntPlayer manhuntPlayer) {
         playerList.add(manhuntPlayer);
         playerDeaths.put(manhuntPlayer, 0);
-
         manhuntPlayer.setTeam(this);
     }
 

@@ -24,12 +24,17 @@ public class SetHeadStartCommand {
         }
 
         if (args.length == 0) {
-            manhuntPlayer.getPlayer().sendMessage("Provide a headstart duration as a non-negative integer.");
+            manhuntPlayer.getPlayer().sendMessage("Provide a headstart duration as a single, non-negative integer.");
             return true;
         }
-        int duration = Integer.parseInt(args[0]);
+        int duration;
+        try {
+            duration = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            duration = -1;
+        }
         if (duration < 0) {
-            manhuntPlayer.getPlayer().sendMessage("Please provide a non-negative integer");
+            manhuntPlayer.getPlayer().sendMessage("Provide a headstart duration as a single, non-negative integer.");
             return true;
         }
         gameStateHandler.setHeadStart(duration);

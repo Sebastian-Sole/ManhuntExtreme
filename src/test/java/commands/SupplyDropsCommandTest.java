@@ -4,25 +4,28 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import manhunt_extreme.GameEngine;
 import manhunt_extreme.PluginMain;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class HunterHelpCommandTest {
+public class SupplyDropsCommandTest {
 
     private ServerMock server;
     private PluginMain plugin;
+    private GameEngine gameEngine;
 
     @BeforeEach
     public void setUp() {
-//        // Start the mock server
+        // Start the mock server
         server = MockBukkit.mock();
-//        // Load your plugin
+        // Load your plugin
         WorldMock worldMock = server.addSimpleWorld("world");
         plugin = MockBukkit.load(PluginMain.class);
-        plugin.onEnable();
+        gameEngine = new GameEngine(plugin);
+        plugin.setGameEngine(gameEngine);
     }
 
     @AfterEach
@@ -32,20 +35,22 @@ public class HunterHelpCommandTest {
     }
 
     @Test
-    public void testHunterHelpCommand() {
+    public void testSupplyDropCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isHunterHelp();
-        server.execute("hunterhelp", player);
-        Assertions.assertEquals(player.nextMessage(), "Hunter help is set to: " + !startingValue);
+        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isSupplyDrops();
+//        System.out.println("Starting value: " + startingValue);
+        server.execute("supplydrops", player);
+//        System.out.println("Ending value: " + plugin.getGameEngine().getGameStateHandler().isSupplyDrops());
+//        Assertions.assertTrue(plugin.getGameEngine().getGameStateHandler().isSupplyDrops() != startingValue);
+        Assertions.assertEquals(player.nextMessage(), "Supply drops are set to: " + !startingValue);
     }
 
     @Test
     public void testInvalidCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        server.execute("hunterhelp", player, "invalid");
-        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /hunterhelp");
+        server.execute("supplydrops", player, "invalid");
+        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /supplydrops");
     }
-
 }

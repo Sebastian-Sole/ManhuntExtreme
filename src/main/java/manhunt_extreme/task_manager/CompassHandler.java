@@ -43,18 +43,16 @@ public class CompassHandler {
                         }
                         // If compassUser is in overworld, and runner is not in overworld
                         else if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL && target.getPlayer().getWorld().getEnvironment() != World.Environment.NORMAL) {
-                            portalLocation = gameEngine.getOverworldPortals().get(target);
-                        }
-                        // If runner is in end, and compassUser isn't
-                        if (target.getPlayer().getWorld().getEnvironment() == World.Environment.THE_END) {
-                            if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER) {
-                                portalLocation = gameEngine.getNetherPortals().get(target);
-                            } else if (compassUser.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL) {
+                            if (target.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER) {
+                                portalLocation = gameEngine.getOverworldPortals().get(target);
+                            } else if (target.getPlayer().getWorld().getEnvironment() == World.Environment.THE_END) {
                                 portalLocation = gameEngine.getEndPortalLocation();
+                            } else {
+                                compassUser.getPlayer().sendMessage("Cannot track player, invalid world. Player is in: " + target.getPlayer().getWorld().getEnvironment());
+                                throw new IllegalStateException("Unexpected value: " + target.getPlayer().getWorld().getEnvironment());
                             }
-                        } else {
-                            portalLocation = compassUser.getPlayer().getWorld().getSpawnLocation();
                         }
+
                         if (portalLocation != null) {
                             compassUser.getPlayer().setCompassTarget(portalLocation);
                         }
@@ -67,14 +65,16 @@ public class CompassHandler {
                                 continue;
                             }
                             stack.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
-                            var meta = stack.getItemMeta();
+                            var meta = (CompassMeta) stack.getItemMeta();
+                            meta.setLodestone(portalLocation);
+                            meta.setLodestoneTracked(false);
                             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                             stack.setItemMeta(meta);
                         }
 
                     } else {
                         compassUser.getPlayer().setCompassTarget(target.getPlayer().getLocation());
-                        for (int j = 0; j <= inv.getSize(); j++) {
+                        for (int j = 0; j < inv.getSize(); j++) {
                             var stack = inv.getItem(j);
                             if (stack == null)
                                 continue;

@@ -2,7 +2,6 @@ package commands;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import manhunt_extreme.PluginMain;
 import org.junit.jupiter.api.AfterEach;
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class HunterHelpCommandTest {
+public class HealthCommandTest {
 
     private ServerMock server;
     private PluginMain plugin;
@@ -20,7 +19,7 @@ public class HunterHelpCommandTest {
 //        // Start the mock server
         server = MockBukkit.mock();
 //        // Load your plugin
-        WorldMock worldMock = server.addSimpleWorld("world");
+        server.addSimpleWorld("world");
         plugin = MockBukkit.load(PluginMain.class);
         plugin.onEnable();
     }
@@ -32,20 +31,25 @@ public class HunterHelpCommandTest {
     }
 
     @Test
-    public void testHunterHelpCommand() {
+    public void testHealthCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isHunterHelp();
-        server.execute("hunterhelp", player);
-        Assertions.assertEquals(player.nextMessage(), "Hunter help is set to: " + !startingValue);
+        server.execute("health", player, "40");
+        Assertions.assertEquals("Health is set to: 40.0", player.nextMessage());
     }
 
     @Test
     public void testInvalidCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        server.execute("hunterhelp", player, "invalid");
-        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /hunterhelp");
+        server.execute("health", player, "yes");
+        Assertions.assertEquals("Invalid number", player.nextMessage());
+        server.execute("health", player, "40", "40");
+        Assertions.assertEquals("Invalid format. Use /health <number>", player.nextMessage());
+        server.execute("health", player, "5");
+        Assertions.assertEquals("Cannot set health under 20", player.nextMessage());
+        plugin.getGameEngine().setRunning(true);
+        server.execute("health", player, "40");
+        Assertions.assertEquals("Game is running. Start a new game to use this command", player.nextMessage());
     }
-
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class HunterHelpCommandTest {
+public class HasteBoostCommandTest {
 
     private ServerMock server;
     private PluginMain plugin;
@@ -32,20 +32,19 @@ public class HunterHelpCommandTest {
     }
 
     @Test
-    public void testHunterHelpCommand() {
+    public void testHasteBoostCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isHunterHelp();
-        server.execute("hunterhelp", player);
-        Assertions.assertEquals(player.nextMessage(), "Hunter help is set to: " + !startingValue);
+        boolean startingValue = plugin.getGameEngine().getGameStateHandler().isHasteBoost();
+        server.execute("hasteBoost", player);
+        Assertions.assertEquals(player.nextMessage(), "Haste boost is set to: " + !startingValue);
     }
 
     @Test
     public void testInvalidCommand() {
         PlayerMock player = server.addPlayer();
         player.setOp(true);
-        server.execute("hunterhelp", player, "invalid");
-        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /hunterhelp");
+        server.execute("hasteboost", player, "invalid");
+        Assertions.assertEquals(player.nextMessage(), "Illegal format. Use /hasteboost");
     }
-
 }

@@ -38,6 +38,7 @@ public class TargetSelectInventory {
 
     public void displayToPlayer(Player player) {
         player.openInventory(inv);
+        System.out.println("Open Inventory Title: " + player.getOpenInventory().getTitle());
     }
 
 
