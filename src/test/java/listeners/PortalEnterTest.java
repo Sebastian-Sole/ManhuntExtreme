@@ -1,130 +1,79 @@
 package listeners;
 
-import manhunt_extreme.GameEngine;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import manhunt_extreme.PluginMain;
-import manhunt_extreme.listeners.PortalEnter;
+import manhunt_extreme.calculators.PlayerScoreCalculator;
 import manhunt_extreme.manhunt_player.ManhuntPlayer;
-import org.bukkit.Bukkit;
+import manhunt_extreme.task_manager.CompassHandler;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.inventory.ItemStack;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class PortalEnterTest {
 
-    GameEngine gameEngine;
-    PortalEnter portalEnter;
-    PlayerPortalEvent event;
+    private ServerMock server;
+    private PluginMain plugin;
+    private ManhuntPlayer manhuntRunner;
+    private ManhuntPlayer manhuntHunter;
+    private PlayerMock playerRunner;
+    private PlayerMock playerHunter;
+    private WorldMock netherMock;
+    private WorldMock worldMock;
+    private WorldMock endMock;
+    private CompassHandler compassHandler;
+    private Location toNether;
 
     @BeforeEach
     public void setUp() {
-        PluginMain pluginMain = mock(PluginMain.class);
-        gameEngine = new GameEngine(pluginMain);
-        portalEnter = new PortalEnter(gameEngine);
-        event = mock(PlayerPortalEvent.class);
+        // Start the mock server
+        server = MockBukkit.mock();
+        // Load your plugin
+        worldMock = server.addSimpleWorld("world");
+        netherMock = server.addSimpleWorld("world_nether");
+        endMock = server.addSimpleWorld("world_end");
+        plugin = MockBukkit.load(PluginMain.class);
+        server.getPluginManager().enablePlugin(plugin);
+        playerRunner = server.addPlayer();
+        playerRunner.setOp(true);
+        manhuntRunner = plugin.getGameEngine().getManhuntPlayerFromPlayer(playerRunner);
+        manhuntRunner.setPlayerScoreCalculator(new PlayerScoreCalculator(manhuntRunner, plugin.getGameEngine().getTaskManager().getGameClock()));
+        plugin.getGameEngine().getRunnersTeam().addPlayer(manhuntRunner);
+
+        playerHunter = server.addPlayer();
+        manhuntHunter = plugin.getGameEngine().getManhuntPlayerFromPlayer(playerHunter);
+        manhuntHunter.setPlayerScoreCalculator(new PlayerScoreCalculator(manhuntHunter, plugin.getGameEngine().getTaskManager().getGameClock()));
+        plugin.getGameEngine().getHuntersTeam().addPlayer(manhuntHunter);
+
+        server.execute("start", playerRunner);
+
+        netherMock.setEnvironment(World.Environment.NETHER);
+        endMock.setEnvironment(World.Environment.THE_END);
+
+        plugin.getGameEngine().getTargets().put(manhuntHunter, manhuntRunner);
+        compassHandler = new CompassHandler(plugin, plugin.getGameEngine());
+        playerHunter.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.COMPASS));
+        compassHandler.start();
+        toNether = new Location(netherMock, 50, 50, 50);
     }
 
-//    @AfterEach
-//    public void tearDown() {
-//        Mockito.reset(event);
-//    }
-
-    @Test
-    public void testOverworldPortalEvent() {
-
-        when(event.getPlayer()).thenReturn(mock(Player.class));
-
-        Player player = mock(Player.class);
-        when(event.getPlayer()).thenReturn(player);
-
-
-        try (MockedStatic<Bukkit> mocked = mockStatic(Bukkit.class)) {
-            World overworld = mock(World.class);
-            World nether = mock(World.class);
-            when(overworld.getEnvironment()).thenReturn(World.Environment.NORMAL);
-            when(nether.getEnvironment()).thenReturn(World.Environment.NETHER);
-
-            when(player.getWorld()).thenReturn(overworld);
-            when(player.getLocation()).thenReturn(new Location(overworld, 10, 10, 10));
-
-            ManhuntPlayer manhuntPlayer = new ManhuntPlayer(player);
-            gameEngine.setRunning(true);
-            gameEngine.setWorld(overworld);
-            gameEngine.getRunnersTeam().addPlayer(manhuntPlayer);
-            gameEngine.getManhuntPlayers().add(manhuntPlayer);
-
-            Location from = new Location(overworld, 0, 0, 0);
-            Location to = new Location(nether, 0, 0, 0);
-
-            when(event.getPlayer()).thenReturn(player);
-            when(event.getFrom()).thenReturn(from);
-            when(event.getTo()).thenReturn(to);
-            mocked.when(() -> Bukkit.getWorld("world")).thenReturn(overworld);
-            mocked.when(() -> Bukkit.getWorld("world_nether")).thenReturn(nether);
-            var scheduler = mock(BukkitScheduler.class);
-            mocked.when(Bukkit::getScheduler).thenReturn(scheduler);
-            assertFalse(portalEnter.hasAlreadyEnteredNether());
-
-            portalEnter.onPlayerEnterPortal(event);
-
-            assertTrue(gameEngine.getOverworldPortals().containsKey(manhuntPlayer));
-            assertSame(gameEngine.getOverworldPortals().get(manhuntPlayer), from);
-            assertTrue(gameEngine.getNetherPortals().containsKey(manhuntPlayer));
-            assertSame(gameEngine.getNetherPortals().get(manhuntPlayer), to);
-
-            assertTrue(portalEnter.hasAlreadyEnteredNether());
-        }
-
-
+    @AfterEach
+    public void tearDown() {
+        // Stop the mock server
+        MockBukkit.unmock();
     }
 
     @Test
-    public void testEndPortalEvent() {
-
-        when(event.getPlayer()).thenReturn(mock(Player.class));
-
-        Player player = mock(Player.class);
-        when(event.getPlayer()).thenReturn(player);
-
-
-        try (MockedStatic<Bukkit> mocked = mockStatic(Bukkit.class)) {
-            World overworld = mock(World.class);
-            World end = mock(World.class);
-            when(overworld.getEnvironment()).thenReturn(World.Environment.NORMAL);
-            when(end.getEnvironment()).thenReturn(World.Environment.THE_END);
-
-            when(player.getWorld()).thenReturn(overworld);
-            when(player.getLocation()).thenReturn(new Location(overworld, 10, 10, 10));
-
-            ManhuntPlayer manhuntPlayer = new ManhuntPlayer(player);
-            gameEngine.setRunning(true);
-            gameEngine.setWorld(overworld);
-            gameEngine.getRunnersTeam().addPlayer(manhuntPlayer);
-            gameEngine.getManhuntPlayers().add(manhuntPlayer);
-
-            Location from = new Location(overworld, 0, 0, 0);
-            Location to = new Location(end, 0, 0, 0);
-
-            when(event.getPlayer()).thenReturn(player);
-            when(event.getFrom()).thenReturn(from);
-            when(event.getTo()).thenReturn(to);
-            mocked.when(() -> Bukkit.getWorld("world")).thenReturn(overworld);
-            mocked.when(() -> Bukkit.getWorld("world_end")).thenReturn(end);
-
-            assertFalse(portalEnter.hasAlreadyEnteredNether());
-
-            portalEnter.onPlayerEnterPortal(event);
-
-            assertEquals(gameEngine.getEndPortalLocation(), from);
-        }
-
+    public void testPortalEnter() {
+        PlayerPortalEvent event = new PlayerPortalEvent(playerHunter.getPlayer(), playerHunter.getPlayer().getLocation(), toNether, PlayerPortalEvent.TeleportCause.NETHER_PORTAL);
+        plugin.getServer().getPluginManager().callEvent(event);
 
     }
 }

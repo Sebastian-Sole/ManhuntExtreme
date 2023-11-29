@@ -18,6 +18,7 @@ public class PortalEnter implements Listener {
 
     @EventHandler
     public void onPlayerEnterPortal(PlayerPortalEvent event) {
+        System.out.println("Entered");
         if (event.getFrom().getWorld().equals(Bukkit.getWorld("world"))
                 && event.getTo().getWorld().equals(Bukkit.getWorld("world_nether"))) {
             ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());

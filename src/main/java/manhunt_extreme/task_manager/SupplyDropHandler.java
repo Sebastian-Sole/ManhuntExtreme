@@ -62,7 +62,7 @@ public class SupplyDropHandler {
     private void createSupplyDrop(Location supplyDropLocation, World targetWorld) {
         generateSupplyDropBox(targetWorld, supplyDropLocation);
         createSupplyDropChest(targetWorld, supplyDropLocation);
-        Bukkit.broadcastMessage("A supply drop has landed at: " + supplyDropLocation.getX() + supplyDropLocation.getY() + supplyDropLocation.getZ());
+        Bukkit.broadcastMessage("A supply drop has landed at: " + supplyDropLocation.getX() + ", " + supplyDropLocation.getY() + ", " + supplyDropLocation.getZ());
     }
 
     private void createSupplyDropChest(World targetWorld, Location supplyDropLocation) {
@@ -74,46 +74,22 @@ public class SupplyDropHandler {
     }
 
     private void generateSupplyDropBox(World targetWorld, Location supplyDropLocation) {
-        // x = +3
-        for (int i = 0; i <= 3; i++) {
-            for (int j = 0; j <= 3; j++) {
-                // x = +3
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + 3), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() + j)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + 3), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() - j)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + 3), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() + j)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + 3), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() - j)).setType(Material.OBSIDIAN);
-                // x = -3
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - 3), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() + j)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - 3), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() - j)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - 3), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() + j)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - 3), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() - j)).setType(Material.OBSIDIAN);
-
-                // z = +3
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() + 3)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() + 3)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() + 3)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() + 3)).setType(Material.OBSIDIAN);
-
-                // z = -3
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() - 3)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() + i), (int) (supplyDropLocation.getZ() - 3)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() - 3)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() - i), (int) (supplyDropLocation.getZ() - 3)).setType(Material.OBSIDIAN);
-
-                // y = +3
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() + 3), (int) (supplyDropLocation.getZ() + i)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() + 3), (int) (supplyDropLocation.getZ() + i)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() + 3), (int) (supplyDropLocation.getZ() - i)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() + 3), (int) (supplyDropLocation.getZ() - i)).setType(Material.OBSIDIAN);
-
-                // y = -3
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() - 3), (int) (supplyDropLocation.getZ() + i)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() - 3), (int) (supplyDropLocation.getZ() + i)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() + j), (int) (supplyDropLocation.getY() - 3), (int) (supplyDropLocation.getZ() - i)).setType(Material.OBSIDIAN);
-                targetWorld.getBlockAt((int) (supplyDropLocation.getX() - j), (int) (supplyDropLocation.getY() - 3), (int) (supplyDropLocation.getZ() - i)).setType(Material.OBSIDIAN);
-
+        for (int i = -3; i <= 3; i++) {
+            for (int j = -3; j <= 3; j++) {
+                if (i == -3 || i == 3 || j == -3 || j == 3) {
+                    setBlock(targetWorld, supplyDropLocation, 3, i, j);
+                    setBlock(targetWorld, supplyDropLocation, -3, i, j);
+                    setBlock(targetWorld, supplyDropLocation, j, i, 3);
+                    setBlock(targetWorld, supplyDropLocation, j, i, -3);
+                    setBlock(targetWorld, supplyDropLocation, j, 3, i);
+                    setBlock(targetWorld, supplyDropLocation, j, -3, i);
+                }
             }
         }
+    }
+
+    private void setBlock(World world, Location location, int x, int y, int z) {
+        world.getBlockAt((int) (location.getX() + x), (int) (location.getY() + y), (int) (location.getZ() + z)).setType(Material.OBSIDIAN);
     }
 
     private Location teamCoords(ArrayList<ManhuntPlayer> players) {
