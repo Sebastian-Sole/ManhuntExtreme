@@ -30,7 +30,9 @@ public class PortalEnter implements Listener {
             }
         } else if (event.getFrom().getWorld().equals(Bukkit.getWorld("world"))
                 && event.getTo().getWorld().equals(Bukkit.getWorld("world_end"))) {
+            System.out.println("Entered end");
             gameEngine.setEndPortalLocation(event.getFrom());
+            System.out.println(gameEngine.getEndPortalLocation().getX() + " " + gameEngine.getEndPortalLocation().getY() + " " + gameEngine.getEndPortalLocation().getZ());
         } else if (event.getFrom().getWorld().equals(Bukkit.getWorld("world_nether"))
                 && event.getTo().getWorld().equals(Bukkit.getWorld("world"))) {
             ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());

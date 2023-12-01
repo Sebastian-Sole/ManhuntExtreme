@@ -61,7 +61,7 @@ public class PlayerDeath implements Listener {
             if (killer.getTeam() instanceof HunterTeam) {
                 manhuntPlayerKilled.addDeath();
                 killer.addKill();
-                if (!gameEngine.getHuntersTeam().getPlayerDeaths().values().contains(0)) {
+                if (!gameEngine.getRunnersTeam().getPlayerDeaths().containsValue(0)) {
                     Bukkit.broadcastMessage("Game over! Hunters win!");
                     Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "end");
                 }

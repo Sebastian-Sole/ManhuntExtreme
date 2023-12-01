@@ -24,9 +24,8 @@ public class EndCommand {
             return true;
         }
         // Todo: Cancel tasks
-
-        GameEngine freshGameEngine = new GameEngine(gameEngine.getPluginMain());
-        gameEngine.getPluginMain().setGameEngine(freshGameEngine);
+        gameEngine.setRunning(false);
+        gameEngine.reset();
 
         Bukkit.broadcastMessage("Manhunt Stopped!");
         return true;

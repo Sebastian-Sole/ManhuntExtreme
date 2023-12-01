@@ -25,7 +25,7 @@ public class ChestOddsCalculator {
                 } else if (scoreDiff <= 30) {
                     return 400;
                 } else if (scoreDiff <= 60) {
-                    return 450;
+                    return 350;
                 } else if (scoreDiff <= 90) {
                     return 300;
                 } else if (scoreDiff <= 120) {

@@ -28,25 +28,25 @@ public class DeathDropGenerator {
     ));
 
     public static ItemStack createItem() {
-        int number = random.nextInt(42);
+        int number = random.nextInt(43);
 
-        if (isBetween(number, 0, 4)) {
+        if (number <= 4) {
             return new ItemStack(Material.GOLDEN_APPLE);
-        } else if (isBetween(number, 5, 10)) {
+        } else if (number <= 10) {
             return new ItemStack(Material.ENDER_PEARL);
-        } else if (isBetween(number, 11, 15)) {
+        } else if (number <= 15) {
             return new ItemStack(Material.DIAMOND, random.nextInt(3) + 1);
-        } else if (isBetween(number, 16, 19)) {
+        } else if (number <= 19) {
             return new ItemStack(Material.OAK_WOOD, 16);
-        } else if (isBetween(number, 20, 25)) {
+        } else if (number <= 25) {
             return new ItemStack(Material.ENCHANTING_TABLE);
-        } else if (isBetween(number, 26, 30)) {
+        } else if (number <= 30) {
             return createBook();
-        } else if (isBetween(number, 31, 34)) {
+        } else if (number <= 34) {
             return new ItemStack(Material.ANVIL);
-        } else if (isBetween(number, 35, 37)) {
+        } else if (number <= 37) {
             return new ItemStack(Material.GOLD_BLOCK, 4);
-        } else if (isBetween(number, 38, 41)) {
+        } else if (number <= 41) {
             return new ChestItem(true).createItemStack();
         } else {
             return new ItemStack(Material.IRON_BLOCK);
@@ -57,9 +57,4 @@ public class DeathDropGenerator {
         ChestItem item = new ChestItem(Material.ENCHANTED_BOOK, bookEnchants);
         return item.createItemStack();
     }
-
-    private static boolean isBetween(int x, int lower, int upper) {
-        return lower <= x && x <= upper;
-    }
-
 }

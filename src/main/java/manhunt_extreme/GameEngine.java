@@ -67,6 +67,20 @@ public class GameEngine {
         this.getLogger().info("gameIsRunning: " + this.isRunning());
     }
 
+    public void reset() {
+        this.taskManager = new TaskManager(pluginMain, this);
+        this.chestGenerator = new ChestGenerator(this);
+        this.respawnHandler = new RespawnHandler(this);
+        this.gameStateHandler = new GameStateHandler();
+        this.targets = new HashMap<>();
+        this.overworldPortals = new HashMap<>();
+        this.netherPortals = new HashMap<>();
+        this.endPortalLocation = null;
+        this.isCompassJammed = false;
+        this.hunters = new HunterTeam();
+        this.runners = new RunnerTeam();
+    }
+
 
     // Getters and Setters
 

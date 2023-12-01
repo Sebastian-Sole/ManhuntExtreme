@@ -19,7 +19,7 @@ public class HunterCommand {
 
     public boolean execute() {
         if (args.length != 1) {
-            manhuntPlayer.getPlayer().sendMessage("Invalid format. Use /runner <playername>");
+            manhuntPlayer.getPlayer().sendMessage("Invalid format. Use /hunter <playername>");
             return true;
         }
         var targetPlayer = Bukkit.getPlayer(args[0]);
@@ -36,7 +36,7 @@ public class HunterCommand {
         }
         gameEngine.getRunnersTeam().removePlayer(targetManhuntPlayer);
         gameEngine.getHuntersTeam().addPlayer(targetManhuntPlayer);
-        Bukkit.broadcastMessage(manhuntPlayer.getPlayer().getName() + " is now a " + ChatColor.RED + ChatColor.BOLD + "HUNTER!");
+        Bukkit.broadcastMessage(targetPlayer.getName() + " is now a " + ChatColor.RED + ChatColor.BOLD + "HUNTER!");
         return true;
     }
 

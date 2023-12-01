@@ -42,6 +42,7 @@ public class BlazeSpawnerHandler {
         spawnerBlock.setType(Material.SPAWNER);
         var blockState = (CreatureSpawner) spawnerBlock.getState();
         blockState.setSpawnedType(EntityType.BLAZE);
+        blockState.update();
         generatePlatform(block, nether);
         Bukkit.broadcastMessage("Blaze spawner generated at: " + (int) x + ", " + (int) y + ", " + (int) z);
     }

@@ -23,6 +23,7 @@ public class AllHelpCommand extends GameRuleCommand {
         gameStateHandler.setChestGenerate(true);
         gameStateHandler.setSupplyDrops(true);
         gameStateHandler.setCutClean(true);
+        gameStateHandler.setAllowJamming(true);
         manhuntPlayer.getPlayer().sendMessage("All help is enabled");
         return true;
     }

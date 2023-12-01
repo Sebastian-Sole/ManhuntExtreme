@@ -29,10 +29,10 @@ public class EntityDeath implements Listener {
             handleBlazeDeath(event.getEntity());
         } else if (event.getEntity().getType() == EntityType.ENDER_DRAGON) {
             for (ManhuntPlayer manhuntPlayer : gameEngine.getHunters()) {
-                manhuntPlayer.getPlayer().sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOSE!", "You're gay!", 20, 60, 20);
+                manhuntPlayer.getPlayer().sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOSE!", "Sucks to suck!!", 20, 60, 20);
             }
             for (ManhuntPlayer manhuntPlayer : gameEngine.getRunners()) {
-                manhuntPlayer.getPlayer().sendTitle(ChatColor.GREEN.toString() + ChatColor.BOLD + "YOU WIN!", ChatColor.MAGIC + "Now go have sex!", 20, 60, 20);
+                manhuntPlayer.getPlayer().sendTitle(ChatColor.GREEN.toString() + ChatColor.BOLD + "YOU WIN!", ChatColor.MAGIC + "Bernothy loves you!", 20, 60, 20);
             }
             Bukkit.getServer().dispatchCommand(
                     Bukkit.getOnlinePlayers().stream().filter(ServerOperator::isOp).toList().get(0),

@@ -48,7 +48,6 @@ public class InventoryClick implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            System.out.println("Doing the thing");
             Player owningPlayer = (Player) meta.getOwningPlayer();
             ManhuntPlayer target = gameEngine.getManhuntPlayerFromPlayer(owningPlayer);
             gameEngine.getTargets().put(manhuntPlayer, target);
