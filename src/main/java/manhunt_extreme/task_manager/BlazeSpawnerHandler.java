@@ -24,7 +24,7 @@ public class BlazeSpawnerHandler {
     public void start() {
         // Test that the start method has started by adding variable?
         Bukkit.getScheduler().scheduleSyncRepeatingTask(pluginMain, () -> {
-            if (spawnersGenerated < 5) {
+            if (spawnersGenerated < 10) {
                 generateSpawner();
                 spawnersGenerated++;
             }
