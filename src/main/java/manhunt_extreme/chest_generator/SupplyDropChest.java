@@ -123,6 +123,9 @@ public class SupplyDropChest {
         if (random.nextInt(2) == 0) {
             itemsToAdd.add(new ChestItem().createJammer());
         }
+        if (itemsToAdd.stream().anyMatch(itemStack -> itemStack.getType() == Material.ENCHANTING_TABLE)) {
+            itemsToAdd.add(new ChestItem(Material.LAPIS_LAZULI, 10).createItemStack());
+        }
         return itemsToAdd;
     }
 

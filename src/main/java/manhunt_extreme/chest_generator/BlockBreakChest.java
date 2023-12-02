@@ -164,8 +164,12 @@ public class BlockBreakChest {
                 itemsToAdd.add(tierFive.get(random.nextInt(tierFive.size())).createItemStack());
             }
         }
-        if (random.nextInt(25) == 3) {
+        if (random.nextInt(17) == 3) {
             itemsToAdd.add(new ChestItem().createJammer());
+        }
+        // If itemsToAdd contains enchanting table, add lapis
+        if (itemsToAdd.stream().anyMatch(itemStack -> itemStack.getType() == Material.ENCHANTING_TABLE)) {
+            itemsToAdd.add(new ChestItem(Material.LAPIS_LAZULI, 3).createItemStack());
         }
         return itemsToAdd;
     }
