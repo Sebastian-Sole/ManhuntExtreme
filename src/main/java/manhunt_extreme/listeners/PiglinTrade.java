@@ -32,13 +32,13 @@ public class PiglinTrade implements Listener {
             dropItem(Material.GOLDEN_CARROT, random.nextInt(10) + 2);
             return;
         }
-        if (random.nextInt(27) == 1) {
+        if (random.nextInt(23) == 1) {
             dropItem(Material.ENDER_PEARL, random.nextInt(2) + 1);
         }
-        if (random.nextInt(17) == 1) {
+        if (random.nextInt(15) == 1) {
             spawnPiglin();
         }
-        if (random.nextInt(38) == 1) {
+        if (random.nextInt(25) == 1) {
             dropItem(Material.BLAZE_ROD, random.nextInt(2) + 1);
         }
 

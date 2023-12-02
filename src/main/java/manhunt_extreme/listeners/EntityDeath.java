@@ -87,6 +87,12 @@ public class EntityDeath implements Listener {
         if (random.nextDouble() <= 0.45) {
             entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.GOLD_INGOT));
         }
+        if (random.nextDouble() <= 0.45) {
+            entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.BLAZE_ROD));
+        }
+        if (random.nextDouble() <= 0.3) {
+            entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.ENDER_PEARL));
+        }
         if (random.nextDouble() <= 0.04) {
             entity.getWorld().dropItem(entity.getLocation(), new ItemStack(Material.ENDER_PEARL));
         }
