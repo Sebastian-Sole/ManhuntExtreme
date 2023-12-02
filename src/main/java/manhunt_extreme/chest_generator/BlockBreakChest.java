@@ -69,7 +69,7 @@ public class BlockBreakChest {
             new ChestItem(Material.IRON_BOOTS, bootsEnchants),
             new ChestItem(Material.IRON_HELMET, helmetEnchants),
             new ChestItem(Material.BOOKSHELF, 6),
-            new ChestItem(Material.BLAZE_ROD, 3)
+            new ChestItem(Material.BLAZE_ROD, 5)
     ));
     private final ArrayList<ChestItem> tierTwo = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.DIAMOND_BOOTS, 1),
@@ -87,7 +87,7 @@ public class BlockBreakChest {
             new ChestItem(Material.IRON_HELMET, helmetEnchants),
             new ChestItem(Material.BOOK, 12),
             new ChestItem(Material.BOOKSHELF, 4),
-            new ChestItem(Material.BLAZE_ROD, random.nextInt(3) + 1),
+            new ChestItem(Material.BLAZE_ROD, random.nextInt(4) + 1),
             new ChestItem(Material.GOLD_BLOCK, random.nextInt(2) + 2)
     ));
     private final ArrayList<ChestItem> tierThree = new ArrayList<>(Arrays.asList(
@@ -103,7 +103,9 @@ public class BlockBreakChest {
             new ChestItem(Material.BOOK, 6),
             new ChestItem(Material.BOOKSHELF, 2),
             new ChestItem(Material.BLAZE_SPAWN_EGG, random.nextInt(3) + 1),
-            new ChestItem(Material.PIGLIN_SPAWN_EGG, 3)
+            new ChestItem(Material.PIGLIN_SPAWN_EGG, 3),
+            new ChestItem(Material.BLAZE_ROD, random.nextInt(3) + 1)
+
     ));
     private final ArrayList<ChestItem> tierFour = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.SHULKER_BOX, 1),
@@ -118,7 +120,8 @@ public class BlockBreakChest {
             new ChestItem(Material.BOOK, 3),
             new ChestItem(Material.ENDER_PEARL, random.nextInt(2) + 1),
             new ChestItem(Material.BLAZE_SPAWN_EGG, 2),
-            new ChestItem(Material.PIGLIN_SPAWN_EGG, 1)
+            new ChestItem(Material.PIGLIN_SPAWN_EGG, 1),
+            new ChestItem(Material.BLAZE_ROD, random.nextInt(2) + 1)
     ));
     private final ArrayList<ChestItem> tierFive = new ArrayList<>(Arrays.asList(
             new ChestItem(Material.OAK_PLANKS, 32),
