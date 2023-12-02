@@ -4,7 +4,6 @@ import manhunt_extreme.manhunt_player.ManhuntPlayer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class InventoryCalculator {
     private final List<Double> axeScore = Arrays.asList(2.5, 3.0, 3.3, 3.6, 4.0);
     private final List<Double> swordScore = Arrays.asList(0.5, 1.0, 2.0, 3.0, 4.0);
     private final List<Double> bowScore = Arrays.asList(4.0, 4.5);
-    private final Double enchantWeight = 1.3;
+    private final Double enchantWeight = 1.5;
     private final ManhuntPlayer manhuntPlayer;
 
 
@@ -44,6 +43,7 @@ public class InventoryCalculator {
         this.manhuntPlayer = manhuntPlayer;
     }
 
+    // Todo: Change into one method which calculates the entire inventory and iterates through all items.
     public Double calculateInventoryScore() {
         return calculateInventoryArmorScore() + calculateInventoryWeaponScore();
     }
@@ -68,6 +68,19 @@ public class InventoryCalculator {
         }
         if (inv.getBoots() != null) {
             invScore += calculateArmorPieceScore(inv.getBoots(), bootsScore);
+        }
+
+        // For each item in the inventory, check if it is armor piece and if it is, add the score of the item to the inventory score.
+        for (ItemStack item : inv.getContents()) {
+            if (item != null && item.getType().name().endsWith("_HELMET")) {
+                invScore += calculateArmorPieceScore(item, helmetScore);
+            } else if (item != null && item.getType().name().endsWith("_CHESTPLATE")) {
+                invScore += calculateArmorPieceScore(item, chestplateScore);
+            } else if (item != null && item.getType().name().endsWith("_LEGGINGS")) {
+                invScore += calculateArmorPieceScore(item, leggingsScore);
+            } else if (item != null && item.getType().name().endsWith("_BOOTS")) {
+                invScore += calculateArmorPieceScore(item, bootsScore);
+            }
         }
         return invScore;
     }
@@ -123,19 +136,17 @@ public class InventoryCalculator {
     private Double calculateInventoryWeaponScore() {
         Double weaponScore = 0.0;
         final var inv = this.manhuntPlayer.getPlayer().getInventory();
-        final var hotbar = new ArrayList<ItemStack>();
-        for (int i = 0; i <= 8; i++) {
-            if (inv.isEmpty()) {
-                break;
+        // For each item in the inventory, check if it is a weapon and if it is, add the score of the item to the inventory score.
+        for (ItemStack item : inv.getContents()) {
+            if (item != null && item.getType().name().endsWith("_SWORD")) {
+                weaponScore += calculateItemScore(item);
+            } else if (item != null && item.getType().name().endsWith("_AXE")) {
+                weaponScore += calculateItemScore(item);
+            } else if (item != null && item.getType().name().endsWith("_BOW")) {
+                weaponScore += calculateItemScore(item);
+            } else if (item != null && item.getType().name().endsWith("_CROSSBOW")) {
+                weaponScore += calculateItemScore(item);
             }
-            if (inv.getItem(i) == null) {
-                continue;
-            }
-            hotbar.add(inv.getItem(i));
-        }
-
-        for (ItemStack itemStack : hotbar) {
-            weaponScore += calculateItemScore(itemStack);
         }
         return weaponScore;
     }

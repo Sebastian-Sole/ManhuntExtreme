@@ -12,7 +12,7 @@ public class PlayerScoreCalculator {
 
 
     private final ManhuntPlayer manhuntPlayer;
-    private final int chestWeight = 30;
+    private final int chestWeight = 20;
     // Runner, Hunter
     private final List<Integer> killWeights = Arrays.asList(10, 10);
     // Runner, Hunter
