@@ -43,7 +43,8 @@ public class BlockBreak implements Listener {
         if (gameStateHandler.isChestGenerate()) {
             ManhuntPlayer manhuntPlayer = gameEngine.getManhuntPlayerFromPlayer(event.getPlayer());
             int playerOdds = chestOddsCalculator.getPlayerChestOdds(manhuntPlayer);
-            int numberGenerated = random.nextInt(playerOdds);
+            boolean isBlockExploitable = isBlockExploitable(event.getBlock().getType());
+            int numberGenerated = random.nextInt(playerOdds) + (isBlockExploitable ? 200 : 0);
             if (numberGenerated == 1) {
                 Location blockBrokenLocation = event.getBlock().getLocation();
                 gameEngine.getChestGenerator().generateChest(blockBrokenLocation, event, event.getPlayer().getWorld());
@@ -58,6 +59,10 @@ public class BlockBreak implements Listener {
                 handleCutClean(event);
             }
         }
+    }
+
+    private boolean isBlockExploitable(Material blockType) {
+        return blockType.getHardness() == 0;
     }
 
     private void handleCutClean(BlockBreakEvent event) {

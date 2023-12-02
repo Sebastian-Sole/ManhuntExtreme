@@ -24,13 +24,13 @@ public class ChestOddsCalculator {
                     return 450;
                 } else if (scoreDiff <= 30) {
                     return 400;
-                } else if (scoreDiff <= 60) {
+                } else if (scoreDiff <= 50) {
                     return 350;
-                } else if (scoreDiff <= 90) {
+                } else if (scoreDiff <= 70) {
                     return 300;
-                } else if (scoreDiff <= 120) {
+                } else if (scoreDiff <= 90) {
                     return 265;
-                } else if (scoreDiff <= 150) {
+                } else if (scoreDiff <= 110) {
                     return 225;
                 } else {
                     return 150;
@@ -45,15 +45,15 @@ public class ChestOddsCalculator {
             if (huntersHaveBetterOdds) {
                 if (scoreDiff <= 15) {
                     return 450;
-                } else if (scoreDiff <= 30) {
+                } else if (scoreDiff <= 25) {
                     return 500;
-                } else if (scoreDiff <= 60) {
+                } else if (scoreDiff <= 40) {
                     return 600;
-                } else if (scoreDiff <= 90) {
+                } else if (scoreDiff <= 60) {
                     return 650;
-                } else if (scoreDiff <= 120) {
+                } else if (scoreDiff <= 80) {
                     return 750;
-                } else if (scoreDiff <= 150) {
+                } else if (scoreDiff <= 100) {
                     return 800;
                 } else {
                     return 900;
@@ -74,7 +74,7 @@ public class ChestOddsCalculator {
             }
 
         } else {
-            Bukkit.broadcastMessage("Error when creating chest. Shiiii");
+            Bukkit.broadcastMessage("Error when creating chest. Player has no team, or invalid team amounts");
             throw new IllegalArgumentException("Chest could not be generated. Player had no team");
         }
     }
